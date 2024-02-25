@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\PROJECTS\\VisualStudio\\Linky141Page\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F99911B7-E781-4CF9-A9D2-56DD8049072C}|client\\client.esproj|e:\\projects\\visualstudio\\linky141page\\client\\.vscode\\launch.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F99911B7-E781-4CF9-A9D2-56DD8049072C}|client\\client.esproj|solutionrelative:client\\.vscode\\launch.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F99911B7-E781-4CF9-A9D2-56DD8049072C}|client\\client.esproj|e:\\projects\\visualstudio\\linky141page\\client\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F99911B7-E781-4CF9-A9D2-56DD8049072C}|client\\client.esproj|solutionrelative:client\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "package.json",
+              "DocumentMoniker": "E:\\PROJECTS\\VisualStudio\\Linky141Page\\client\\package.json",
+              "RelativeDocumentMoniker": "client\\package.json",
+              "ToolTip": "E:\\PROJECTS\\VisualStudio\\Linky141Page\\client\\package.json",
+              "RelativeToolTip": "client\\package.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-02-25T13:00:46.71Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "launch.json",
+              "DocumentMoniker": "E:\\PROJECTS\\VisualStudio\\Linky141Page\\client\\.vscode\\launch.json",
+              "RelativeDocumentMoniker": "client\\.vscode\\launch.json",
+              "ToolTip": "E:\\PROJECTS\\VisualStudio\\Linky141Page\\client\\.vscode\\launch.json",
+              "RelativeToolTip": "client\\.vscode\\launch.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-02-25T12:49:19.626Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

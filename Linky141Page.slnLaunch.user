@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Name": "API\\API.csproj",
+        "Action": "Start",
+        "DebugTarget": "http"
+      },
+      {
+        "Name": "client\\client.esproj",
+        "Action": "Start",
+        "DebugTarget": "localhost (Chrome)"
+      }
+    ]
+  }
+]
