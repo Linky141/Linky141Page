@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
 import { HeaderComponent } from "./header/header.component";
+import i18next from "i18next";
+import HttpBackend from "i18next-http-backend";
 
 @Component({
   selector: "app-root",
@@ -12,6 +14,4 @@ import { HeaderComponent } from "./header/header.component";
   styles: [],
   imports: [RouterOutlet, HeaderComponent],
 })
-export class AppComponent {
-  title = "client";
-}
+export class AppComponent {}
