@@ -2,3 +2,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  body {
+    @apply bg-white;
+  }
+  body.dark {
+    @apply bg-gray-600;
+  }
+  .header_button_style {
+    @apply text-green-400 font-bold font-consolas rounded-tl-2xl rounded-tr-2xl hover:text-green-50;
+  }
+  .dark .header_button_style {
+    @apply text-green-600 font-bold font-consolas rounded-tl-2xl rounded-tr-2xl hover:text-green-300;
+  }
+  .select_header_style {
+    @apply text-green-400 font-bold font-consolas uppercase rounded-2xl bg-green-800 hover:bg-green-700 focus:outline-none;
+  }
+  .dark .select_header_style {
+    @apply text-green-600 font-bold font-consolas uppercase rounded-2xl bg-green-950 hover:bg-green-900 focus:outline-none;
+  }
+  .header_background {
+    @apply bg-green-800;
+  }
+  .dark .header_background {
+    @apply bg-green-950;
+  }
+  .header_style {
+    @apply text-green-200 uppercase py-4 text-2xl text-center font-consolas;
+  }
+  .dark .header_style {
+    @apply text-green-400 uppercase py-4 text-2xl text-center font-consolas;
+  }
+}

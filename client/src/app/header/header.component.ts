@@ -1,6 +1,4 @@
-import { Component, inject } from "@angular/core";
-import i18next from "i18next";
-import { Observable } from "rxjs";
+import { Component, EventEmitter, Input, Output, inject } from "@angular/core";
 import { TranslationService } from "../services/translation.service";
 import { CommonModule } from "@angular/common";
 
@@ -10,69 +8,53 @@ import { CommonModule } from "@angular/common";
   styles: [],
   imports: [CommonModule],
   template: `
-    <h1
-      class="text-green-200 bg-green-800 uppercase py-4 text-2xl text-center font-consolas"
-    >
+    <h1 class="header_style header_background">
       {{ translationService.t("pageName") }}
     </h1>
-    <nav class="bg-green-800">
+    <nav class="header_background">
       <ul class="flex gap-5">
-        <li
-          class="text-green-400 font-bold font-consolas rounded-tl-2xl rounded-tr-2xl hover:text-green-50"
-        >
+        <li class="header_button_style">
           <button class="py-4 px-4">
             {{ translationService.t("homePage") }}
           </button>
         </li>
-        <li
-          class="text-green-400 font-bold font-consolas rounded-tl-2xl rounded-tr-2xl hover:text-green-50"
-        >
+        <li class="header_button_style">
           <button class="py-4 px-4">{{ translationService.t("about") }}</button>
         </li>
-        <li
-          class="text-green-400 font-bold font-consolas rounded-tl-2xl rounded-tr-2xl hover:text-green-50"
-        >
+        <li class="header_button_style">
           <button class="py-4 px-4">
             {{ translationService.t("projects") }}
           </button>
         </li>
-        <li
-          class="text-green-400 font-bold font-consolas rounded-tl-2xl rounded-tr-2xl hover:text-green-50"
-        >
+        <li class="header_button_style">
           <button class="py-4 px-4">
             {{ translationService.t("downloads") }}
           </button>
         </li>
-        <li
-          class="text-green-400 font-bold font-consolas rounded-tl-2xl rounded-tr-2xl hover:text-green-50"
-        >
+        <li class="header_button_style">
           <button class="py-4 px-4">
             {{ translationService.t("contact") }}
           </button>
         </li>
 
         <select
-          (change)="ChangeLanguage($event)"
-          class="text-green-400 font-bold font-consolas uppercase ml-auto rounded-2xl bg-green-800 hover:bg-green-700"
+          (change)="ChangeLanguage.emit($event)"
+          class="select_header_style ml-auto"
         >
           <option value="en" [selected]="lang === 'en'">EN</option>
           <option value="pl" [selected]="lang === 'pl'">PL</option>
         </select>
+        <button (click)="ToggleTheme.emit()" class="header_button_style pr-3">
+          Dark mode
+        </button>
       </ul>
     </nav>
   `,
 })
 export class HeaderComponent {
+  @Input() lang!: string;
+  @Output() ChangeLanguage = new EventEmitter<Event>();
+  @Output() ToggleTheme = new EventEmitter<void>();
+
   translationService = inject(TranslationService);
-
-  lang = "";
-
-  ngOnInit() {
-    this.lang = localStorage.getItem("language") || "en";
-  }
-  ChangeLanguage(lang: any) {
-    const selectedLanguage = lang.target.value;
-    i18next.changeLanguage(selectedLanguage);
-    localStorage.setItem("language", selectedLanguage);
-  }
 }
