@@ -66,8 +66,8 @@ import { Router, RouterLink, RouterLinkActive } from "@angular/router";
           <option value="en" [selected]="lang === 'en'">EN</option>
           <option value="pl" [selected]="lang === 'pl'">PL</option>
         </select>
-        <button (click)="ToggleTheme.emit()" class="header_list_style bar pr-3">
-          Dark mode
+        <button (click)="changedTheme()" class="header_list_style bar pr-3">
+          {{ darkOrLightMode }}
         </button>
       </ul>
     </nav>
@@ -79,9 +79,19 @@ export class HeaderComponent {
   @Output() ToggleTheme = new EventEmitter<void>();
 
   translationService = inject(TranslationService);
-  private router = inject(Router);
 
-  navigationButtonClick(path: string) {
-    this.router.navigateByUrl(path);
+  darkOrLightMode = "empty";
+
+  ngOnInit() {
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") this.darkOrLightMode = "Light mode";
+    else this.darkOrLightMode = "Dark mode";
+  }
+
+  changedTheme() {
+    this.ToggleTheme.emit();
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") this.darkOrLightMode = "Light mode";
+    else this.darkOrLightMode = "Dark mode";
   }
 }
