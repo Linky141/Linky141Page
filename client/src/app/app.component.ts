@@ -13,7 +13,7 @@ import { TranslationService } from "./services/translation.service";
       (ToggleTheme)="ToggleTheme()"
       [lang]="lang"
     />
-    <!-- <router-outlet /> -->
+    <router-outlet />
   `,
   styles: [],
   imports: [RouterOutlet, HeaderComponent],

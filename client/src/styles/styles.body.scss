@@ -1,0 +1,20 @@
+@layer components {
+  body {
+    @apply bg-white text-black;
+  }
+  body.dark {
+    @apply bg-gray-600 text-gray-200;
+  }
+  .body_background {
+    @apply bg-white;
+  }
+  .dark .body_background {
+    @apply bg-gray-600;
+  }
+  .body_text {
+    @apply text-black;
+  }
+  .dark .body_text {
+    @apply text-gray-200;
+  }
+}

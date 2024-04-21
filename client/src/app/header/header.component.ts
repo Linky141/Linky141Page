@@ -1,50 +1,72 @@
 import { Component, EventEmitter, Input, Output, inject } from "@angular/core";
 import { TranslationService } from "../services/translation.service";
-import { CommonModule } from "@angular/common";
+import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 
 @Component({
   selector: "app-header",
   standalone: true,
-  styles: [],
-  imports: [CommonModule],
+  styles: [``],
+  imports: [RouterLink, RouterLinkActive],
   template: `
-    <h1 class="header_style header_background">
+    <h1 class="header_title_style background_color_dark">
       {{ translationService.t("pageName") }}
     </h1>
     <nav class="header_background">
-      <ul class="flex gap-5">
-        <li class="header_button_style">
-          <button class="py-4 px-4">
+      <ul class="flex">
+        <li class="header_list_style">
+          <a
+            class="header_link_padding"
+            routerLink="/homePage"
+            routerLinkActive="header_list_active_style"
+          >
             {{ translationService.t("homePage") }}
-          </button>
+          </a>
         </li>
-        <li class="header_button_style">
-          <button class="py-4 px-4">{{ translationService.t("about") }}</button>
+        <li class="header_list_style">
+          <a
+            class="header_link_padding"
+            routerLink="/about"
+            routerLinkActive="header_list_active_style"
+          >
+            {{ translationService.t("about") }}
+          </a>
         </li>
-        <li class="header_button_style">
-          <button class="py-4 px-4">
+        <li class="header_list_style">
+          <a
+            class="header_link_padding"
+            routerLink="/projects"
+            routerLinkActive="header_list_active_style"
+          >
             {{ translationService.t("projects") }}
-          </button>
+          </a>
         </li>
-        <li class="header_button_style">
-          <button class="py-4 px-4">
+        <li class="header_list_style">
+          <a
+            class="header_link_padding"
+            routerLink="/downloads"
+            routerLinkActive="header_list_active_style"
+          >
             {{ translationService.t("downloads") }}
-          </button>
+          </a>
         </li>
-        <li class="header_button_style">
-          <button class="py-4 px-4">
+        <li class="header_list_style">
+          <a
+            class="header_link_padding"
+            routerLink="/contact"
+            routerLinkActive="header_list_active_style"
+          >
             {{ translationService.t("contact") }}
-          </button>
+          </a>
         </li>
 
         <select
           (change)="ChangeLanguage.emit($event)"
-          class="select_header_style ml-auto"
+          class="header_select_style ml-auto"
         >
           <option value="en" [selected]="lang === 'en'">EN</option>
           <option value="pl" [selected]="lang === 'pl'">PL</option>
         </select>
-        <button (click)="ToggleTheme.emit()" class="header_button_style pr-3">
+        <button (click)="ToggleTheme.emit()" class="header_list_style bar pr-3">
           Dark mode
         </button>
       </ul>
@@ -57,4 +79,9 @@ export class HeaderComponent {
   @Output() ToggleTheme = new EventEmitter<void>();
 
   translationService = inject(TranslationService);
+  private router = inject(Router);
+
+  navigationButtonClick(path: string) {
+    this.router.navigateByUrl(path);
+  }
 }

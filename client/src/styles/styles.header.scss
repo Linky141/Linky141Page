@@ -1,0 +1,20 @@
+@layer components {
+  .header_link_padding {
+    @apply px-6;
+  }
+  .header_list_style {
+    @apply text_color_green_medium font-bold font-consolas hover:text_color_green_light;
+  }
+  .header_list_active_style {
+    @apply body_text font-bold font-consolas rounded-tl-2xl rounded-tr-2xl body_background flex;
+  }
+  .header_select_style {
+    @apply text_color_green_medium font-bold font-consolas uppercase rounded-2xl background_color_dark hover:background_color_dark focus:outline-none mx-4;
+  }
+  .header_background {
+    @apply background_color_dark;
+  }
+  .header_title_style {
+    @apply text_color_green_light uppercase py-1 text-2xl text-center font-consolas;
+  }
+}
