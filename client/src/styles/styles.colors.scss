@@ -1,4 +1,17 @@
 @layer components {
+  .body_background {
+    @apply bg-white;
+  }
+  .dark .body_background {
+    @apply bg-gray-600;
+  }
+  .body_text {
+    @apply text-black;
+  }
+  .dark .body_text {
+    @apply text-gray-200;
+  }
+
   .background_color_light {
     @apply bg-teal-400;
   }
@@ -18,22 +31,67 @@
     @apply bg-teal-950;
   }
 
-  .text_color_light {
+  .text_color_light_a {
     @apply text-teal-100;
   }
-  .dark .text_color_light {
+  .dark .text_color_light_a {
     @apply text-teal-400;
   }
-  .text_color_medium {
+  .text_color_medium_a {
     @apply text-teal-400;
   }
-  .dark .text_color_medium {
+  .dark .text_color_medium_a {
     @apply text-teal-600;
   }
-  .text_color_dark {
+  .text_color_dark_a {
+    @apply text-teal-600;
+  }
+  .dark .text_color_dark_a {
+    @apply text-teal-800;
+  }
+
+  .text_color_medium_b {
+    @apply text-teal-800;
+  }
+  .dark .text_color_medium_b {
     @apply text-teal-400;
   }
-  .dark .text_color_dark {
-    @apply text-teal-600;
+
+  .border_color_unselected {
+    @apply border-gray-300;
+  }
+  .dark .border_color_unselected {
+    @apply border-gray-500;
+  }
+  .border_color_selected {
+    @apply border-teal-600;
+  }
+  .dark .border_color_selected {
+    @apply border-teal-500;
+  }
+
+  .border_color_submit {
+    @apply border-green-600;
+  }
+  .dark .border_color_submit {
+    @apply border-green-600;
+  }
+  .background_color_submit {
+    @apply bg-green-200;
+  }
+  .dark .background_color_submit {
+    @apply bg-green-800;
+  }
+  .border_color_cancel {
+    @apply border-red-600;
+  }
+  .dark .border_color_cancel {
+    @apply border-red-500;
+  }
+  .background_color_cancel {
+    @apply bg-red-300;
+  }
+  .dark .background_color_cancel {
+    @apply bg-red-800;
   }
 }

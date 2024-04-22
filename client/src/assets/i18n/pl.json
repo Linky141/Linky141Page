@@ -4,5 +4,9 @@
   "about": "O mnie",
   "projects": "Projekty",
   "downloads": "Do pobrania",
-  "contact": "Kontakt"
+  "contact": "Kontakt",
+  "submit":"Zatwierdź",
+  "reset":"Resetuj",
+  "cancel":"Anuluj",
+  "edit":"Edytuj"
 }

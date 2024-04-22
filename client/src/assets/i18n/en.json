@@ -4,5 +4,9 @@
   "about": "About",
   "projects": "Projects",
   "downloads": "Downloads",
-  "contact": "Contact"
+  "contact": "Contact",
+  "submit":"Submit",
+  "reset":"Reset",
+  "cancel":"Cancel",
+  "edit":"Edit"
 }

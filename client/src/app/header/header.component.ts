@@ -69,6 +69,9 @@ import { Router, RouterLink, RouterLinkActive } from "@angular/router";
         <button (click)="changedTheme()" class="header_list_style bar pr-3">
           {{ darkOrLightMode }}
         </button>
+        <button (click)="testAdminChange()" class="header_list_style bar pr-3">
+          DEBUG ADMIN {{ isAdmin === "true" ? "1" : "0" }}
+        </button>
       </ul>
     </nav>
   `,
@@ -81,8 +84,10 @@ export class HeaderComponent {
   translationService = inject(TranslationService);
 
   darkOrLightMode = "empty";
+  isAdmin = "false"; //todo: remove after add users
 
   ngOnInit() {
+    this.isAdmin = localStorage.getItem("isAdmin") || "false"; //todo: remove after add users
     const theme = localStorage.getItem("theme");
     if (theme === "dark") this.darkOrLightMode = "Light mode";
     else this.darkOrLightMode = "Dark mode";
@@ -93,5 +98,17 @@ export class HeaderComponent {
     const theme = localStorage.getItem("theme");
     if (theme === "dark") this.darkOrLightMode = "Light mode";
     else this.darkOrLightMode = "Dark mode";
+  }
+
+  testAdminChange() {
+    //todo: remove after add users
+    const isAdmin = localStorage.getItem("isAdmin");
+    if (isAdmin === "true") {
+      localStorage.setItem("isAdmin", "false");
+      this.isAdmin = "false";
+    } else {
+      localStorage.setItem("isAdmin", "true");
+      this.isAdmin = "true";
+    }
   }
 }

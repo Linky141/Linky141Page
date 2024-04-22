@@ -7,4 +7,25 @@
 @import "./styles.header.scss";
 
 @layer components {
+  .body_input {
+    @apply outline-none border-b-2 border_color_unselected focus:border_color_selected body_background;
+  }
+  .body_button_rounded_left {
+    @apply outline-none border-2 border_color_unselected hover:border_color_selected rounded-tl-xl rounded-bl-xl mx-1 px-1;
+  }
+  .body_button_rounded_left_submit {
+    @apply outline-none border-2 border_color_unselected hover:border_color_submit hover:background_color_submit rounded-tl-xl rounded-bl-xl mx-1 px-1;
+  }
+  .body_button_rounded_middle {
+    @apply outline-none border-2 border_color_unselected hover:border_color_selected mx-1 px-1;
+  }
+  .body_button_rounded_right {
+    @apply outline-none border-2 border_color_unselected hover:border_color_selected rounded-tr-xl rounded-br-xl  mx-1 px-1;
+  }
+  .body_button_rounded_right_cancel {
+    @apply outline-none border-2 border_color_unselected hover:border_color_cancel hover:background_color_cancel rounded-tr-xl rounded-br-xl  mx-1 px-1;
+  }
+  .body_button_rounded {
+    @apply outline-none border-2 border_color_unselected hover:border_color_selected rounded-xl mx-1 px-1;
+  }
 }
