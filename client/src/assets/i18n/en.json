@@ -9,9 +9,13 @@
   "reset": "Reset",
   "cancel": "Cancel",
   "edit": "Edit",
-  "login": "Login",
-  "register": "Register",
+  "signIn": "Sign in",
+  "signUp": "Sign up",
   "username": "User name",
   "password": "Password",
-  "email": "Email"
+  "email": "Email",
+  "login": "Login",
+  "register": "Register",
+  "dontHaveAccountRegister": "You don't have an account, register here",
+  "haveAccountLogin": "You already have an account, log in here"
 }

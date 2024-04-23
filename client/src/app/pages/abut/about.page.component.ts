@@ -1,29 +1,38 @@
 import { Component, inject } from "@angular/core";
 import { TranslationService } from "../../services/translation.service";
+import { MatButtonModule } from "@angular/material/button";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 
 @Component({
   selector: "app-about",
   standalone: true,
+  imports: [MatButtonModule, MatFormFieldModule, MatInputModule],
   template: `
     @if(editElement !== 1){
     <h1 class=" mx-5">
       {{ content }}
     </h1>
     } @if(isAdmin==='true'){ @if(editElement !== 1){
-    <button (click)="buttonEditContentClick()" class=" ml-5">
+    <button
+      (click)="buttonEditContentClick()"
+      class=" ml-5"
+      mat-stroked-button
+      color="primary"
+    >
       {{ translationService.t("edit") }}
     </button>
     } @else {
-    <textarea class=" mb-3 block mx-5 mt-5" style="width: calc(100% - 40px);">{{
-      content
-    }}</textarea>
-    <button class=" ml-5">
+    <mat-form-field class="w-full">
+      <textarea matInput>{{ content }}</textarea>
+    </mat-form-field>
+    <button class=" ml-5" mat-flat-button color="primary">
       {{ translationService.t("submit") }}
     </button>
-    <button class="">
+    <button mat-button color="primary">
       {{ translationService.t("reset") }}
     </button>
-    <button (click)="buttonEditContentClick()" class="">
+    <button (click)="buttonEditContentClick()" mat-button color="warn">
       {{ translationService.t("cancel") }}
     </button>
     } }

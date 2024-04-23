@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, inject } from "@angular/core";
 import { TranslationService } from "../services/translation.service";
-import { Router, RouterLink, RouterLinkActive } from "@angular/router";
+import { RouterLink, RouterLinkActive } from "@angular/router";
 import { ThemeService } from "../services/theme.service";
 
 @Component({
@@ -71,7 +71,7 @@ import { ThemeService } from "../services/theme.service";
             routerLink="/login"
             routerLinkActive="header_list_active_style"
           >
-            {{ translationService.t("login") }}
+            {{ translationService.t("signIn") }}
           </a>
         </li>
         <li class="header_list_style">
@@ -80,7 +80,7 @@ import { ThemeService } from "../services/theme.service";
             routerLink="/register"
             routerLinkActive="header_list_active_style"
           >
-            {{ translationService.t("register") }}
+            {{ translationService.t("signUp") }}
           </a>
         </li>
         <li class="header_list_style">
@@ -138,5 +138,6 @@ export class HeaderComponent {
       localStorage.setItem("isAdmin", "true");
       this.isAdmin = "true";
     }
+    window.location.reload();
   }
 }

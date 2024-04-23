@@ -1,10 +1,10 @@
 @layer components {
   @layer components {
     .body_background {
-      @apply bg-white;
+      @apply bg-material-light;
     }
     .dark .body_background {
-      @apply bg-gray-600;
+      @apply bg-material-dark;
     }
     .body_text {
       @apply text-black;

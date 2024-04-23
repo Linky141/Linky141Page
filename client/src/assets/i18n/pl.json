@@ -9,9 +9,13 @@
   "reset": "Resetuj",
   "cancel": "Anuluj",
   "edit": "Edytuj",
-  "login": "Logowanie",
-  "register": "Rejestracja",
+  "signIn": "Logowanie",
+  "signUp": "Rejestracja",
   "username": "Nazwa użytkownika",
   "password": "Hsało",
-  "email": "Email"
+  "email": "Email",
+  "login": "Zaloguj",
+  "register": "Zarejestruj",
+  "dontHaveAccountRegister": "Nie masz konta, zarejestruj się tutaj",
+  "haveAccountLogin": "Masz już konto, zaloguj się tutaj"
 }
