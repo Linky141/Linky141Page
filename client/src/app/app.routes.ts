@@ -4,6 +4,8 @@ import { AboutPageComponent } from "./pages/abut/about.page.component";
 import { ContactPageComponent } from "./pages/contact/contact.page.component";
 import { DownloadsPageComponent } from "./pages/downloads/downloads.page.component";
 import { ProjectsPageComponent } from "./pages/projects/projects.page.component";
+import { LoginPageComponent } from "./pages/usersManagement/login.page.component";
+import { RegisterPageComponent } from "./pages/usersManagement/register.page.component";
 
 export const routes: Routes = [
   {
@@ -30,6 +32,14 @@ export const routes: Routes = [
   {
     path: "projects",
     component: ProjectsPageComponent,
+  },
+  {
+    path: "login",
+    component: LoginPageComponent,
+  },
+  {
+    path: "register",
+    component: RegisterPageComponent,
   },
   {
     path: "**",

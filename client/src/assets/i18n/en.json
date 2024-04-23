@@ -5,8 +5,13 @@
   "projects": "Projects",
   "downloads": "Downloads",
   "contact": "Contact",
-  "submit":"Submit",
-  "reset":"Reset",
-  "cancel":"Cancel",
-  "edit":"Edit"
+  "submit": "Submit",
+  "reset": "Reset",
+  "cancel": "Cancel",
+  "edit": "Edit",
+  "login": "Login",
+  "register": "Register",
+  "username": "User name",
+  "password": "Password",
+  "email": "Email"
 }

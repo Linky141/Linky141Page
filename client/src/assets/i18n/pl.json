@@ -5,8 +5,13 @@
   "projects": "Projekty",
   "downloads": "Do pobrania",
   "contact": "Kontakt",
-  "submit":"Zatwierdź",
-  "reset":"Resetuj",
-  "cancel":"Anuluj",
-  "edit":"Edytuj"
+  "submit": "Zatwierdź",
+  "reset": "Resetuj",
+  "cancel": "Anuluj",
+  "edit": "Edytuj",
+  "login": "Logowanie",
+  "register": "Rejestracja",
+  "username": "Nazwa użytkownika",
+  "password": "Hsało",
+  "email": "Email"
 }
