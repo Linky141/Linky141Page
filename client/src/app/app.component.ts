@@ -3,16 +3,13 @@ import { RouterOutlet } from "@angular/router";
 import { HeaderComponent } from "./header/header.component";
 import i18next from "i18next";
 import { TranslationService } from "./services/translation.service";
+import { ThemeService } from "./services/theme.service";
 
 @Component({
   selector: "app-root",
   standalone: true,
   template: `
-    <app-header
-      (ChangeLanguage)="ChangeLanguage($event)"
-      (ToggleTheme)="ToggleTheme()"
-      [lang]="lang"
-    />
+    <app-header (ChangeLanguage)="ChangeLanguage($event)" [lang]="lang" />
     <router-outlet />
   `,
   styles: [],
@@ -20,6 +17,7 @@ import { TranslationService } from "./services/translation.service";
 })
 export class AppComponent {
   translationService = inject(TranslationService);
+  private themeService = inject(ThemeService);
 
   lang = "";
 
@@ -32,7 +30,7 @@ export class AppComponent {
   ngOnInit() {
     this.lang = localStorage.getItem("language") || "en";
     if (localStorage.getItem("theme") === "dark") {
-      this.ToggleTheme();
+      this.themeService.toggleDarkTheme();
     }
   }
 
@@ -40,16 +38,5 @@ export class AppComponent {
     const selectedLanguage = lang.target.value;
     i18next.changeLanguage(selectedLanguage);
     localStorage.setItem("language", selectedLanguage);
-  }
-
-  ToggleTheme() {
-    this.componentCssClass = this.componentCssClass === "dark" ? "" : "dark";
-    localStorage.setItem("theme", this.componentCssClass);
-
-    if (this.componentCssClass === "dark") {
-      document.body.classList.add("dark");
-    } else {
-      document.body.classList.remove("dark");
-    }
   }
 }

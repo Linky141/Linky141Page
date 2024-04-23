@@ -6,55 +6,43 @@ import { TranslationService } from "../../services/translation.service";
   standalone: true,
   template: `
     @if(editElement !== 1){
-    <h1
-      class="text-center text-3xl mt-4 mb-3 mx-5 font-consolas text_color_medium_b"
-    >
+    <h1 class="text-center text-3xl mt-4 mb-3 mx-5  ">
       {{ title }}
     </h1>
     } @if(isAdmin==='true'){ @if(editElement !== 1){
-    <button (click)="buttonEditTitleClick()" class="body_button_rounded ml-5">
+    <button (click)="buttonEditTitleClick()" class=" ml-5">
       {{ translationService.t("edit") }}
     </button>
     } @else {
-    <textarea
-      class="body_input mb-3 block mx-5 mt-5"
-      style="width: calc(100% - 40px);"
-      >{{ title }}</textarea
-    >
-    <button class="body_button_rounded_left_submit ml-5">
+    <textarea class=" mb-3 block mx-5 mt-5" style="width: calc(100% - 40px);">{{
+      title
+    }}</textarea>
+    <button class=" ml-5">
       {{ translationService.t("submit") }}
     </button>
-    <button class="body_button_rounded_middle">
+    <button class="">
       {{ translationService.t("reset") }}
     </button>
-    <button
-      (click)="buttonEditTitleClick()"
-      class="body_button_rounded_right_cancel"
-    >
+    <button (click)="buttonEditTitleClick()" class="">
       {{ translationService.t("cancel") }}
     </button>
     } } @if(editElement !== 2){
-    <h1 class="font-consolas mx-5">{{ content }}</h1>
+    <h1 class=" mx-5">{{ content }}</h1>
     } @if(isAdmin==='true'){ @if(editElement !== 2){
-    <button (click)="buttonEditContentClick()" class="body_button_rounded ml-5">
+    <button (click)="buttonEditContentClick()" class=" ml-5">
       {{ translationService.t("edit") }}
     </button>
     } @else{
-    <textarea
-      class="body_input mb-3 block mx-5"
-      style="width: calc(100% - 40px);"
-      >{{ content }}</textarea
-    >
-    <button class="body_button_rounded_left_submit ml-5">
+    <textarea class=" mb-3 block mx-5" style="width: calc(100% - 40px);">{{
+      content
+    }}</textarea>
+    <button class=" ml-5">
       {{ translationService.t("submit") }}
     </button>
-    <button class="body_button_rounded_middle">
+    <button class="">
       {{ translationService.t("reset") }}
     </button>
-    <button
-      (click)="buttonEditContentClick()"
-      class="body_button_rounded_right_cancel"
-    >
+    <button (click)="buttonEditContentClick()" class="">
       {{ translationService.t("cancel") }}
     </button>
     } }

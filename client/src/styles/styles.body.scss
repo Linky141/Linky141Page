@@ -1,8 +1,8 @@
 @layer components {
   body {
-    @apply bg-white text-black;
+    @apply bg-material-light text-black;
   }
   body.dark {
-    @apply bg-gray-600 text-gray-200;
+    @apply bg-material-dark text-gray-200;
   }
 }

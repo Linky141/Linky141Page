@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, inject } from "@angular/core";
 import { TranslationService } from "../services/translation.service";
 import { Router, RouterLink, RouterLinkActive } from "@angular/router";
+import { ThemeService } from "../services/theme.service";
 
 @Component({
   selector: "app-header",
@@ -8,6 +9,11 @@ import { Router, RouterLink, RouterLinkActive } from "@angular/router";
   styles: [``],
   imports: [RouterLink, RouterLinkActive],
   template: `
+    <div class="bg-yellow-600">
+      <button (click)="testAdminChange()" class="pr-3">
+        ADMIN={{ isAdmin === "true" ? "1" : "0" }}
+      </button>
+    </div>
     <h1 class="header_title_style background_color_dark">
       {{ translationService.t("pageName") }}
     </h1>
@@ -91,14 +97,6 @@ import { Router, RouterLink, RouterLinkActive } from "@angular/router";
             {{ darkOrLightMode }}
           </button>
         </li>
-        <li class="header_list_style">
-          <button
-            (click)="testAdminChange()"
-            class="header_list_style bar pr-3"
-          >
-            ADMIN={{ isAdmin === "true" ? "1" : "0" }}
-          </button>
-        </li>
       </ul>
     </nav>
   `,
@@ -106,9 +104,9 @@ import { Router, RouterLink, RouterLinkActive } from "@angular/router";
 export class HeaderComponent {
   @Input() lang!: string;
   @Output() ChangeLanguage = new EventEmitter<Event>();
-  @Output() ToggleTheme = new EventEmitter<void>();
 
   translationService = inject(TranslationService);
+  themeService = inject(ThemeService);
 
   darkOrLightMode = "empty";
   isAdmin = "false"; //todo: remove after add users
@@ -121,10 +119,13 @@ export class HeaderComponent {
   }
 
   changedTheme() {
-    this.ToggleTheme.emit();
+    this.themeService.toggleDarkTheme();
     const theme = localStorage.getItem("theme");
-    if (theme === "dark") this.darkOrLightMode = "Light mode";
-    else this.darkOrLightMode = "Dark mode";
+    if (theme === "dark") {
+      this.darkOrLightMode = "Light mode";
+    } else {
+      this.darkOrLightMode = "Dark mode";
+    }
   }
 
   testAdminChange() {

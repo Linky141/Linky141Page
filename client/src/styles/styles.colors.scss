@@ -1,97 +1,131 @@
-@layer components {
-  .body_background {
-    @apply bg-white;
-  }
-  .dark .body_background {
-    @apply bg-gray-600;
-  }
-  .body_text {
-    @apply text-black;
-  }
-  .dark .body_text {
-    @apply text-gray-200;
-  }
+$custom-color-light: (
+  50: #e0f2f1,
+  100: #b2dfdb,
+  200: #80cbc4,
+  300: #4db6ac,
+  400: #26a69a,
+  500: #009688,
+  600: #00897b,
+  700: #00796b,
+  800: #00695c,
+  900: #004d40,
+  A100: #a7ffeb,
+  A200: #64ffda,
+  A400: #1de9b6,
+  A700: #00bfa5,
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+    300: black,
+    400: black,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: black,
+    A400: black,
+    A700: black,
+  ),
+);
 
-  .background_color_light {
-    @apply bg-teal-400;
-  }
-  .dark .background_color_light {
-    @apply bg-teal-600;
-  }
-  .background_color_medium {
-    @apply bg-teal-600;
-  }
-  .dark .background_color_medium {
-    @apply bg-teal-800;
-  }
-  .background_color_dark {
-    @apply bg-teal-800;
-  }
-  .dark .background_color_dark {
-    @apply bg-teal-950;
-  }
+$custom-color-accent-light: (
+  50: #f3e5f5,
+  100: #e1bee7,
+  200: #ce93d8,
+  300: #ba68c8,
+  400: #ab47bc,
+  500: #9c27b0,
+  600: #8e24aa,
+  700: #7b1fa2,
+  800: #6a1b9a,
+  900: #4a148c,
+  A100: #ea80fc,
+  A200: #e040fb,
+  A400: #d500f9,
+  A700: #aa00ff,
+  contrast: (
+    50: black,
+    100: black,
+    200: black,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: black,
+    A200: white,
+    A400: white,
+    A700: white,
+  ),
+);
 
-  .text_color_light_a {
-    @apply text-teal-100;
-  }
-  .dark .text_color_light_a {
-    @apply text-teal-400;
-  }
-  .text_color_medium_a {
-    @apply text-teal-400;
-  }
-  .dark .text_color_medium_a {
-    @apply text-teal-600;
-  }
-  .text_color_dark_a {
-    @apply text-teal-600;
-  }
-  .dark .text_color_dark_a {
-    @apply text-teal-800;
-  }
+$custom-color-dark: (
+  50: #004d40,
+  100: #00695c,
+  200: #00796b,
+  300: #00897b,
+  400: #009688,
+  500: #26a69a,
+  600: #4db6ac,
+  700: #80cbc4,
+  800: #b2dfdb,
+  900: #e0f2f1,
+  A100: #00bfa5,
+  A200: #1de9b6,
+  A400: #64ffda,
+  A700: #a7ffeb,
+  contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: black,
+    500: black,
+    600: black,
+    700: black,
+    800: black,
+    900: black,
+    A100: black,
+    A200: black,
+    A400: black,
+    A700: black,
+  ),
+);
 
-  .text_color_medium_b {
-    @apply text-teal-800;
-  }
-  .dark .text_color_medium_b {
-    @apply text-teal-400;
-  }
-
-  .border_color_unselected {
-    @apply border-gray-300;
-  }
-  .dark .border_color_unselected {
-    @apply border-gray-500;
-  }
-  .border_color_selected {
-    @apply border-teal-600;
-  }
-  .dark .border_color_selected {
-    @apply border-teal-500;
-  }
-
-  .border_color_submit {
-    @apply border-green-600;
-  }
-  .dark .border_color_submit {
-    @apply border-green-600;
-  }
-  .background_color_submit {
-    @apply bg-green-200;
-  }
-  .dark .background_color_submit {
-    @apply bg-green-800;
-  }
-  .border_color_cancel {
-    @apply border-red-600;
-  }
-  .dark .border_color_cancel {
-    @apply border-red-500;
-  }
-  .background_color_cancel {
-    @apply bg-red-300;
-  }
-  .dark .background_color_cancel {
-    @apply bg-red-800;
-  }
-}
+$custom-color-accent-dark: (
+  50: #4a148c,
+  100: #6a1b9a,
+  200: #7b1fa2,
+  300: #8e24aa,
+  400: #9c27b0,
+  500: #ab47bc,
+  600: #ba68c8,
+  700: #ce93d8,
+  800: #e1bee7,
+  900: #f3e5f5,
+  A100: #aa00ff,
+  A200: #d500f9,
+  A400: #e040fb,
+  A700: #ea80fc,
+  contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: black,
+    600: black,
+    700: black,
+    800: black,
+    900: black,
+    A100: white,
+    A200: black,
+    A400: black,
+    A700: black,
+  ),
+);
