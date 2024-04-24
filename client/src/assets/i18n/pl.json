@@ -4,6 +4,7 @@
   "about": "O mnie",
   "projects": "Projekty",
   "downloads": "Do pobrania",
+  "download": "Pobierz",
   "contact": "Kontakt",
   "submit": "Zatwierdź",
   "reset": "Resetuj",
@@ -27,5 +28,8 @@
   "name": "Nazwa",
   "description": "Opis",
   "darkTheme": "Motyw ciemny",
-  "lightTheme": "Motyw jasny"
+  "lightTheme": "Motyw jasny",
+  "uploadDate": "Data wstawienia",
+  "onlyForLoggedUsers": "Tylko dla zalogowanych użytkowników",
+  "addressUrl": "Adres URL"
 }

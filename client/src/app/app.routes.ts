@@ -8,6 +8,7 @@ import { LoginPageComponent } from "./pages/usersManagement/login.page.component
 import { RegisterPageComponent } from "./pages/usersManagement/register.page.component";
 import { ProjectPageComponent } from "./pages/projects/project.page.component";
 import { ProjectEditPageComponent } from "./pages/projects/project-edit.page.component";
+import { DownloadsAddPageComponent } from "./pages/downloads/download-add.page.component";
 
 export const routes: Routes = [
   {
@@ -30,6 +31,10 @@ export const routes: Routes = [
   {
     path: "downloads",
     component: DownloadsPageComponent,
+  },
+  {
+    path: "downloadsAdd",
+    component: DownloadsAddPageComponent,
   },
   {
     path: "projects",
