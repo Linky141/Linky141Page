@@ -6,10 +6,12 @@ import { MatCardModule } from "@angular/material/card";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatGridListModule } from "@angular/material/grid-list";
+import { MatDialog } from "@angular/material/dialog";
 import { CustomDatePipe } from "../../utils/pipes/custom-date.pipe";
 import { TranslationService } from "../../services/translation.service";
 import { ActivatedRoute } from "@angular/router";
 import { ProjectModel } from "../../models/project.model";
+import { DialogImage } from "./dialog-image.component";
 
 @Component({
   selector: "app-project",
@@ -24,20 +26,13 @@ import { ProjectModel } from "../../models/project.model";
     MatInputModule,
     MatGridListModule,
   ],
-  styles: `
-//   .example-card {
-//   max-width: 400px;
-//   }
-//   mat-grid-tile {
-//   background: lightblue;
-// }
-  `,
+  styles: ``,
   template: `
     <h1 class="text-3xl mt-5 mb-3" style="text-align: center;">
       {{ project.title }}
     </h1>
 
-    <div class="flex justify-center items-center">
+    <div class="flex justify-center items-center mb-5">
       <div
         class="flex justify-center flex-wrap mx-auto"
         style="max-width: 75%;"
@@ -45,6 +40,7 @@ import { ProjectModel } from "../../models/project.model";
         @for (photo of project.photos; track $index) {
         <div class="flex justify-center items-center m-1 w-52 h-52">
           <img
+            (click)="openImage(photo)"
             src="{{ photo }}"
             alt="Image"
             class="max-w-52 max-h-52 rounded-2xl"
@@ -98,6 +94,7 @@ import { ProjectModel } from "../../models/project.model";
 export class ProjectPageComponent {
   translationService = inject(TranslationService);
   route = inject(ActivatedRoute);
+  dialog = inject(MatDialog);
 
   id = "";
   credentials = ""; //todo: remove after add users
@@ -105,6 +102,14 @@ export class ProjectPageComponent {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get("id") || "-1";
     this.credentials = localStorage.getItem("credentials") || ""; //todo: remove after add users
+  }
+
+  openImage(image: string) {
+    this.dialog.open(DialogImage, {
+      data: {
+        url: image,
+      },
+    });
   }
 
   project: ProjectModel = {
@@ -123,7 +128,7 @@ export class ProjectPageComponent {
       "https://picsum.photos/200",
       "https://picsum.photos/200",
       "https://picsum.photos/500",
-      "https://picsum.photos/300",
+      "https://picsum.photos/2000",
       "https://picsum.photos/200",
     ],
     comments: [
