@@ -21,5 +21,7 @@
   "lastUpdate": "Last update",
   "open": "Open",
   "remove": "Remove",
-  "logout": "Logout"
+  "logout": "Logout",
+  "leaveAComment": "Leave a comment",
+  "addComment": "Add commnet"
 }

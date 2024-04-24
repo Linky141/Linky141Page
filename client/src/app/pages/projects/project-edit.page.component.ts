@@ -3,6 +3,8 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatCardModule } from "@angular/material/card";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 import { CustomDatePipe } from "../../utils/pipes/custom-date.pipe";
 import { TranslationService } from "../../services/translation.service";
 import { ActivatedRoute } from "@angular/router";
@@ -27,6 +29,8 @@ export type ProjectModel = {
     MatButtonModule,
     MatProgressBarModule,
     CustomDatePipe,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   styles: `
   .example-card {
@@ -36,6 +40,12 @@ export type ProjectModel = {
   template: `
     <div class="flex justify-center items-center flex-col">
       Edit project {{ id }}
+      <form class="w-3/4">
+        <mat-form-field class="w-full">
+          <mat-label>Tutle</mat-label>
+          <input matInput />
+        </mat-form-field>
+      </form>
       <!-- @for (project of projects; track $index) {
       <mat-card class="w-4/5 my-3">
         <mat-card-header>

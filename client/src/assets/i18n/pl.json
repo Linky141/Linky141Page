@@ -21,5 +21,7 @@
   "lastUpdate": "Ostatnia aktualizacja",
   "open": "Otwórz",
   "remove": "Skasuj",
-  "logout": "Wyloguj"
+  "logout": "Wyloguj",
+  "leaveAComment": "Pozostaw komentarz",
+  "addComment": "Dodaj komentarz"
 }
