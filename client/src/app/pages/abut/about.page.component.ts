@@ -13,7 +13,7 @@ import { MatInputModule } from "@angular/material/input";
     <h1 class=" mx-5">
       {{ content }}
     </h1>
-    } @if(isAdmin==='true'){ @if(editElement !== 1){
+    } @if(credentials==='admin'){ @if(editElement !== 1){
     <button
       (click)="buttonEditContentClick()"
       class=" ml-5"
@@ -39,7 +39,7 @@ import { MatInputModule } from "@angular/material/input";
   `,
 })
 export class AboutPageComponent {
-  isAdmin = "false"; //todo: remove after add users
+  credentials = ""; //todo: remove after add users
   editElement = 0;
   content =
     "Lorem ipsum dolor sit amet. Aut explicabo dolor sit ullam aliquid nam incidunt distinctio? Aut Quis corrupti non nulla ducimus qui adipisci perspiciatis ut corporis sint aut illo tenetur. Ut eius eaque ut necessitatibus voluptas et beatae necessitatibus. </p><p>Aut quas esse ea laboriosam sunt ut eligendi cupiditate! Sed ducimus reiciendis est eius fugit 33 ipsam saepe At unde corporis in optio ipsa. Et omnis quasi ad mollitia accusamus qui vero rerum id facere ipsam a aliquid dolor. </p><p>Ex incidunt aliquam et voluptas rerum ut voluptas repellat et ratione quia. Cum illo molestiae aut sint ratione est alias odio. Et molestiae voluptatem ut voluptates iure et accusamus porro est accusantium esse cum nisi sint aut reiciendis quia.";
@@ -47,7 +47,7 @@ export class AboutPageComponent {
   translationService = inject(TranslationService);
 
   ngOnInit() {
-    this.isAdmin = localStorage.getItem("isAdmin") || "false"; //todo: remove after add users
+    this.credentials = localStorage.getItem("credentials") || ""; //todo: remove after add users
   }
 
   buttonEditContentClick() {

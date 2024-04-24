@@ -17,5 +17,9 @@
   "login": "Zaloguj",
   "register": "Zarejestruj",
   "dontHaveAccountRegister": "Nie masz konta, zarejestruj się tutaj",
-  "haveAccountLogin": "Masz już konto, zaloguj się tutaj"
+  "haveAccountLogin": "Masz już konto, zaloguj się tutaj",
+  "lastUpdate": "Ostatnia aktualizacja",
+  "open": "Otwórz",
+  "remove": "Skasuj",
+  "logout": "Wyloguj"
 }

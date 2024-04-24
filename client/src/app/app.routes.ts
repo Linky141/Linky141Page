@@ -6,6 +6,8 @@ import { DownloadsPageComponent } from "./pages/downloads/downloads.page.compone
 import { ProjectsPageComponent } from "./pages/projects/projects.page.component";
 import { LoginPageComponent } from "./pages/usersManagement/login.page.component";
 import { RegisterPageComponent } from "./pages/usersManagement/register.page.component";
+import { ProjectPageComponent } from "./pages/projects/project.page.component";
+import { ProjectEditPageComponent } from "./pages/projects/project-edit.page.component";
 
 export const routes: Routes = [
   {
@@ -32,6 +34,14 @@ export const routes: Routes = [
   {
     path: "projects",
     component: ProjectsPageComponent,
+  },
+  {
+    path: "project/:id",
+    component: ProjectPageComponent,
+  },
+  {
+    path: "projectEdit/:id",
+    component: ProjectEditPageComponent,
   },
   {
     path: "login",

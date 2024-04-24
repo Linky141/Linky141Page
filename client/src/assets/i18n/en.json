@@ -17,5 +17,9 @@
   "login": "Login",
   "register": "Register",
   "dontHaveAccountRegister": "You don't have an account, register here",
-  "haveAccountLogin": "You already have an account, log in here"
+  "haveAccountLogin": "You already have an account, log in here",
+  "lastUpdate": "Last update",
+  "open": "Open",
+  "remove": "Remove",
+  "logout": "Logout"
 }

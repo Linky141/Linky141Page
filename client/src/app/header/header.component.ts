@@ -10,8 +10,14 @@ import { ThemeService } from "../services/theme.service";
   imports: [RouterLink, RouterLinkActive],
   template: `
     <div class="bg-yellow-600">
-      <button (click)="testAdminChange()" class="pr-3">
-        ADMIN={{ isAdmin === "true" ? "1" : "0" }}
+      <button (click)="testAdminChange('admin')" class="pr-3">
+        ADMIN={{ credentials === "admin" ? "1" : "0" }}
+      </button>
+      <button (click)="testAdminChange('user')" class="pr-3">
+        USER={{ credentials === "user" ? "1" : "0" }}
+      </button>
+      <button (click)="testAdminChange('')" class="pr-3">
+        GUEST={{ credentials === "" ? "1" : "0" }}
       </button>
     </div>
     <h1 class="header_title_style background_color_dark">
@@ -66,6 +72,32 @@ import { ThemeService } from "../services/theme.service";
         </li>
 
         <li class="header_list_style ml-auto">
+          <select
+            (change)="ChangeLanguage.emit($event)"
+            class="header_select_style"
+          >
+            <option value="en" [selected]="lang === 'en'">EN</option>
+            <option value="pl" [selected]="lang === 'pl'">PL</option>
+          </select>
+        </li>
+        <li class="header_list_style">
+          <button (click)="changedTheme()" class="header_list_style bar pr-3">
+            {{ darkOrLightMode }}
+          </button>
+        </li>
+        @if(credentials !== '') {
+        <li class="header_list_style">
+          <a class="header_link_padding">
+            {{ credentials.toUpperCase() }}
+          </a>
+        </li>
+        <li class="header_list_style">
+          <a class="header_link_padding">
+            {{ translationService.t("logout") }}
+          </a>
+        </li>
+        } @else{
+        <li class="header_list_style">
           <a
             class="header_link_padding"
             routerLink="/login"
@@ -83,20 +115,7 @@ import { ThemeService } from "../services/theme.service";
             {{ translationService.t("signUp") }}
           </a>
         </li>
-        <li class="header_list_style">
-          <select
-            (change)="ChangeLanguage.emit($event)"
-            class="header_select_style"
-          >
-            <option value="en" [selected]="lang === 'en'">EN</option>
-            <option value="pl" [selected]="lang === 'pl'">PL</option>
-          </select>
-        </li>
-        <li class="header_list_style">
-          <button (click)="changedTheme()" class="header_list_style bar pr-3">
-            {{ darkOrLightMode }}
-          </button>
-        </li>
+        }
       </ul>
     </nav>
   `,
@@ -109,10 +128,10 @@ export class HeaderComponent {
   themeService = inject(ThemeService);
 
   darkOrLightMode = "empty";
-  isAdmin = "false"; //todo: remove after add users
+  credentials = ""; //todo: remove after add users
 
   ngOnInit() {
-    this.isAdmin = localStorage.getItem("isAdmin") || "false"; //todo: remove after add users
+    this.credentials = localStorage.getItem("credentials") || ""; //todo: remove after add users
     const theme = localStorage.getItem("theme");
     if (theme === "dark") this.darkOrLightMode = "Light mode";
     else this.darkOrLightMode = "Dark mode";
@@ -128,15 +147,18 @@ export class HeaderComponent {
     }
   }
 
-  testAdminChange() {
+  testAdminChange(credential: string) {
     //todo: remove after add users
-    const isAdmin = localStorage.getItem("isAdmin");
-    if (isAdmin === "true") {
-      localStorage.setItem("isAdmin", "false");
-      this.isAdmin = "false";
+    // const credentials = localStorage.getItem("credentials");
+    if (credential === "admin") {
+      localStorage.setItem("credentials", "admin");
+      this.credentials = "admin";
+    } else if (credential === "user") {
+      localStorage.setItem("credentials", "user");
+      this.credentials = "user";
     } else {
-      localStorage.setItem("isAdmin", "true");
-      this.isAdmin = "true";
+      localStorage.removeItem("credentials");
+      this.credentials = "";
     }
     window.location.reload();
   }

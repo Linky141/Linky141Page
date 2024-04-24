@@ -13,7 +13,7 @@ import { MatInputModule } from "@angular/material/input";
     <h1 class="text-center text-3xl mt-4 mb-3 mx-5  ">
       {{ title }}
     </h1>
-    } @if(isAdmin==='true'){ @if(editElement !== 1){
+    } @if(credentials==='admin'){ @if(editElement !== 1){
     <button
       mat-stroked-button
       color="primary"
@@ -37,7 +37,7 @@ import { MatInputModule } from "@angular/material/input";
     </button>
     } } @if(editElement !== 2){
     <h1 class=" mx-5">{{ content }}</h1>
-    } @if(isAdmin==='true'){ @if(editElement !== 2){
+    } @if(credentials==='admin'){ @if(editElement !== 2){
     <button
       (click)="buttonEditContentClick()"
       class=" ml-5"
@@ -63,13 +63,13 @@ import { MatInputModule } from "@angular/material/input";
   `,
 })
 export class HomePagePageComponent {
-  isAdmin = "false"; //todo: remove after add users
+  credentials = ""; //todo: remove after add users
   editElement = 0;
 
   translationService = inject(TranslationService);
 
   ngOnInit() {
-    this.isAdmin = localStorage.getItem("isAdmin") || "false"; //todo: remove after add users
+    this.credentials = localStorage.getItem("credentials") || ""; //todo: remove after add users
   }
 
   buttonEditTitleClick() {
