@@ -7,18 +7,11 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { CustomDatePipe } from "../../utils/pipes/custom-date.pipe";
 import { TranslationService } from "../../services/translation.service";
+import { MatIconModule } from "@angular/material/icon";
 import { ActivatedRoute } from "@angular/router";
-// import { ProjectModel } from "../../models/project.model";
-
-export type ProjectModel = {
-  id: number;
-  title: string;
-  date: number;
-  github: string;
-  description: string;
-  photos: string[];
-  comments: string[];
-};
+import { ProjectModel } from "../../models/project.model";
+import { MatDialog } from "@angular/material/dialog";
+import { DialogImage } from "./dialog-image.component";
 
 @Component({
   selector: "app-project-edit",
@@ -31,58 +24,65 @@ export type ProjectModel = {
     CustomDatePipe,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
   ],
-  styles: `
-  .example-card {
-  max-width: 400px;
-  }
-  `,
+  styles: ``,
   template: `
+    <button class="ml-5 mt-5" mat-flat-button color="primary">
+      {{ translationService.t("submit") }}
+    </button>
+    <button class="mt-5" mat-button color="primary">
+      {{ translationService.t("reset") }}
+    </button>
+    <button class="mt-5" mat-button color="warn">
+      {{ translationService.t("cancel") }}
+    </button>
     <div class="flex justify-center items-center flex-col">
-      Edit project {{ id }}
-      <form class="w-3/4">
+      <form class="w-3/4 mt-4">
         <mat-form-field class="w-full">
-          <mat-label>Tutle</mat-label>
-          <input matInput />
+          <mat-label>Title</mat-label>
+          <input matInput value="{{ project.title }}" />
+        </mat-form-field>
+        <mat-form-field class="w-full h-72">
+          <mat-label>Description</mat-label>
+          <textarea matInput>{{ project.description }}</textarea>
         </mat-form-field>
       </form>
-      <!-- @for (project of projects; track $index) {
-      <mat-card class="w-4/5 my-3">
-        <mat-card-header>
-          <mat-card-subtitle
-            >{{ translationService.t("lastUpdate") }}:
-            {{ project.date | customDate }}</mat-card-subtitle
-          >
-          <mat-card-title>{{ project.title }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>{{ project.description }}</p>
-          <mat-divider></mat-divider>
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-button color="primary">
-            {{ translationService.t("open") }}
-          </button>
-          @if(credentials==='admin'){
-          <button mat-button color="primary">
-            {{ translationService.t("edit") }}
-          </button>
-          <button mat-button color="warn">
-            {{ translationService.t("remove") }}
-          </button>
+      <div class="flex justify-center items-center mb-5">
+        <div
+          class="flex justify-center flex-wrap mx-auto"
+          style="max-width: 75%;"
+        >
+          @for (photo of project.photos; track $index) {
+          <mat-card class="m-1">
+            <div class="flex justify-center items-center m-2 w-52 h-52">
+              <img
+                (click)="openImage(photo)"
+                src="{{ photo }}"
+                alt="Image"
+                class="max-w-52 max-h-52 rounded-2xl"
+                style="object-fit: contain;"
+              />
+            </div>
+            <button mat-fab color="warn" class="m-2">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card>
           }
-        </mat-card-actions>
-        <mat-card-footer>
-          <mat-progress-bar mode="indeterminate"></mat-progress-bar> 
-        </mat-card-footer>
-      </mat-card>
-      } -->
+          <div class="flex justify-center items-center m-2 w-52 h-72">
+            <button mat-fab color="primary" class="m-2">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   `,
 })
 export class ProjectEditPageComponent {
   translationService = inject(TranslationService);
   route = inject(ActivatedRoute);
+  dialog = inject(MatDialog);
 
   id = "";
   credentials = ""; //todo: remove after add users
@@ -92,13 +92,48 @@ export class ProjectEditPageComponent {
     this.credentials = localStorage.getItem("credentials") || ""; //todo: remove after add users
   }
 
+  openImage(image: string) {
+    this.dialog.open(DialogImage, {
+      data: {
+        url: image,
+      },
+    });
+  }
+
   project: ProjectModel = {
     id: 1,
     title: "Project 1",
-    date: 1700291084476,
-    description: "Project 1 description",
+    lastUpdate: 1700291084476,
+    description:
+      "Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. ",
     github: "www.google.pl",
-    photos: ["https://picsum.photos/200", "https://picsum.photos/200"],
-    comments: ["comment1", "comment2", "comment3"],
+    photos: [
+      "https://picsum.photos/100",
+      "https://picsum.photos/800",
+      "https://picsum.photos/200",
+      "https://picsum.photos/500",
+      "https://picsum.photos/300",
+      "https://picsum.photos/200",
+      "https://picsum.photos/200",
+      "https://picsum.photos/500",
+      "https://picsum.photos/2000",
+      "https://picsum.photos/200",
+    ],
+    comments: [
+      {
+        id: 1,
+        user: "USER1",
+        content:
+          "commnet commnet commnet commnet commnet commnet commnet commnet commnet commnet ",
+        date: 1700291084476,
+      },
+      {
+        id: 2,
+        user: "USER2",
+        content:
+          "commnet commnet commnet commnet commnet commnet commnet commnet commnet commnet ",
+        date: 1700291084476,
+      },
+    ],
   };
 }

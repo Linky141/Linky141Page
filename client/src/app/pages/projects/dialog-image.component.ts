@@ -11,7 +11,11 @@ export interface DialogImageData {
 
 @Component({
   selector: "dialog-image",
-  templateUrl: "show-image.html",
+  template: `
+    <mat-dialog-content class="overflow-auto">
+      <img src="{{ data.url }}" class="max-w-none block" />
+    </mat-dialog-content>
+  `,
   standalone: true,
   imports: [MatDialogTitle, MatDialogContent],
 })
