@@ -40,11 +40,11 @@ import { DialogImage } from "./dialog-image.component";
     <div class="flex justify-center items-center flex-col">
       <form class="w-3/4 mt-4">
         <mat-form-field class="w-full">
-          <mat-label>Title</mat-label>
+          <mat-label>{{ translationService.t("name") }}</mat-label>
           <input matInput value="{{ project.title }}" />
         </mat-form-field>
         <mat-form-field class="w-full h-72">
-          <mat-label>Description</mat-label>
+          <mat-label>{{ translationService.t("description") }}</mat-label>
           <textarea matInput>{{ project.description }}</textarea>
         </mat-form-field>
       </form>

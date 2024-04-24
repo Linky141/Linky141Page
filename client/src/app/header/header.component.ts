@@ -82,7 +82,11 @@ import { ThemeService } from "../services/theme.service";
         </li>
         <li class="header_list_style">
           <button (click)="changedTheme()" class="header_list_style bar pr-3">
-            {{ darkOrLightMode }}
+            @if(theme === 'light'){
+            {{ translationService.t("lightTheme") }}
+            } @else {
+            {{ translationService.t("darkTheme") }}
+            }
           </button>
         </li>
         @if(credentials !== '') {
@@ -127,23 +131,23 @@ export class HeaderComponent {
   translationService = inject(TranslationService);
   themeService = inject(ThemeService);
 
-  darkOrLightMode = "empty";
+  theme = "light";
   credentials = ""; //todo: remove after add users
 
   ngOnInit() {
     this.credentials = localStorage.getItem("credentials") || ""; //todo: remove after add users
     const theme = localStorage.getItem("theme");
-    if (theme === "dark") this.darkOrLightMode = "Light mode";
-    else this.darkOrLightMode = "Dark mode";
+    if (theme === "dark") this.theme = "light";
+    else this.theme = "dark";
   }
 
   changedTheme() {
     this.themeService.toggleDarkTheme();
     const theme = localStorage.getItem("theme");
     if (theme === "dark") {
-      this.darkOrLightMode = "Light mode";
+      this.theme = "light";
     } else {
-      this.darkOrLightMode = "Dark mode";
+      this.theme = "dark";
     }
   }
 

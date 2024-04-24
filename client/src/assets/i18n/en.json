@@ -23,5 +23,9 @@
   "remove": "Remove",
   "logout": "Logout",
   "leaveAComment": "Leave a comment",
-  "addComment": "Add commnet"
+  "addComment": "Add commnet",
+  "name": "Name",
+  "description": "Description",
+  "darkTheme": "Dark theme",
+  "lightTheme": "Light theme"
 }

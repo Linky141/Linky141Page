@@ -23,5 +23,9 @@
   "remove": "Skasuj",
   "logout": "Wyloguj",
   "leaveAComment": "Pozostaw komentarz",
-  "addComment": "Dodaj komentarz"
+  "addComment": "Dodaj komentarz",
+  "name": "Nazwa",
+  "description": "Opis",
+  "darkTheme": "Motyw ciemny",
+  "lightTheme": "Motyw jasny"
 }
