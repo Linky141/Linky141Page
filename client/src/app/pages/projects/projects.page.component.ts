@@ -7,6 +7,7 @@ import { CustomDatePipe } from "../../utils/pipes/custom-date.pipe";
 import { TranslationService } from "../../services/translation.service";
 import { RouterModule } from "@angular/router";
 import { ProjectModel } from "../../models/project.model";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: "app-projects",
@@ -18,6 +19,7 @@ import { ProjectModel } from "../../models/project.model";
     MatProgressBarModule,
     CustomDatePipe,
     RouterModule,
+    MatIconModule,
   ],
   styles: `
   .example-card {
@@ -66,6 +68,20 @@ import { ProjectModel } from "../../models/project.model";
       </mat-card>
       }
     </div>
+    @if(credentials==='admin'){
+    <div class="w-full flex justify-center mb-5">
+      <div class="flex w-4/5">
+        <button
+          class="ml-auto"
+          mat-fab
+          color="primary"
+          routerLink="/projectEdit/0"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+    }
   `,
 })
 export class ProjectsPageComponent {

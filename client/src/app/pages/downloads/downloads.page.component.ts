@@ -84,6 +84,132 @@ const ELEMENT_DATA: downloadItem[] = [
     downloadLink: "www.google.pl",
     uploadDate: 1700291084476,
   },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
+  {
+    name: "Item10",
+    description:
+      "description of some items where will be in the future real description",
+    downloadLink: "www.google.pl",
+    uploadDate: 1700291084476,
+  },
 ];
 
 @Component({
@@ -149,7 +275,7 @@ const ELEMENT_DATA: downloadItem[] = [
       </table>
     </div>
     @if(credentials==='admin'){
-    <div class="w-full flex pr-5">
+    <div class="w-full flex pr-5 mb-5">
       <button
         class="ml-auto"
         mat-fab
