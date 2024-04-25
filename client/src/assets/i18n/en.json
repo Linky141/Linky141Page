@@ -31,5 +31,9 @@
   "lightTheme": "Light theme",
   "uploadDate": "Upload date",
   "onlyForLoggedUsers": "Only for logged users",
-  "addressUrl": "URL address"
+  "addressUrl": "URL address",
+  "contactName":"Contact name",
+  "contactValue":"Contact value",
+  "add": "Add",
+  "examplemail@mail.com":"yourmail@mail.com"
 }

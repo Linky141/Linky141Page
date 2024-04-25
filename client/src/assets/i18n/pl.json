@@ -31,5 +31,9 @@
   "lightTheme": "Motyw jasny",
   "uploadDate": "Data wstawienia",
   "onlyForLoggedUsers": "Tylko dla zalogowanych użytkowników",
-  "addressUrl": "Adres URL"
+  "addressUrl": "Adres URL",
+  "contactName":"Nazwa kontaktu",
+  "contactValue":"Wartość kontaktu",
+  "add":"Dodaj",
+  "examplemail@mail.com":"twójmail@mail.pl"
 }
