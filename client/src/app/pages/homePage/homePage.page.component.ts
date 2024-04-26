@@ -4,12 +4,9 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { HomePageData } from "../../models/home-page.model";
-import {
-  HomePageService,
-  HomePageUpdatePayload,
-} from "../../services/home-page.service";
 import { LIST_STATE_VALUE, PageState } from "../../utils/page-state.type";
 import { FormsModule } from "@angular/forms";
+import { HomePageService } from "../../services/home-page.servicee";
 // import { HomePageUpdatePayload } from "../../services/home-page.service";
 
 @Component({
@@ -72,12 +69,17 @@ export class HomePagePageComponent {
 
   ngOnInit() {
     this.credentials = localStorage.getItem("credentials") || ""; //todo: remove after add users
+    this.getAllHomePageData();
+  }
+
+  getAllHomePageData(): void {
     this.state = { state: LIST_STATE_VALUE.LOADING };
+
     this.homePageService.getAll().subscribe({
       next: (res) => {
         this.state = {
           state: LIST_STATE_VALUE.SUCCESS,
-          result: res,
+          result: res.body!,
         };
         this.title = this.state.result[0].title;
         this.content = this.state.result[0].content;

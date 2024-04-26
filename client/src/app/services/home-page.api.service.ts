@@ -7,14 +7,18 @@ export type HomePageUpdatePayload = { title?: string; content?: string };
 @Injectable({
   providedIn: "root",
 })
-export class HomePageService {
+export class HomePageApiService {
   private http = inject(HttpClient);
 
   private baseURL = "http://localhost:3000";
 
   getAll() {
-    const url = new URL("/homePageData", this.baseURL);
-    return this.http.get<HomePageData[]>(url.href);
+    return this.http.get<HomePageData[]>(`${this.baseURL}/homePageData`, {
+      observe: "response",
+    });
+
+    // const url = new URL("/homePageData", this.baseURL);
+    // return this.http.get<HomePageData[]>(url.href);
   }
 
   update(payload: HomePageUpdatePayload) {
@@ -22,5 +26,9 @@ export class HomePageService {
       `${this.baseURL}/homePageData/1`,
       payload
     );
+    // return this.http.patch<HomePageData>(
+    //   `${this.baseURL}/homePageData/1`,
+    //   payload
+    // );
   }
 }
