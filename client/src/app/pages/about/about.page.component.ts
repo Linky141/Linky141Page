@@ -9,6 +9,8 @@ import { AboutData } from "../../models/about.model";
 import { wait } from "../../utils/wait";
 import { FormsModule } from "@angular/forms";
 import { LoadingPageComponent } from "../../components/loading/loading.component";
+import { MatProgressBar } from "@angular/material/progress-bar";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
   selector: "app-about",
@@ -32,13 +34,17 @@ import { LoadingPageComponent } from "../../components/loading/loading.component
       <textarea matInput [(ngModel)]="content"></textarea>
     </mat-form-field>
     <button
-      class=" ml-5"
+      class="ml-5 w-24"
       mat-flat-button
       color="primary"
       (click)="updateAbout()"
       disabled="{{ savingData }}"
     >
+      @if(savingData===true){
+      <mat-spinner diameter="30" mode="indeterminate"></mat-spinner>
+      } @else {
       {{ translationService.t("submit") }}
+      }
     </button>
     <button mat-button color="primary" disabled="{{ savingData }}">
       {{ translationService.t("reset") }}
@@ -61,6 +67,8 @@ import { LoadingPageComponent } from "../../components/loading/loading.component
     MatInputModule,
     FormsModule,
     LoadingPageComponent,
+    MatProgressBar,
+    MatProgressSpinnerModule,
   ],
 })
 export class AboutPageComponent {

@@ -9,6 +9,7 @@ import { FormsModule } from "@angular/forms";
 import { HomePageService } from "./services/home-page.service";
 import { wait } from "../../utils/wait";
 import { LoadingPageComponent } from "../../components/loading/loading.component";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
   selector: "app-home-page-page",
@@ -41,17 +42,32 @@ import { LoadingPageComponent } from "../../components/loading/loading.component
       <textarea matInput [(ngModel)]="content"></textarea>
     </mat-form-field>
     <button
-      class=" ml-5"
+      class="ml-5 w-24"
       mat-flat-button
       color="primary"
       (click)="updateHomePage()"
+      disabled="{{ savingData }}"
     >
+      @if(savingData===true){
+      <mat-spinner diameter="30" mode="indeterminate"></mat-spinner>
+      } @else {
       {{ translationService.t("submit") }}
+      }
     </button>
-    <button mat-button color="primary" (click)="resetControlsValues()">
+    <button
+      mat-button
+      color="primary"
+      (click)="resetControlsValues()"
+      disabled="{{ savingData }}"
+    >
       {{ translationService.t("reset") }}
     </button>
-    <button (click)="buttonChangeEditMode(false)" mat-button color="warn">
+    <button
+      (click)="buttonChangeEditMode(false)"
+      mat-button
+      color="warn"
+      disabled="{{ savingData }}"
+    >
       {{ translationService.t("cancel") }}
     </button>
     } } @else {
@@ -64,6 +80,7 @@ import { LoadingPageComponent } from "../../components/loading/loading.component
     MatInputModule,
     FormsModule,
     LoadingPageComponent,
+    MatProgressSpinnerModule,
   ],
 })
 export class HomePagePageComponent {
@@ -74,6 +91,7 @@ export class HomePagePageComponent {
   title = "";
   content = "";
   listStateValue = LIST_STATE_VALUE;
+  savingData = false;
 
   translationService = inject(TranslationService);
 
@@ -121,6 +139,7 @@ export class HomePagePageComponent {
   }
 
   async updateHomePage() {
+    this.savingData = true;
     await wait(2000); //todo: remove
     this.homePageService
       .update({ title: this.title, content: this.content })
@@ -132,6 +151,7 @@ export class HomePagePageComponent {
             this.title = res.title;
             this.content = res.content;
             this.editMode = false;
+            this.savingData = false;
           }
         },
       });
