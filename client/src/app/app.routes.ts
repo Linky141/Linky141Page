@@ -1,6 +1,6 @@
 import { Routes } from "@angular/router";
 import { HomePagePageComponent } from "./pages/homePage/homePage.page.component";
-import { AboutPageComponent } from "./pages/abut/about.page.component";
+import { AboutPageComponent } from "./pages/about/about.page.component";
 import { ContactPageComponent } from "./pages/contact/contact.page.component";
 import { DownloadsPageComponent } from "./pages/downloads/downloads.page.component";
 import { ProjectsPageComponent } from "./pages/projects/projects.page.component";

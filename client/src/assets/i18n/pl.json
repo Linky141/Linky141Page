@@ -32,8 +32,9 @@
   "uploadDate": "Data wstawienia",
   "onlyForLoggedUsers": "Tylko dla zalogowanych użytkowników",
   "addressUrl": "Adres URL",
-  "contactName":"Nazwa kontaktu",
-  "contactValue":"Wartość kontaktu",
-  "add":"Dodaj",
-  "examplemail@mail.com":"twójmail@mail.pl"
+  "contactName": "Nazwa kontaktu",
+  "contactValue": "Wartość kontaktu",
+  "add": "Dodaj",
+  "examplemail@mail.com": "twójmail@mail.pl",
+  "loading": "Wczytywanie..."
 }

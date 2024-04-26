@@ -1,6 +1,6 @@
 import { Component, HostBinding, inject } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { HeaderComponent } from "./header/header.component";
+import { HeaderComponent } from "./components/header/header.component";
 import i18next from "i18next";
 import { TranslationService } from "./services/translation.service";
 import { ThemeService } from "./services/theme.service";

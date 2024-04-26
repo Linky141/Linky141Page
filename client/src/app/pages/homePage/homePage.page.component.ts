@@ -6,15 +6,15 @@ import { MatInputModule } from "@angular/material/input";
 import { HomePageData } from "../../models/home-page.model";
 import { LIST_STATE_VALUE, PageState } from "../../utils/page-state.type";
 import { FormsModule } from "@angular/forms";
-import { HomePageService } from "../../services/home-page.servicee";
-// import { HomePageUpdatePayload } from "../../services/home-page.service";
+import { HomePageService } from "./services/home-page.servicee";
+import { wait } from "../../utils/wait";
+import { LoadingPageComponent } from "../../components/loading/loading.component";
 
 @Component({
   selector: "app-home-page",
   standalone: true,
-  imports: [MatButtonModule, MatFormFieldModule, MatInputModule, FormsModule],
   template: `
-    @if(editMode === false){
+    @if(state.state === listStateValue.SUCCESS){ @if(editMode === false){
     <h1 class="text-center text-3xl mt-4 mb-3 mx-5  ">
       {{ title }}
     </h1>
@@ -54,8 +54,17 @@ import { HomePageService } from "../../services/home-page.servicee";
     <button (click)="buttonChangeEditMode(false)" mat-button color="warn">
       {{ translationService.t("cancel") }}
     </button>
+    } } @else {
+    <app-loading text="{{ translationService.t('loading') }}" />
     }
   `,
+  imports: [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    LoadingPageComponent,
+  ],
 })
 export class HomePagePageComponent {
   credentials = ""; //todo: remove after add users
@@ -64,6 +73,7 @@ export class HomePagePageComponent {
   editMode = false;
   title = "";
   content = "";
+  listStateValue = LIST_STATE_VALUE;
 
   translationService = inject(TranslationService);
 
@@ -72,8 +82,9 @@ export class HomePagePageComponent {
     this.getAllHomePageData();
   }
 
-  getAllHomePageData(): void {
+  async getAllHomePageData(): Promise<void> {
     this.state = { state: LIST_STATE_VALUE.LOADING };
+    await wait(2000); //todo: remove
 
     this.homePageService.getAll().subscribe({
       next: (res) => {
@@ -110,9 +121,6 @@ export class HomePagePageComponent {
   }
 
   updateHomePage() {
-    // let payload: HomePageUpdatePayload;
-    // payload.title = this.title;
-    // payload.content = this.content;
     this.homePageService
       .update({ title: this.title, content: this.content })
       .subscribe({
@@ -126,15 +134,5 @@ export class HomePagePageComponent {
           }
         },
       });
-
-    // .then((res) => {
-    //   if (res instanceof Error) {
-    //     alert(res.message);
-    //   } else {
-    //     this.title = res.title;
-    //     this.content = res.content;
-    //     this.editMode = false;
-    //   }
-    // });
   }
 }
