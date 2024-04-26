@@ -1,143 +1,138 @@
-import { Component, inject } from "@angular/core";
+import { Component, EventEmitter, inject } from "@angular/core";
 import { TranslationService } from "../../services/translation.service";
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { HomePageData } from "../../models/home-page.model";
-
-type FetchingError = { status: number; message: string };
-
-type IdleState = {
-  state: "idle";
-};
-type LoadingState = {
-  state: "loading";
-};
-type SuccessState = {
-  state: "success";
-  result: HomePageData[];
-};
-type ErrorState = {
-  state: "error";
-  error: FetchingError;
-};
-
-type HomePageState = IdleState | LoadingState | SuccessState | ErrorState;
+import {
+  HomePageService,
+  HomePageUpdatePayload,
+} from "../../services/home-page.service";
+import { LIST_STATE_VALUE, PageState } from "../../utils/page-state.type";
+import { FormsModule } from "@angular/forms";
+// import { HomePageUpdatePayload } from "../../services/home-page.service";
 
 @Component({
   selector: "app-home-page",
   standalone: true,
-  imports: [MatButtonModule, MatFormFieldModule, MatInputModule],
+  imports: [MatButtonModule, MatFormFieldModule, MatInputModule, FormsModule],
   template: `
-    @if(editElement !== 1){
+    @if(editMode === false){
     <h1 class="text-center text-3xl mt-4 mb-3 mx-5  ">
-      {{ state.state === "success" ? state.result[0].title : "" }}
+      {{ title }}
     </h1>
-    } @if(credentials==='admin'){ @if(editElement !== 1){
+    <h1 class=" mx-5 whitespace-pre-line">
+      {{ content }}
+    </h1>
+
+    @if(credentials==='admin'){
     <button
       mat-stroked-button
       color="primary"
-      (click)="buttonEditTitleClick()"
+      (click)="buttonChangeEditMode(true)"
       class=" ml-5"
     >
       {{ translationService.t("edit") }}
     </button>
-    } @else {
+    } } @else {
     <mat-form-field class="w-full">
-      <input
-        matInput
-        class="w-full"
-        value="{{ state.state === 'success' ? state.result[0].title : '' }}"
-      />
+      <mat-label>Title</mat-label>
+      <input matInput class="w-full" [(ngModel)]="title" />
     </mat-form-field>
-    <button class=" ml-5" mat-flat-button color="primary">
-      {{ translationService.t("submit") }}
-    </button>
-    <button mat-button color="primary">
-      {{ translationService.t("reset") }}
-    </button>
-    <button (click)="buttonEditTitleClick()" mat-button color="warn">
-      {{ translationService.t("cancel") }}
-    </button>
-    } } @if(editElement !== 2){
-    <h1 class=" mx-5">
-      {{ state.state === "success" ? state.result[0].content : "" }}
-    </h1>
-    } @if(credentials==='admin'){ @if(editElement !== 2){
+    <mat-form-field class="w-full">
+      <mat-label>Content</mat-label>
+      <textarea matInput [(ngModel)]="content"></textarea>
+    </mat-form-field>
     <button
-      (click)="buttonEditContentClick()"
       class=" ml-5"
-      mat-stroked-button
+      mat-flat-button
       color="primary"
+      (click)="updateHomePage()"
     >
-      {{ translationService.t("edit") }}
-    </button>
-    } @else{
-    <mat-form-field class="w-full">
-      <textarea matInput>{{
-        state.state === "success" ? state.result[0].content : ""
-      }}</textarea>
-    </mat-form-field>
-    <button class=" ml-5" mat-flat-button color="primary">
       {{ translationService.t("submit") }}
     </button>
-    <button mat-button color="primary">
+    <button mat-button color="primary" (click)="resetControlsValues()">
       {{ translationService.t("reset") }}
     </button>
-    <button (click)="buttonEditContentClick()" mat-button color="warn">
+    <button (click)="buttonChangeEditMode(false)" mat-button color="warn">
       {{ translationService.t("cancel") }}
     </button>
-    } }
+    }
   `,
 })
 export class HomePagePageComponent {
   credentials = ""; //todo: remove after add users
-  // homePageData: HomePageData[] = [];
-  state: HomePageState = { state: "idle" };
-  private readonly URL = "http://localhost:3000";
-  editElement = 0;
+  private homePageService = inject(HomePageService);
+  state: PageState<HomePageData> = { state: LIST_STATE_VALUE.IDLE };
+  editMode = false;
+  title = "";
+  content = "";
 
   translationService = inject(TranslationService);
 
-  constructor() {
-    this.state = { state: "loading" };
-    fetch(`${this.URL}/homePageData`)
-      .then<HomePageData[] | FetchingError>((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        return { status: response.status, message: response.statusText };
-      })
-      .then((response) => {
-        if (Array.isArray(response)) {
-          this.state = { state: "success", result: response };
-        } else {
-          this.state = { state: "error", error: response };
-        }
-      });
-  }
-
   ngOnInit() {
     this.credentials = localStorage.getItem("credentials") || ""; //todo: remove after add users
+    this.state = { state: LIST_STATE_VALUE.LOADING };
+    this.homePageService.getAll().subscribe({
+      next: (res) => {
+        this.state = {
+          state: LIST_STATE_VALUE.SUCCESS,
+          result: res,
+        };
+        this.title = this.state.result[0].title;
+        this.content = this.state.result[0].content;
+      },
+      error: (err) => {
+        this.state = {
+          state: LIST_STATE_VALUE.ERROR,
+          error: err,
+        };
+      },
+    });
   }
 
-  buttonEditTitleClick() {
-    if (this.editElement === 0) {
-      this.editElement = 1;
-    } else if (this.editElement === 1) {
-      this.editElement = 0;
+  buttonChangeEditMode(edit: boolean) {
+    if (this.state.state == LIST_STATE_VALUE.SUCCESS) {
+      this.editMode = edit;
+      if (edit === false) {
+        this.resetControlsValues();
+      }
     }
   }
 
-  buttonEditContentClick() {
-    if (this.editElement === 0) {
-      this.editElement = 2;
-    } else if (this.editElement === 2) {
-      this.editElement = 0;
+  resetControlsValues() {
+    if (this.state.state === LIST_STATE_VALUE.SUCCESS) {
+      this.title = this.state.result[0].title;
+      this.content = this.state.result[0].content;
     }
   }
 
-  // title = "sample header text";
-  // content =
-  //   "Lorem ipsum dolor sit amet. Aut explicabo dolor sit ullam aliquid nam incidunt distinctio? Aut Quis corrupti non nulla ducimus qui adipisci perspiciatis ut corporis sint aut illo tenetur. Ut eius eaque ut necessitatibus voluptas et beatae necessitatibus. </p><p>Aut quas esse ea laboriosam sunt ut eligendi cupiditate! Sed ducimus reiciendis est eius fugit 33 ipsam saepe At unde corporis in optio ipsa. Et omnis quasi ad mollitia accusamus qui vero rerum id facere ipsam a aliquid dolor. </p><p>Ex incidunt aliquam et voluptas rerum ut voluptas repellat et ratione quia. Cum illo molestiae aut sint ratione est alias odio. Et molestiae voluptatem ut voluptates iure et accusamus porro est accusantium esse cum nisi sint aut reiciendis quia.";
+  updateHomePage() {
+    // let payload: HomePageUpdatePayload;
+    // payload.title = this.title;
+    // payload.content = this.content;
+    this.homePageService
+      .update({ title: this.title, content: this.content })
+      .subscribe({
+        next: (res) => {
+          if (this.state.state === LIST_STATE_VALUE.SUCCESS) {
+            this.state.result[0].title = res.title;
+            this.state.result[0].content = res.content;
+            this.title = res.title;
+            this.content = res.content;
+            this.editMode = false;
+          }
+        },
+      });
+
+    // .then((res) => {
+    //   if (res instanceof Error) {
+    //     alert(res.message);
+    //   } else {
+    //     this.title = res.title;
+    //     this.content = res.content;
+    //     this.editMode = false;
+    //   }
+    // });
+  }
 }
