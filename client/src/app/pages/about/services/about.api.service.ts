@@ -1,10 +1,12 @@
 import { Injectable, computed, inject, signal } from "@angular/core";
-import { HomePageData } from "../../../models/home-page.model";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { FetchingError } from "../../../utils/page-state.type";
-import { EMPTY, Observable, catchError, tap } from "rxjs";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Observable, catchError, EMPTY, tap } from "rxjs";
+import { HomePageData } from "../../../models/home-page.model";
+import { HomePageUpdatePayload } from "../../homePage/services/home-page.api.service";
+import { AboutData } from "../../../models/about.model";
 
-export type HomePageUpdatePayload = { title?: string; content?: string };
+export type AboutUpdatePayload = { content?: string };
 
 export type LoadingState = {
   idle: boolean;
@@ -15,7 +17,7 @@ export type LoadingState = {
 @Injectable({
   providedIn: "root",
 })
-export class HomePageApiService {
+export class AboutApiService {
   private http = inject(HttpClient);
 
   private $idle = signal(true);
@@ -51,16 +53,13 @@ export class HomePageApiService {
 
   getAll() {
     return this.withLoadingState(
-      this.http.get<HomePageData[]>(`${this.baseURL}/homePageData`, {
+      this.http.get<AboutData[]>(`${this.baseURL}/about`, {
         observe: "response",
       })
     );
   }
 
-  update(payload: HomePageUpdatePayload) {
-    return this.http.patch<HomePageData>(
-      `${this.baseURL}/homePageData/1`,
-      payload
-    );
+  update(payload: AboutUpdatePayload) {
+    return this.http.patch<AboutData>(`${this.baseURL}/about/1`, payload);
   }
 }

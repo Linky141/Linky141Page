@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject } from "@angular/core";
+import { Component, inject } from "@angular/core";
 import { TranslationService } from "../../services/translation.service";
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -6,12 +6,12 @@ import { MatInputModule } from "@angular/material/input";
 import { HomePageData } from "../../models/home-page.model";
 import { LIST_STATE_VALUE, PageState } from "../../utils/page-state.type";
 import { FormsModule } from "@angular/forms";
-import { HomePageService } from "./services/home-page.servicee";
+import { HomePageService } from "./services/home-page.service";
 import { wait } from "../../utils/wait";
 import { LoadingPageComponent } from "../../components/loading/loading.component";
 
 @Component({
-  selector: "app-home-page",
+  selector: "app-home-page-page",
   standalone: true,
   template: `
     @if(state.state === listStateValue.SUCCESS){ @if(editMode === false){
@@ -120,7 +120,8 @@ export class HomePagePageComponent {
     }
   }
 
-  updateHomePage() {
+  async updateHomePage() {
+    await wait(2000); //todo: remove
     this.homePageService
       .update({ title: this.title, content: this.content })
       .subscribe({

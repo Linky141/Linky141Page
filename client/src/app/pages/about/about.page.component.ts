@@ -3,19 +3,24 @@ import { TranslationService } from "../../services/translation.service";
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
+import { AboutService } from "./services/about.service";
+import { LIST_STATE_VALUE, PageState } from "../../utils/page-state.type";
+import { AboutData } from "../../models/about.model";
+import { wait } from "../../utils/wait";
+import { FormsModule } from "@angular/forms";
+import { LoadingPageComponent } from "../../components/loading/loading.component";
 
 @Component({
   selector: "app-about",
   standalone: true,
-  imports: [MatButtonModule, MatFormFieldModule, MatInputModule],
   template: `
-    @if(editElement !== 1){
-    <h1 class=" mx-5">
+    @if(state.state === listStateValue.SUCCESS){ @if(editMode === false){
+    <h1 class=" mx-5 mt-5 whitespace-pre-line">
       {{ content }}
     </h1>
-    } @if(credentials==='admin'){ @if(editElement !== 1){
+    } @if(credentials==='admin'){ @if(editMode === false){
     <button
-      (click)="buttonEditContentClick()"
+      (click)="buttonChangeEditMode(true)"
       class=" ml-5"
       mat-stroked-button
       color="primary"
@@ -24,37 +29,104 @@ import { MatInputModule } from "@angular/material/input";
     </button>
     } @else {
     <mat-form-field class="w-full">
-      <textarea matInput>{{ content }}</textarea>
+      <textarea matInput [(ngModel)]="content"></textarea>
     </mat-form-field>
-    <button class=" ml-5" mat-flat-button color="primary">
+    <button
+      class=" ml-5"
+      mat-flat-button
+      color="primary"
+      (click)="updateAbout()"
+      disabled="{{ savingData }}"
+    >
       {{ translationService.t("submit") }}
     </button>
-    <button mat-button color="primary">
+    <button mat-button color="primary" disabled="{{ savingData }}">
       {{ translationService.t("reset") }}
     </button>
-    <button (click)="buttonEditContentClick()" mat-button color="warn">
+    <button
+      (click)="buttonChangeEditMode(false)"
+      mat-button
+      color="warn"
+      disabled="{{ savingData }}"
+    >
       {{ translationService.t("cancel") }}
     </button>
-    } }
+    } } } @else {
+    <app-loading text="{{ translationService.t('loading') }}" />
+    }
   `,
+  imports: [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    LoadingPageComponent,
+  ],
 })
 export class AboutPageComponent {
   credentials = ""; //todo: remove after add users
-  editElement = 0;
-  content =
-    "Lorem ipsum dolor sit amet. Aut explicabo dolor sit ullam aliquid nam incidunt distinctio? Aut Quis corrupti non nulla ducimus qui adipisci perspiciatis ut corporis sint aut illo tenetur. Ut eius eaque ut necessitatibus voluptas et beatae necessitatibus. </p><p>Aut quas esse ea laboriosam sunt ut eligendi cupiditate! Sed ducimus reiciendis est eius fugit 33 ipsam saepe At unde corporis in optio ipsa. Et omnis quasi ad mollitia accusamus qui vero rerum id facere ipsam a aliquid dolor. </p><p>Ex incidunt aliquam et voluptas rerum ut voluptas repellat et ratione quia. Cum illo molestiae aut sint ratione est alias odio. Et molestiae voluptatem ut voluptates iure et accusamus porro est accusantium esse cum nisi sint aut reiciendis quia.";
+  editMode = false;
 
+  private aboutService = inject(AboutService);
   translationService = inject(TranslationService);
+  state: PageState<AboutData> = { state: LIST_STATE_VALUE.IDLE };
+  content = "";
+  listStateValue = LIST_STATE_VALUE;
+  savingData = false;
 
   ngOnInit() {
     this.credentials = localStorage.getItem("credentials") || ""; //todo: remove after add users
+    this.getAllAboutData();
   }
 
-  buttonEditContentClick() {
-    if (this.editElement === 0) {
-      this.editElement = 1;
-    } else if (this.editElement === 1) {
-      this.editElement = 0;
+  async getAllAboutData(): Promise<void> {
+    this.state = { state: LIST_STATE_VALUE.LOADING };
+    await wait(2000); //todo: remove
+
+    this.aboutService.getAll().subscribe({
+      next: (res) => {
+        this.state = {
+          state: LIST_STATE_VALUE.SUCCESS,
+          result: res.body!,
+        };
+        this.content = this.state.result[0].content;
+      },
+      error: (err) => {
+        this.state = {
+          state: LIST_STATE_VALUE.ERROR,
+          error: err,
+        };
+      },
+    });
+  }
+
+  buttonChangeEditMode(edit: boolean) {
+    if (this.state.state == LIST_STATE_VALUE.SUCCESS) {
+      this.editMode = edit;
+      if (edit === false) {
+        this.resetControlsValues();
+      }
     }
+  }
+
+  resetControlsValues() {
+    if (this.state.state === LIST_STATE_VALUE.SUCCESS) {
+      this.content = this.state.result[0].content;
+    }
+  }
+
+  async updateAbout() {
+    this.savingData = true;
+    await wait(2000); //todo: remove
+    this.aboutService.update({ content: this.content }).subscribe({
+      next: (res) => {
+        if (this.state.state === LIST_STATE_VALUE.SUCCESS) {
+          this.state.result[0].content = res.content;
+          this.content = res.content;
+          this.editMode = false;
+          this.savingData = false;
+        }
+      },
+    });
   }
 }
