@@ -3,7 +3,7 @@ import { BehaviorSubject } from "rxjs";
 import { AboutData } from "../../../models/about.model";
 
 const initialState = {
-  homePage: [] as AboutData[],
+  about: [] as AboutData[],
 };
 
 type AboutStateValue = typeof initialState;
@@ -13,19 +13,19 @@ export class AboutStateService {
   private state$ = new BehaviorSubject(initialState);
   value$ = this.state$.asObservable();
 
-  setHomePageData(data: AboutData[]) {
+  setAboutData(data: AboutData[]) {
     this.state$.next({
-      homePage: data,
+      about: data,
     });
   }
 
-  updateHomePageData(data: AboutData) {
-    const updatedData = this.state$.value.homePage.map((val) => {
+  updateAboutData(data: AboutData) {
+    const updatedData = this.state$.value.about.map((val) => {
       return val.id === data.id ? data : val;
     });
 
     this.state$.next({
-      homePage: updatedData,
+      about: updatedData,
     });
   }
 }

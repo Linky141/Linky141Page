@@ -12,7 +12,7 @@ export class AboutService {
     return this.httpService.getAll().pipe(
       tap((res) => {
         if (res.body) {
-          this.state.setHomePageData(res.body);
+          this.state.setAboutData(res.body);
         }
       })
     );
@@ -21,7 +21,7 @@ export class AboutService {
   update(payload: AboutUpdatePayload) {
     return this.httpService.update(payload).pipe(
       tap((res) => {
-        this.state.updateHomePageData(res);
+        this.state.updateAboutData(res);
       })
     );
   }

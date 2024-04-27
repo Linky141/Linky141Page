@@ -9,7 +9,6 @@ import { AboutData } from "../../models/about.model";
 import { wait } from "../../utils/wait";
 import { FormsModule } from "@angular/forms";
 import { LoadingPageComponent } from "../../components/loading/loading.component";
-import { MatProgressBar } from "@angular/material/progress-bar";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
@@ -67,7 +66,6 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     MatInputModule,
     FormsModule,
     LoadingPageComponent,
-    MatProgressBar,
     MatProgressSpinnerModule,
   ],
 })

@@ -2,9 +2,17 @@ import { Injectable, computed, inject, signal } from "@angular/core";
 import { FetchingError } from "../../../utils/page-state.type";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, catchError, EMPTY, tap } from "rxjs";
-import { AboutData } from "../../../models/about.model";
+import { ContactData } from "../../../models/contact.model";
 
-export type AboutUpdatePayload = { content?: string };
+export type ContactUpdatePayload = {
+  contactName?: string;
+  contactValue?: string;
+};
+
+export type ContactAddPayload = {
+  contactName?: string;
+  contactValue?: string;
+};
 
 export type LoadingState = {
   idle: boolean;
@@ -12,10 +20,8 @@ export type LoadingState = {
   error: FetchingError | null;
 };
 
-@Injectable({
-  providedIn: "root",
-})
-export class AboutApiService {
+@Injectable({ providedIn: "root" })
+export class ContactApiService {
   private http = inject(HttpClient);
 
   private $idle = signal(true);
@@ -51,13 +57,24 @@ export class AboutApiService {
 
   getAll() {
     return this.withLoadingState(
-      this.http.get<AboutData[]>(`${this.baseURL}/about`, {
+      this.http.get<ContactData[]>(`${this.baseURL}/contact`, {
         observe: "response",
       })
     );
   }
 
-  update(payload: AboutUpdatePayload) {
-    return this.http.patch<AboutData>(`${this.baseURL}/about/1`, payload);
+  update(id: number, payload: ContactUpdatePayload) {
+    return this.http.patch<ContactData>(
+      `${this.baseURL}/contact/${id}`,
+      payload
+    );
+  }
+
+  add(payload: ContactAddPayload) {
+    return this.http.post<ContactData>(`${this.baseURL}/contact`, payload);
+  }
+
+  delete(id: number) {
+    return this.http.delete(`${this.baseURL}/contact/${id}`);
   }
 }
