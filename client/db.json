@@ -2,14 +2,14 @@
   "homePageData": [
     {
       "id": "1",
-      "title": "Titlexzczc",
-      "content": "contentasdasd\nline1aaa\nline2\nline3\n\nline5"
+      "title": "sample title",
+      "content": "sample comment"
     }
   ],
   "about": [
     {
       "id": "1",
-      "content": "test"
+      "content": "test1"
     }
   ],
   "contact": [
@@ -70,13 +70,6 @@
     {
       "id": "7",
       "name": "7",
-      "description": "string",
-      "downloadLink": "not",
-      "uploadDate": "1700291084476"
-    },
-    {
-      "id": "9",
-      "name": "9",
       "description": "string",
       "downloadLink": "not",
       "uploadDate": "1700291084476"

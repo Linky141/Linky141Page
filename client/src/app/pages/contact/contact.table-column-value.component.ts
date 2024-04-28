@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output, inject } from "@angular/core";
-import { ContactData } from "../../models/contact.model";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { TranslationService } from "../../services/translation.service";
@@ -8,6 +7,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { ContactTableRowButtonsComponent } from "./contact.table-row-buttons.component";
+import { ContactData } from "./models/contact.model";
 
 @Component({
   selector: "app-contact-table-column-value",
@@ -57,30 +57,34 @@ import { ContactTableRowButtonsComponent } from "./contact.table-row-buttons.com
 })
 export class ContactTableColumnValueComponent {
   @Input() credentials: string = "";
-  @Input() element: ContactData = { id: 0, contactName: "", contactValue: "" };
+  @Input() element: ContactData = {
+    id: "0",
+    contactName: "",
+    contactValue: "",
+  };
   @Input() savingEditedContact: boolean = false;
   @Input() addingNewContact: boolean = false;
   @Input() editingContactName: string = "";
   @Input() editingContactValue: string = "";
-  @Input() deletingContactId: number = -1;
-  @Input() editingContact: number = -1;
+  @Input() deletingContactId: string = "-1";
+  @Input() editingContact: string = "-1";
   @Output() setEditModeEmitter = new EventEmitter<{
-    id: number;
+    id: string;
     name: string;
     value: string;
   }>();
   @Output() updateContactEmitter = new EventEmitter<{
-    id: number;
+    id: string;
     name: string;
     value: string;
   }>();
   @Output() deleteContactEmitter = new EventEmitter<{
-    id: number;
+    id: string;
   }>();
 
   translationsService = inject(TranslationService);
 
-  emitSetEditMode(event: { id: number; name: string; value: string }) {
+  emitSetEditMode(event: { id: string; name: string; value: string }) {
     this.setEditModeEmitter.emit({
       id: event.id,
       name: event.name,
@@ -88,7 +92,7 @@ export class ContactTableColumnValueComponent {
     });
   }
 
-  emitUpdateContect(event: { id: number; name: string; value: string }) {
+  emitUpdateContect(event: { id: string; name: string; value: string }) {
     this.updateContactEmitter.emit({
       id: event.id,
       name: event.name,
@@ -96,7 +100,7 @@ export class ContactTableColumnValueComponent {
     });
   }
 
-  emitdeleteContact(event: { id: number }) {
+  emitdeleteContact(event: { id: string }) {
     this.deleteContactEmitter.emit({ id: event.id });
   }
 }

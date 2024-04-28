@@ -9,6 +9,7 @@ import { RegisterPageComponent } from "./pages/usersManagement/register.page.com
 import { ProjectPageComponent } from "./pages/projects/project.page.component";
 import { ProjectEditPageComponent } from "./pages/projects/project-edit.page.component";
 import { DownloadsAddPageComponent } from "./pages/downloads/download-add.page.component";
+import { DownloadsUpdatePageComponent } from "./pages/downloads/download-update.page.component";
 
 export const routes: Routes = [
   {
@@ -35,6 +36,10 @@ export const routes: Routes = [
   {
     path: "downloadsAdd",
     component: DownloadsAddPageComponent,
+  },
+  {
+    path: "downloadsUpdate/:id/:name/:description/:addressurl",
+    component: DownloadsUpdatePageComponent,
   },
   {
     path: "projects",

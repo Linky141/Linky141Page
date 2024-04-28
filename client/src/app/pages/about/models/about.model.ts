@@ -1,4 +1,4 @@
 export type AboutData = {
-  id: number;
+  id: string;
   content: string;
 };

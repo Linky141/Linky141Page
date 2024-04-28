@@ -68,7 +68,7 @@ export class DownloadsApiService {
     );
   }
 
-  update(id: number, payload: DownloadsUpdatePayload) {
+  update(id: string, payload: DownloadsUpdatePayload) {
     return this.http.patch<DownloadsData>(
       `${this.baseURL}/downloads/${id}`,
       payload

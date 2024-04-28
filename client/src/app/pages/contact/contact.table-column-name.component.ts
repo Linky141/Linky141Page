@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output, inject } from "@angular/core";
-import { ContactData } from "../../models/contact.model";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { TranslationService } from "../../services/translation.service";
 import { FormsModule } from "@angular/forms";
+import { ContactData } from "./models/contact.model";
 
 @Component({
   selector: "app-contact-table-column-name",
@@ -26,8 +26,12 @@ import { FormsModule } from "@angular/forms";
   imports: [MatInputModule, MatFormFieldModule, FormsModule],
 })
 export class ContactTableColumnNameComponent {
-  @Input() element: ContactData = { id: 0, contactName: "", contactValue: "" };
-  @Input() editingContact: number = -1;
+  @Input() element: ContactData = {
+    id: "0",
+    contactName: "",
+    contactValue: "",
+  };
+  @Input() editingContact: string = "-1";
   @Input() editingContactName: string = "";
   @Output() editingContactNameEmitter = new EventEmitter<string>();
 

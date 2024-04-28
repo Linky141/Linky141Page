@@ -5,7 +5,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { AboutService } from "./services/about.service";
 import { LIST_STATE_VALUE, PageState } from "../../utils/page-state.type";
-import { AboutData } from "../../models/about.model";
+import { AboutData } from "./models/about.model";
 import { wait } from "../../utils/wait";
 import { FormsModule } from "@angular/forms";
 import { LoadingPageComponent } from "../../components/loading/loading.component";

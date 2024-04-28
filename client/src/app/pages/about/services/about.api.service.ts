@@ -2,7 +2,7 @@ import { Injectable, computed, inject, signal } from "@angular/core";
 import { FetchingError } from "../../../utils/page-state.type";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, catchError, EMPTY, tap } from "rxjs";
-import { AboutData } from "../../../models/about.model";
+import { AboutData } from "../models/about.model";
 
 export type AboutUpdatePayload = { content?: string };
 

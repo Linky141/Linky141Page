@@ -11,11 +11,11 @@ import { PageState, LIST_STATE_VALUE } from "../../utils/page-state.type";
 import { DownloadsData } from "./models/downloads.model";
 import { DownloadsService } from "./services/downloads.service";
 import { FormsModule } from "@angular/forms";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @Component({
-  selector: "app-downloads-add",
+  selector: "app-downloads-update",
   standalone: true,
   imports: [
     MatTableModule,
@@ -56,7 +56,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
           class="ml-5 mt-5 w-28"
           mat-flat-button
           color="primary"
-          (click)="addDownloads(name, description, addresUrl)"
+          (click)="updateDownloads(id, name, description, addresUrl)"
           disabled="{{ saving }}"
         >
           @if(saving){
@@ -78,8 +78,9 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     </div>
   `,
 })
-export class DownloadsAddPageComponent {
+export class DownloadsUpdatePageComponent {
   translationService = inject(TranslationService);
+  private route = inject(ActivatedRoute);
   private router = inject(Router);
 
   credentials = ""; //todo: remove after add users
@@ -87,28 +88,31 @@ export class DownloadsAddPageComponent {
   private downloadsService = inject(DownloadsService);
   state: PageState<DownloadsData> = { state: LIST_STATE_VALUE.IDLE };
 
+  id = "";
   name = "";
   description = "";
   addresUrl = "";
   saving = false;
 
-  // displayedColumns: string[] = ["name", "description", "link", "uploaded"];
-  // dataSource = ELEMENT_DATA;
-
   ngOnInit() {
+    this.id = this.route.snapshot.paramMap.get("id") || "";
+    this.name = this.route.snapshot.paramMap.get("name") || "";
+    this.description = this.route.snapshot.paramMap.get("description") || "";
+    this.addresUrl = this.route.snapshot.paramMap.get("addressurl") || "";
     this.credentials = localStorage.getItem("credentials") || ""; //todo: remove after add users
   }
 
-  async addDownloads(
+  async updateDownloads(
+    id: string,
     name: string,
     description: string,
     downloadLink: string
-  ): Promise<void> {
+  ) {
     this.saving = true;
-    await wait(500); //todo: remove
+    await wait(2000); //todo: remove
     let currentDate = new Date();
     this.downloadsService
-      .add({
+      .update(id, {
         name: name,
         description: description,
         downloadLink: downloadLink,
@@ -116,20 +120,22 @@ export class DownloadsAddPageComponent {
       })
       .subscribe({
         next: (res) => {
-          if (this.state.state == LIST_STATE_VALUE.SUCCESS) {
-            this.state.result = [...this.state.result, res];
+          if (this.state.state === LIST_STATE_VALUE.SUCCESS) {
+            this.state.result = this.state.result.map((d) => {
+              if (d.id === res.id) {
+                return res;
+              } else {
+                return d;
+              }
+            });
           }
+          this.saving = false;
+          this.backToDownloads();
         },
-        error: (err) => {
-          this.state = {
-            state: LIST_STATE_VALUE.ERROR,
-            error: err,
-          };
+        error: (res) => {
+          alert(res.message);
         },
       });
-
-    this.saving = false;
-    this.backToDownloads();
   }
 
   backToDownloads() {

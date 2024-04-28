@@ -2,7 +2,7 @@ import { Injectable, computed, inject, signal } from "@angular/core";
 import { FetchingError } from "../../../utils/page-state.type";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, catchError, EMPTY, tap } from "rxjs";
-import { ContactData } from "../../../models/contact.model";
+import { ContactData } from "../models/contact.model";
 
 export type ContactUpdatePayload = {
   contactName?: string;
@@ -63,7 +63,7 @@ export class ContactApiService {
     );
   }
 
-  update(id: number, payload: ContactUpdatePayload) {
+  update(id: string, payload: ContactUpdatePayload) {
     return this.http.patch<ContactData>(
       `${this.baseURL}/contact/${id}`,
       payload
@@ -74,7 +74,7 @@ export class ContactApiService {
     return this.http.post<ContactData>(`${this.baseURL}/contact`, payload);
   }
 
-  delete(id: number) {
+  delete(id: string) {
     return this.http.delete(`${this.baseURL}/contact/${id}`);
   }
 }

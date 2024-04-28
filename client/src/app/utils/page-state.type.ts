@@ -1,4 +1,4 @@
-import { HomePageData } from "../models/home-page.model";
+import { HomePageData } from "../pages/homePage/models/home-page.model";
 
 type IdleState = {
   state: LIST_STATE_VALUE["IDLE"];

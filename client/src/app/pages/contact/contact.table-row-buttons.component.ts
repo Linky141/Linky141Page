@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { ContactData } from "../../models/contact.model";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from "@angular/material/button";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { ContactData } from "./models/contact.model";
 
 @Component({
   selector: "app-contact-table-row-buttons",
@@ -15,7 +15,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
         <button
           mat-icon-button
           class="mx-2"
-          disabled="{{ deletingContactId !== -1 || editingContact !== -1 }}"
+          disabled="{{ deletingContactId !== '-1' || editingContact !== '-1' }}"
           (click)="
             emitSetEditMode(
               element.id,
@@ -24,7 +24,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
             )
           "
         >
-          @if(deletingContactId===-1 && editingContact === -1){
+          @if(deletingContactId==='-1' && editingContact === '-1'){
           <mat-icon class="text-blue-600">edit</mat-icon>
           } @else {
           <mat-icon class="text-gray-600">edit</mat-icon>
@@ -34,9 +34,9 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
           mat-icon-button
           class="mx-2"
           (click)="emitdeleteContact(element.id)"
-          disabled="{{ deletingContactId !== -1 || editingContact !== -1 }}"
+          disabled="{{ deletingContactId !== '-1' || editingContact !== '-1' }}"
         >
-          @if(deletingContactId===-1 && editingContact === -1){
+          @if(deletingContactId==='-1' && editingContact === '-1'){
           <mat-icon class="text-red-600">delete</mat-icon>
           } @else { @if(deletingContactId === element.id){
           <mat-spinner
@@ -72,7 +72,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
         <button
           mat-icon-button
           class="mx-2"
-          (click)="emitSetEditMode(-1, '', '')"
+          (click)="emitSetEditMode('-1', '', '')"
           disabled="{{ savingEditedContact }}"
         >
           @if(savingEditedContact){
@@ -90,35 +90,39 @@ export class ContactTableRowButtonsComponent {
   @Input() credentials: string = "";
   @Input() editingContactName: string = "";
   @Input() editingContactValue: string = "";
-  @Input() element: ContactData = { id: 0, contactName: "", contactValue: "" };
+  @Input() element: ContactData = {
+    id: "0",
+    contactName: "",
+    contactValue: "",
+  };
   @Input() addingNewContact: boolean = false;
   @Input() savingEditedContact: boolean = false;
-  @Input() editingContact: number = -1;
-  @Input() deletingContactId: number = -1;
+  @Input() editingContact: string = "-1";
+  @Input() deletingContactId: string = "-1";
 
   @Output() setEditModeEmitter = new EventEmitter<{
-    id: number;
+    id: string;
     name: string;
     value: string;
   }>();
   @Output() updateContactEmitter = new EventEmitter<{
-    id: number;
+    id: string;
     name: string;
     value: string;
   }>();
   @Output() deleteContactEmitter = new EventEmitter<{
-    id: number;
+    id: string;
   }>();
 
-  emitdeleteContact(id: number) {
+  emitdeleteContact(id: string) {
     this.deleteContactEmitter.emit({ id: id });
   }
 
-  emitSetEditMode(id: number, name: string, value: string) {
+  emitSetEditMode(id: string, name: string, value: string) {
     this.setEditModeEmitter.emit({ id: id, name: name, value: value });
   }
 
-  emitUpdateContect(id: number, name: string, value: string) {
+  emitUpdateContect(id: string, name: string, value: string) {
     this.updateContactEmitter.emit({ id: id, name: name, value: value });
   }
 }

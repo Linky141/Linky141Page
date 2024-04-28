@@ -22,7 +22,7 @@ export class DownloadsService {
     );
   }
 
-  update(id: number, payload: DownloadsUpdatePayload) {
+  update(id: string, payload: DownloadsUpdatePayload) {
     return this.httpService.update(id, payload).pipe(
       tap((res) => {
         this.state.updateDownloads(res);

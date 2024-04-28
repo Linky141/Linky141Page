@@ -3,7 +3,7 @@ import { TranslationService } from "../../services/translation.service";
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { HomePageData } from "../../models/home-page.model";
+import { HomePageData } from "./models/home-page.model";
 import { LIST_STATE_VALUE, PageState } from "../../utils/page-state.type";
 import { FormsModule } from "@angular/forms";
 import { HomePageService } from "./services/home-page.service";

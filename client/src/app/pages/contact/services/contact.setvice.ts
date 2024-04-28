@@ -22,7 +22,7 @@ export class ContactService {
     );
   }
 
-  update(id: number, payload: ContactUpdatePayload) {
+  update(id: string, payload: ContactUpdatePayload) {
     return this.httpService.update(id, payload).pipe(
       tap((res) => {
         this.state.updateContact(res);
@@ -30,10 +30,10 @@ export class ContactService {
     );
   }
 
-  delete(taskId: number) {
-    return this.httpService.delete(taskId).pipe(
+  delete(id: string) {
+    return this.httpService.delete(id).pipe(
       tap(() => {
-        this.state.removeContact(taskId);
+        this.state.removeContact(id);
       })
     );
   }

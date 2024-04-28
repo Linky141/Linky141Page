@@ -1,5 +1,5 @@
 import { Injectable, computed, inject, signal } from "@angular/core";
-import { HomePageData } from "../../../models/home-page.model";
+import { HomePageData } from "../models/home-page.model";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { FetchingError } from "../../../utils/page-state.type";
 import { EMPTY, Observable, catchError, tap } from "rxjs";

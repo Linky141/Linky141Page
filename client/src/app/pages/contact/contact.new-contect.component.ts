@@ -18,7 +18,7 @@ import { MatInputModule } from "@angular/material/input";
         mat-fab
         color="primary"
         (click)="changeFlagAddingNewContact(true)"
-        disabled="{{ deletingContactId !== -1 }}"
+        disabled="{{ deletingContactId !== '-1' }}"
       >
         <mat-icon>add</mat-icon>
       </button>
@@ -75,7 +75,7 @@ export class ContactNewContectComponent {
   @Input() credentials: string = "";
   @Input() addingNewContact: boolean = false;
   @Input() savingNewContact: boolean = false;
-  @Input() deletingContactId: number = -1;
+  @Input() deletingContactId: string = "-1";
 
   @Output() changeAddNewContactFlag = new EventEmitter<boolean>();
   @Output() addContact = new EventEmitter<{ name: string; value: string }>();

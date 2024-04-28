@@ -2,7 +2,6 @@ import { Component, inject } from "@angular/core";
 import { MatTableModule } from "@angular/material/table";
 import { TranslationService } from "../../services/translation.service";
 import { ContactService } from "./services/contact.setvice";
-import { ContactData } from "../../models/contact.model";
 import { PageState, LIST_STATE_VALUE } from "../../utils/page-state.type";
 import { wait } from "../../utils/wait";
 import { LoadingPageComponent } from "../../components/loading/loading.component";
@@ -10,6 +9,7 @@ import { FormsModule } from "@angular/forms";
 import { ContactNewContectComponent } from "./contact.new-contect.component";
 import { ContactTableColumnNameComponent } from "./contact.table-column-name.component";
 import { ContactTableColumnValueComponent } from "./contact.table-column-value.component";
+import { ContactData } from "./models/contact.model";
 
 @Component({
   selector: "app-contact",
@@ -84,12 +84,12 @@ export class ContactPageComponent {
   addingNewContact = false;
   savingNewContact = false;
 
-  editingContact = -1;
+  editingContact = "-1";
   editingContactName = "";
   editingContactValue = "";
   savingEditedContact = false;
 
-  deletingContactId = -1;
+  deletingContactId = "-1";
 
   contactService = inject(ContactService);
   translationsService = inject(TranslationService);
@@ -146,7 +146,7 @@ export class ContactPageComponent {
     this.addingNewContact = false;
   }
 
-  async deleteContact(id: number) {
+  async deleteContact(id: string) {
     this.deletingContactId = id;
     await wait(this.debugDelay); //todo: remove
     this.contactService.delete(id).subscribe({
@@ -159,10 +159,10 @@ export class ContactPageComponent {
         alert(res.message);
       },
     });
-    this.deletingContactId = -1;
+    this.deletingContactId = "-1";
   }
 
-  async updateContact(id: number, name: string, value: string) {
+  async updateContact(id: string, name: string, value: string) {
     this.savingEditedContact = true;
     await wait(this.debugDelay); //todo: remove
     this.contactService
@@ -178,7 +178,7 @@ export class ContactPageComponent {
               }
             });
           }
-          this.setEditMode(-1, "", "");
+          this.setEditMode("-1", "", "");
           this.savingEditedContact = false;
         },
         error: (res) => {
@@ -191,19 +191,19 @@ export class ContactPageComponent {
     this.editingContactName = newName;
   }
 
-  handleEditModeEmitter(event: { id: number; name: string; value: string }) {
+  handleEditModeEmitter(event: { id: string; name: string; value: string }) {
     this.setEditMode(event.id, event.name, event.value);
   }
 
   handleUpdateContactEmitter(event: {
-    id: number;
+    id: string;
     name: string;
     value: string;
   }) {
     this.updateContact(event.id, event.name, event.value);
   }
 
-  handleDeleteContactEmitter(event: { id: number }) {
+  handleDeleteContactEmitter(event: { id: string }) {
     this.deleteContact(event.id);
   }
 
@@ -211,7 +211,7 @@ export class ContactPageComponent {
     this.addingNewContact = value;
   }
 
-  setEditMode(id: number, name: string, value: string) {
+  setEditMode(id: string, name: string, value: string) {
     this.editingContact = id;
     this.editingContactName = name;
     this.editingContactValue = value;

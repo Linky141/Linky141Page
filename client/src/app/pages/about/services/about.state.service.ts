@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { AboutData } from "../../../models/about.model";
+import { AboutData } from "../models/about.model";
 
 const initialState = {
   about: [] as AboutData[],

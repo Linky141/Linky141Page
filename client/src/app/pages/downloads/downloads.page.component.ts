@@ -81,6 +81,23 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
               <mat-icon class="text-gray-600">delete</mat-icon>
               } }
             </button>
+            <button
+              mat-icon-button
+              disabled="{{ deletingDownloadsId !== -1 }}"
+              [routerLink]="[
+                '/downloadsUpdate',
+                element.id,
+                element.name,
+                element.description,
+                element.downloadLink
+              ]"
+            >
+              @if(deletingDownloadsId === -1){
+              <mat-icon color="primary">edit</mat-icon>
+              } @else {
+              <mat-icon class="text-gray-600">edit</mat-icon>
+              }
+            </button>
             }
           </td>
         </ng-container>
@@ -131,7 +148,7 @@ export class DownloadsPageComponent {
   ngOnInit() {
     this.credentials = localStorage.getItem("credentials") || ""; //todo: remove after add users
     this.lastCollumnWidth =
-      this.credentials === "admin" ? "w-[157px]" : "w-[50px]";
+      this.credentials === "admin" ? "w-[220px]" : "w-[50px]";
     this.getAllDownloadsData();
   }
 
@@ -155,39 +172,6 @@ export class DownloadsPageComponent {
     });
   }
 
-  async addDownloads(
-    name: string,
-    description: string,
-    downloadLink: string
-  ): Promise<void> {
-    // this.savingNewContact = true;
-    await wait(500); //todo: remove
-    let currentDate = new Date();
-    this.downloadsService
-      .add({
-        name: name,
-        description: description,
-        downloadLink: downloadLink,
-        uploadDate: currentDate.getTime(),
-      })
-      .subscribe({
-        next: (res) => {
-          if (this.state.state == LIST_STATE_VALUE.SUCCESS) {
-            this.state.result = [...this.state.result, res];
-          }
-        },
-        error: (err) => {
-          this.state = {
-            state: LIST_STATE_VALUE.ERROR,
-            error: err,
-          };
-        },
-      });
-
-    // this.savingNewContact = false;
-    // this.addingNewContact = false;
-  }
-
   async deleteDownloads(id: number) {
     this.deletingDownloadsId = id;
     await wait(500); //todo: remove
@@ -202,41 +186,5 @@ export class DownloadsPageComponent {
       },
     });
     this.deletingDownloadsId = -1;
-  }
-
-  async updateDownloads(
-    id: number,
-    name: string,
-    description: string,
-    downloadLink: string
-  ) {
-    // this.savingEditedContact = true;
-    await wait(500); //todo: remove
-    let currentDate = new Date();
-    this.downloadsService
-      .update(id, {
-        name: name,
-        description: description,
-        downloadLink: downloadLink,
-        uploadDate: currentDate.getTime(),
-      })
-      .subscribe({
-        next: (res) => {
-          if (this.state.state === LIST_STATE_VALUE.SUCCESS) {
-            this.state.result = this.state.result.map((d) => {
-              if (d.id === res.id) {
-                return res;
-              } else {
-                return d;
-              }
-            });
-          }
-          // this.setEditMode(-1, "", "");
-          // this.savingEditedContact = false;
-        },
-        error: (res) => {
-          alert(res.message);
-        },
-      });
   }
 }

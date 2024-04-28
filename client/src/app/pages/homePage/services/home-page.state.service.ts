@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HomePageData } from "../../../models/home-page.model";
+import { HomePageData } from "../models/home-page.model";
 import { BehaviorSubject } from "rxjs";
 
 const initialState = {
