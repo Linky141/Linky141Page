@@ -23,5 +23,63 @@
       "contactName": "3",
       "contactValue": "42jj"
     }
+  ],
+  "downloads": [
+    {
+      "id": "1",
+      "name": "1",
+      "description": "some",
+      "downloadLink": "not",
+      "uploadDate": "1700291084476"
+    },
+    {
+      "id": "2",
+      "name": "2",
+      "description": "string",
+      "downloadLink": "not",
+      "uploadDate": "1700291084476"
+    },
+    {
+      "id": "3",
+      "name": "3",
+      "description": "string",
+      "downloadLink": "not",
+      "uploadDate": "1700291084476"
+    },
+    {
+      "id": "4",
+      "name": "4",
+      "description": "string",
+      "downloadLink": "not",
+      "uploadDate": "1700291084476"
+    },
+    {
+      "id": "5",
+      "name": "5",
+      "description": "string",
+      "downloadLink": "not",
+      "uploadDate": "1700291084476"
+    },
+    {
+      "id": "6",
+      "name": "6",
+      "description": "string",
+      "downloadLink": "not",
+      "uploadDate": "1700291084476"
+    },
+    {
+      "id": "7",
+      "name": "7",
+      "description": "string",
+      "downloadLink": "not",
+      "uploadDate": "1700291084476"
+    },
+    {
+      "id": "9",
+      "name": "9",
+      "description": "string",
+      "downloadLink": "not",
+      "uploadDate": "1700291084476"
+    }
   ]
 }
