@@ -14,26 +14,6 @@
   ],
   "contact": [
     {
-      "id": "0f62",
-      "contactName": "",
-      "contactValue": ""
-    },
-    {
-      "id": "c8ab",
-      "contactName": "",
-      "contactValue": ""
-    },
-    {
-      "id": "6527",
-      "contactName": "",
-      "contactValue": ""
-    },
-    {
-      "id": "3641",
-      "contactName": "",
-      "contactValue": ""
-    },
-    {
       "id": "cc6d",
       "contactName": "123",
       "contactValue": "23"
@@ -41,17 +21,7 @@
     {
       "id": "79a7",
       "contactName": "3",
-      "contactValue": "42"
-    },
-    {
-      "id": "b7c2",
-      "contactName": "asdasdasd",
-      "contactValue": "aaaaaaad"
-    },
-    {
-      "id": "2402",
-      "contactName": "asd",
-      "contactValue": "nie podam xd"
+      "contactValue": "42jj"
     }
   ]
 }
