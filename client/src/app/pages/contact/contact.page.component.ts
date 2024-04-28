@@ -14,6 +14,7 @@ import { ContactUpdatePayload } from "./services/contact.api.service";
 import { FormsModule } from "@angular/forms";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatProgressBarModule } from "@angular/material/progress-bar";
+import { ContactNewContectComponent } from "./contact.new-contect.component";
 
 @Component({
   selector: "app-contact",
@@ -153,56 +154,15 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
     </div>
-    @if(credentials==='admin' && addingNewContact===false){
-    <div class="w-full flex pr-5 mb-5">
-      <button
-        class="ml-auto"
-        mat-fab
-        color="primary"
-        (click)="changeAddNewContactFlag(true)"
-        disabled="{{ deletingContactId !== -1 }}"
-      >
-        <mat-icon>add</mat-icon>
-      </button>
-    </div>
-    } @else if (credentials === 'admin' && addingNewContact === true){
-    <div class="m-5 flex">
-      <mat-form-field class="mx-2">
-        <mat-label>{{ translationsService.t("contactName") }}</mat-label>
-        <input matInput placeholder="email" [(ngModel)]="newContactName" />
-      </mat-form-field>
-      <mat-form-field class="mx-2 w-full">
-        <mat-label>{{ translationsService.t("contactValue") }}</mat-label>
-        <input
-          matInput
-          placeholder="{{ translationsService.t('examplemail@mail.com') }}"
-          [(ngModel)]="newContactValue"
-        />
-      </mat-form-field>
-      <div class="flex h-auto items-center ml-auto">
-        <button
-          mat-button
-          color="primary"
-          (click)="addContact(newContactName, newContactValue)"
-          disabled="{{ savingNewContact }}"
-        >
-          @if(savingNewContact){
-          <mat-spinner diameter="30" mode="indeterminate"></mat-spinner>
-          } @else {
-          {{ translationsService.t("add") }}
-          }
-        </button>
-        <button
-          mat-button
-          color="warn"
-          (click)="changeAddNewContactFlag(false)"
-          disabled="{{ savingNewContact }}"
-        >
-          {{ translationsService.t("cancel") }}
-        </button>
-      </div>
-    </div>
-    } } @else {
+    <app-contact-new-contact
+      credentials="{{ credentials }}"
+      [addingNewContact]="addingNewContact"
+      [savingNewContact]="savingNewContact"
+      (changeAddNewContactFlag)="changeAddNewContactFlag($event)"
+      (addContact)="addContact($event)"
+      [deletingContactId]="deletingContactId"
+    />
+    } @else {
     <app-loading text="{{ translationsService.t('loading') }}" />
     }
   `,
@@ -216,6 +176,7 @@ import { MatProgressBarModule } from "@angular/material/progress-bar";
     FormsModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    ContactNewContectComponent,
   ],
 })
 export class ContactPageComponent {
@@ -225,8 +186,6 @@ export class ContactPageComponent {
 
   addingNewContact = false;
   savingNewContact = false;
-  newContactName = "";
-  newContactValue = "";
 
   editingContact = -1;
   editingContactName = "";
@@ -243,10 +202,6 @@ export class ContactPageComponent {
 
   changeAddNewContactFlag(value: boolean) {
     this.addingNewContact = value;
-    if (value === false) {
-      this.newContactName = "";
-      this.newContactValue = "";
-    }
   }
 
   ngOnInit() {
@@ -280,21 +235,16 @@ export class ContactPageComponent {
     this.editingContactValue = value;
   }
 
-  async addContact(name: string, value: string): Promise<void> {
+  async addContact(event: { name: string; value: string }): Promise<void> {
     this.savingNewContact = true;
     await wait(this.debugDelay); //todo: remove
     this.contactService
-      .add({ contactName: name, contactValue: value })
+      .add({ contactName: event.name, contactValue: event.value })
       .subscribe({
         next: (res) => {
           if (this.state.state == LIST_STATE_VALUE.SUCCESS) {
             this.state.result = [...this.state.result, res];
           }
-          console.log(
-            this.state.state === LIST_STATE_VALUE.SUCCESS
-              ? this.state.result
-              : ""
-          );
         },
         error: (err) => {
           this.state = {
@@ -306,8 +256,6 @@ export class ContactPageComponent {
 
     this.savingNewContact = false;
     this.addingNewContact = false;
-    this.newContactName = "";
-    this.newContactValue = "";
   }
 
   async deleteContact(id: number) {
