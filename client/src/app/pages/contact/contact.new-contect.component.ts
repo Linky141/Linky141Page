@@ -87,10 +87,8 @@ export class ContactNewContectComponent {
 
   changeFlagAddingNewContact(value: boolean) {
     this.changeAddNewContactFlag.emit(value);
-    if (value === false) {
-      this.newContactName = "";
-      this.newContactValue = "";
-    }
+    this.newContactName = "";
+    this.newContactValue = "";
   }
 
   addContactLocal(name: string, value: string) {
@@ -98,7 +96,5 @@ export class ContactNewContectComponent {
       name: this.newContactName,
       value: this.newContactValue,
     });
-    this.newContactName = "";
-    this.newContactValue = "";
   }
 }

@@ -13,7 +13,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
   standalone: true,
   template: `
     <div class="flex">
-      <div class="flex h-auto items-center">
+      <div class="flex h-auto items-center w-full">
         @if(editingContact !== element.id){
         {{ element.contactValue }}
         }@else {
@@ -30,42 +30,44 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
       @if(credentials==='admin' && addingNewContact === false){
       <div class="ml-auto">
         @if(editingContact !== element.id){
-        <button
-          mat-icon-button
-          class="mx-2"
-          disabled="{{ deletingContactId !== -1 || editingContact !== -1 }}"
-          (click)="
-            emitSetEditMode(
-              element.id,
-              element.contactName,
-              element.contactValue
-            )
-          "
-        >
-          @if(deletingContactId===-1 && editingContact === -1){
-          <mat-icon class="text-blue-600">edit</mat-icon>
-          } @else {
-          <mat-icon class="text-gray-600">edit</mat-icon>
-          }
-        </button>
-        <button
-          mat-icon-button
-          class="mx-2"
-          (click)="emitdeleteContact(element.id)"
-          disabled="{{ deletingContactId !== -1 || editingContact !== -1 }}"
-        >
-          @if(deletingContactId===-1 && editingContact === -1){
-          <mat-icon class="text-red-600">delete</mat-icon>
-          } @else { @if(deletingContactId === element.id){
-          <mat-spinner
-            diameter="24"
-            mode="indeterminate"
-            color="accent"
-          ></mat-spinner>
-          } @else{
-          <mat-icon class="text-gray-600">delete</mat-icon>
-          } }
-        </button>
+        <div class="flex items-center h-full">
+          <button
+            mat-icon-button
+            class="mx-2"
+            disabled="{{ deletingContactId !== -1 || editingContact !== -1 }}"
+            (click)="
+              emitSetEditMode(
+                element.id,
+                element.contactName,
+                element.contactValue
+              )
+            "
+          >
+            @if(deletingContactId===-1 && editingContact === -1){
+            <mat-icon class="text-blue-600">edit</mat-icon>
+            } @else {
+            <mat-icon class="text-gray-600">edit</mat-icon>
+            }
+          </button>
+          <button
+            mat-icon-button
+            class="mx-2"
+            (click)="emitdeleteContact(element.id)"
+            disabled="{{ deletingContactId !== -1 || editingContact !== -1 }}"
+          >
+            @if(deletingContactId===-1 && editingContact === -1){
+            <mat-icon class="text-red-600">delete</mat-icon>
+            } @else { @if(deletingContactId === element.id){
+            <mat-spinner
+              diameter="24"
+              mode="indeterminate"
+              color="accent"
+            ></mat-spinner>
+            } @else{
+            <mat-icon class="text-gray-600">delete</mat-icon>
+            } }
+          </button>
+        </div>
         } @else{
         <div class="flex items-center h-full">
           <button
