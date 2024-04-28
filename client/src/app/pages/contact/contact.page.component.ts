@@ -1,20 +1,15 @@
 import { Component, inject } from "@angular/core";
 import { MatTableModule } from "@angular/material/table";
-import { MatIconModule } from "@angular/material/icon";
-import { MatButtonModule } from "@angular/material/button";
-import { MatInputModule } from "@angular/material/input";
-import { MatFormFieldModule } from "@angular/material/form-field";
 import { TranslationService } from "../../services/translation.service";
 import { ContactService } from "./services/contact.setvice";
 import { ContactData } from "../../models/contact.model";
 import { PageState, LIST_STATE_VALUE } from "../../utils/page-state.type";
 import { wait } from "../../utils/wait";
 import { LoadingPageComponent } from "../../components/loading/loading.component";
-import { ContactUpdatePayload } from "./services/contact.api.service";
 import { FormsModule } from "@angular/forms";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { ContactNewContectComponent } from "./contact.new-contect.component";
+import { ContactTableColumnNameComponent } from "./contact.table-column-name.component";
+import { ContactTableColumnValueComponent } from "./contact.table-column-value.component";
 
 @Component({
   selector: "app-contact",
@@ -28,18 +23,12 @@ import { ContactNewContectComponent } from "./contact.new-contect.component";
             {{ translationsService.t("contactName") }}
           </th>
           <td mat-cell *matCellDef="let element">
-            @if(editingContact !== element.id){
-            {{ element.contactName }}
-            } @else {
-            <mat-form-field class="mx-2 mt-5 w-full">
-              <mat-label>{{ translationsService.t("contactName") }}</mat-label>
-              <input
-                matInput
-                placeholder="{{ translationsService.t('email') }}"
-                [(ngModel)]="editingContactName"
-              />
-            </mat-form-field>
-            }
+            <app-contact-table-column-name
+              [element]="element"
+              [editingContact]="editingContact"
+              editingContactName="{{ editingContactName }}"
+              (editingContactNameEmitter)="handleEditingContactName($event)"
+            />
           </td>
         </ng-container>
         <ng-container matColumnDef="contactValue">
@@ -47,106 +36,19 @@ import { ContactNewContectComponent } from "./contact.new-contect.component";
             {{ translationsService.t("contactValue") }}
           </th>
           <td mat-cell *matCellDef="let element">
-            <div class="flex">
-              <div class="flex h-auto items-center">
-                @if(editingContact !== element.id){
-                {{ element.contactValue }}
-                }@else {
-                <mat-form-field class="mx-2 mt-5 w-full">
-                  <mat-label>{{
-                    translationsService.t("contactValue")
-                  }}</mat-label>
-                  <input
-                    matInput
-                    placeholder="{{
-                      translationsService.t('examplemail@mail.com')
-                    }}"
-                    [(ngModel)]="editingContactValue"
-                  />
-                </mat-form-field>
-                }
-              </div>
-              @if(credentials==='admin' && addingNewContact === false){
-              <div class="ml-auto">
-                @if(editingContact !== element.id){
-                <button
-                  mat-icon-button
-                  class="mx-2"
-                  disabled="{{
-                    deletingContactId !== -1 || editingContact !== -1
-                  }}"
-                  (click)="
-                    setEditMode(
-                      element.id,
-                      element.contactName,
-                      element.contactValue
-                    )
-                  "
-                >
-                  @if(deletingContactId===-1 && editingContact === -1){
-                  <mat-icon class="text-blue-600">edit</mat-icon>
-                  } @else {
-                  <mat-icon class="text-gray-600">edit</mat-icon>
-                  }
-                </button>
-                <button
-                  mat-icon-button
-                  class="mx-2"
-                  (click)="deleteContact(element.id)"
-                  disabled="{{
-                    deletingContactId !== -1 || editingContact !== -1
-                  }}"
-                >
-                  @if(deletingContactId===-1 && editingContact === -1){
-                  <mat-icon class="text-red-600">delete</mat-icon>
-                  } @else { @if(deletingContactId === element.id){
-                  <mat-spinner
-                    diameter="24"
-                    mode="indeterminate"
-                    color="accent"
-                  ></mat-spinner>
-                  } @else{
-                  <mat-icon class="text-gray-600">delete</mat-icon>
-                  } }
-                </button>
-                } @else{
-                <div class="flex items-center h-full">
-                  <button
-                    mat-icon-button
-                    class="mx-2"
-                    (click)="
-                      updateContact(
-                        element.id,
-                        editingContactName,
-                        editingContactValue
-                      )
-                    "
-                    disabled="{{ savingEditedContact }}"
-                  >
-                    @if(savingEditedContact){
-                    <mat-spinner
-                      diameter="24"
-                      mode="indeterminate"
-                    ></mat-spinner>
-                    }@else {
-                    <mat-icon class="text-green-600">save</mat-icon>
-                    }
-                  </button>
-                  <button
-                    mat-icon-button
-                    class="mx-2"
-                    (click)="setEditMode(-1, '', '')"
-                    disabled="{{ savingEditedContact }}"
-                  >
-                    @if(savingEditedContact){
-                    <mat-icon class="text-gray-600">cancel</mat-icon>} @else {
-                    <mat-icon class="text-red-600">cancel</mat-icon>}
-                  </button>
-                </div>
-                }
-              </div>
-              }
-            </div>
+            <app-contact-table-column-value
+              [element]="element"
+              [savingEditedContact]="savingEditedContact"
+              (setEditModeEmitter)="handleEditModeEmitter($event)"
+              editingContactName="{{ editingContactName }}"
+              editingContactValue="{{ editingContactValue }}"
+              (updateContactEmitter)="handleUpdateContactEmitter($event)"
+              credentials="{{ credentials }}"
+              [addingNewContact]="addingNewContact"
+              [deletingContactId]="deletingContactId"
+              [editingContact]="editingContact"
+              (deleteContactEmitter)="handleDeleteContactEmitter($event)"
+            />
           </td>
         </ng-container>
 
@@ -168,19 +70,14 @@ import { ContactNewContectComponent } from "./contact.new-contect.component";
   `,
   imports: [
     MatTableModule,
-    MatIconModule,
-    MatButtonModule,
-    MatInputModule,
-    MatFormFieldModule,
     LoadingPageComponent,
     FormsModule,
-    MatProgressSpinnerModule,
-    MatProgressBarModule,
     ContactNewContectComponent,
+    ContactTableColumnNameComponent,
+    ContactTableColumnValueComponent,
   ],
 })
 export class ContactPageComponent {
-  translationsService = inject(TranslationService);
   credentials = ""; //todo: remove after add users
   debugDelay = 1000; //todo: remove
 
@@ -195,14 +92,11 @@ export class ContactPageComponent {
   deletingContactId = -1;
 
   contactService = inject(ContactService);
+  translationsService = inject(TranslationService);
   state: PageState<ContactData> = { state: LIST_STATE_VALUE.IDLE };
   listStateValue = LIST_STATE_VALUE;
 
   displayedColumns: string[] = ["contactName", "contactValue"];
-
-  changeAddNewContactFlag(value: boolean) {
-    this.addingNewContact = value;
-  }
 
   ngOnInit() {
     this.credentials = localStorage.getItem("credentials") || ""; //todo: remove after add users
@@ -227,12 +121,6 @@ export class ContactPageComponent {
         };
       },
     });
-  }
-
-  setEditMode(id: number, name: string, value: string) {
-    this.editingContact = id;
-    this.editingContactName = name;
-    this.editingContactValue = value;
   }
 
   async addContact(event: { name: string; value: string }): Promise<void> {
@@ -297,5 +185,35 @@ export class ContactPageComponent {
           alert(res.message);
         },
       });
+  }
+
+  handleEditingContactName(newName: string) {
+    this.editingContactName = newName;
+  }
+
+  handleEditModeEmitter(event: { id: number; name: string; value: string }) {
+    this.setEditMode(event.id, event.name, event.value);
+  }
+
+  handleUpdateContactEmitter(event: {
+    id: number;
+    name: string;
+    value: string;
+  }) {
+    this.updateContact(event.id, event.name, event.value);
+  }
+
+  handleDeleteContactEmitter(event: { id: number }) {
+    this.deleteContact(event.id);
+  }
+
+  changeAddNewContactFlag(value: boolean) {
+    this.addingNewContact = value;
+  }
+
+  setEditMode(id: number, name: string, value: string) {
+    this.editingContact = id;
+    this.editingContactName = name;
+    this.editingContactValue = value;
   }
 }
