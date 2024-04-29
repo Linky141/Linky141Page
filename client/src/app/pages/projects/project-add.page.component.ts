@@ -76,7 +76,7 @@ import { NewImageDialog } from "./new-image-dialog.component";
             disabled="{{ saving }}"
           />
         </mat-form-field>
-        <mat-form-field class="w-full h-72">
+        <mat-form-field class="w-full">
           <mat-label>{{ translationService.t("description") }}</mat-label>
           <textarea
             matInput

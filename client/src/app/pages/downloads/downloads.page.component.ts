@@ -11,6 +11,7 @@ import { PageState, LIST_STATE_VALUE } from "../../utils/page-state.type";
 import { wait } from "../../utils/wait";
 import { LoadingPageComponent } from "../../components/loading/loading.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { CustomDateTimePipe } from "../../utils/pipes/custom-date-time.pipe";
 
 @Component({
   selector: "app-downloads",
@@ -60,10 +61,11 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
         </ng-container>
         <ng-container matColumnDef="uploaded">
           <th mat-header-cell *matHeaderCellDef class="{{ lastCollumnWidth }}">
-            {{ translationService.t("uploadDate") }}
+            {{ translationService.t("lastUpdate") }}
           </th>
           <td mat-cell *matCellDef="let element">
-            {{ element.uploadDate | customDate }} @if(credentials === 'admin'){
+            {{ element.uploadDate | customDateTime }} @if(credentials ===
+            'admin'){
             <button
               mat-icon-button
               (click)="deleteDownloads(element.id)"
@@ -130,6 +132,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     RouterModule,
     LoadingPageComponent,
     MatProgressSpinnerModule,
+    CustomDateTimePipe,
   ],
 })
 export class DownloadsPageComponent {
@@ -148,7 +151,7 @@ export class DownloadsPageComponent {
   ngOnInit() {
     this.credentials = localStorage.getItem("credentials") || ""; //todo: remove after add users
     this.lastCollumnWidth =
-      this.credentials === "admin" ? "w-[220px]" : "w-[50px]";
+      this.credentials === "admin" ? "w-[270px]" : "w-[170px]";
     this.getAllDownloadsData();
   }
 

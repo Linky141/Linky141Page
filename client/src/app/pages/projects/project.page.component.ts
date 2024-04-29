@@ -9,7 +9,7 @@ import { MatGridListModule } from "@angular/material/grid-list";
 import { MatDialog } from "@angular/material/dialog";
 import { CustomDatePipe } from "../../utils/pipes/custom-date.pipe";
 import { TranslationService } from "../../services/translation.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import { DialogImage } from "./dialog-image.component";
 import { PageState, LIST_STATE_VALUE } from "../../utils/page-state.type";
 import { ProjectData } from "./models/project.model";
@@ -20,6 +20,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatIconModule } from "@angular/material/icon";
 import { FormsModule } from "@angular/forms";
 import { generateUUID } from "../../utils/guid-generator";
+import { CustomDateTimePipe } from "../../utils/pipes/custom-date-time.pipe";
 
 @Component({
   selector: "app-project",
@@ -62,7 +63,7 @@ import { generateUUID } from "../../utils/guid-generator";
     }
     <h1 class="mx-5 mt-3 text-xs">
       {{ translationService.t("lastUpdate") }}:
-      {{ state.result[0].lastUpdate | customDate }}
+      {{ state.result[0].lastUpdate | customDateTime }}
     </h1>
     @if(credentials==='admin'){
     <button
@@ -70,6 +71,7 @@ import { generateUUID } from "../../utils/guid-generator";
       color="primary"
       class="mt-4 ml-4"
       disabled="{{ deleting || addingComment }}"
+      routerLink="/projectEdit/{{ state.result[0].id }}"
     >
       {{ translationService.t("edit") }}
     </button>
@@ -96,7 +98,9 @@ import { generateUUID } from "../../utils/guid-generator";
       <mat-card class="w-1/2 my-1">
         <mat-card-header>
           <mat-card-title>{{ comment.user }}</mat-card-title>
-          <mat-card-subtitle>{{ comment.date | customDate }}</mat-card-subtitle>
+          <mat-card-subtitle>{{
+            comment.date | customDateTime
+          }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
           <p class="whitespace-pre-line">{{ comment.content }}</p>
@@ -152,6 +156,8 @@ import { generateUUID } from "../../utils/guid-generator";
     MatProgressSpinnerModule,
     MatIconModule,
     FormsModule,
+    RouterModule,
+    CustomDateTimePipe,
   ],
 })
 export class ProjectPageComponent {
@@ -173,14 +179,14 @@ export class ProjectPageComponent {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get("id") || "-1";
     this.credentials = localStorage.getItem("credentials") || ""; //todo: remove after add users
-    this.getProjectData();
+    this.getProjectData(this.id);
   }
 
-  async getProjectData(): Promise<void> {
+  async getProjectData(id: string): Promise<void> {
     this.state = { state: LIST_STATE_VALUE.LOADING };
     await wait(400); //todo: remove
 
-    this.projectsService.getSingle(this.id).subscribe({
+    this.projectsService.getSingle(id).subscribe({
       next: (res) => {
         this.state = {
           state: LIST_STATE_VALUE.SUCCESS,

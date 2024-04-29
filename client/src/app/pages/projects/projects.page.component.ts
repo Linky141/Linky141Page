@@ -13,6 +13,7 @@ import { LIST_STATE_VALUE, PageState } from "../../utils/page-state.type";
 import { wait } from "../../utils/wait";
 import { LoadingPageComponent } from "../../components/loading/loading.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { CustomDateTimePipe } from "../../utils/pipes/custom-date-time.pipe";
 
 @Component({
   selector: "app-projects",
@@ -30,7 +31,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
         <mat-card-header>
           <mat-card-subtitle
             >{{ translationService.t("lastUpdate") }}:
-            {{ project.lastUpdate | customDate }}</mat-card-subtitle
+            {{ project.lastUpdate | customDateTime }}</mat-card-subtitle
           >
           <mat-card-title>{{ project.title }}</mat-card-title>
         </mat-card-header>
@@ -108,6 +109,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     MatIconModule,
     LoadingPageComponent,
     MatProgressSpinnerModule,
+    CustomDateTimePipe,
   ],
 })
 export class ProjectsPageComponent {
