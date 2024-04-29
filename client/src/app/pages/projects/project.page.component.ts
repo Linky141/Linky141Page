@@ -17,6 +17,7 @@ import { ProjectsService } from "./services/projects.service";
 import { wait } from "../../utils/wait";
 import { LoadingPageComponent } from "../../components/loading/loading.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatIconModule } from "@angular/material/icon";
 
 @Component({
   selector: "app-project",
@@ -48,6 +49,15 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     </div>
 
     <h1 class="mx-5">{{ state.result[0].description }}</h1>
+    @if(state.result[0].github){
+    <button
+      class="mx-5"
+      mat-icon-button
+      (click)="openGit(state.result[0].github)"
+    >
+      <mat-icon color="accent">code</mat-icon>
+    </button>
+    }
     <h1 class="mx-5 mt-3 text-xs">
       {{ translationService.t("lastUpdate") }}:
       {{ state.result[0].lastUpdate | customDate }}
@@ -119,6 +129,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     MatGridListModule,
     LoadingPageComponent,
     MatProgressSpinnerModule,
+    MatIconModule,
   ],
 })
 export class ProjectPageComponent {
@@ -183,5 +194,9 @@ export class ProjectPageComponent {
         url: image,
       },
     });
+  }
+
+  openGit(git: string) {
+    window.location.href = git;
   }
 }
