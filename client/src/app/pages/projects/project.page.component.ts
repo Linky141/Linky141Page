@@ -18,6 +18,8 @@ import { wait } from "../../utils/wait";
 import { LoadingPageComponent } from "../../components/loading/loading.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatIconModule } from "@angular/material/icon";
+import { FormsModule } from "@angular/forms";
+import { generateUUID } from "../../utils/guid-generator";
 
 @Component({
   selector: "app-project",
@@ -67,7 +69,7 @@ import { MatIconModule } from "@angular/material/icon";
       mat-button
       color="primary"
       class="mt-4 ml-4"
-      disabled="{{ deleting }}"
+      disabled="{{ deleting || addingComment }}"
     >
       {{ translationService.t("edit") }}
     </button>
@@ -75,7 +77,7 @@ import { MatIconModule } from "@angular/material/icon";
       mat-button
       color="warn"
       class="mt-4"
-      disabled="{{ deleting }}"
+      disabled="{{ deleting || addingComment }}"
       (click)="deleteProject(state.result[0].id)"
     >
       @if(deleting){
@@ -97,18 +99,37 @@ import { MatIconModule } from "@angular/material/icon";
           <mat-card-subtitle>{{ comment.date | customDate }}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
-          <p>{{ comment.content }}</p>
+          <p class="whitespace-pre-line">{{ comment.content }}</p>
         </mat-card-content>
       </mat-card>
       } @if(credentials !== ''){
       <form class="w-1/2 my-1">
         <mat-form-field class="w-full" color="accent">
           <mat-label>{{ translationService.t("leaveAComment") }}</mat-label>
-          <textarea matInput disabled="{{ deleting }}"></textarea>
+          <textarea
+            matInput
+            disabled="{{ deleting || addingComment }}"
+            [(ngModel)]="newComment"
+            name="newComment"
+          ></textarea>
         </mat-form-field>
         <div class="flex justify-end">
-          <button mat-stroked-button color="accent" disabled="{{ deleting }}">
+          <button
+            class="w-40"
+            mat-stroked-button
+            color="accent"
+            disabled="{{ deleting || addingComment }}"
+            (click)="addComment(newComment)"
+          >
+            @if(addingComment){
+            <mat-spinner
+              diameter="30"
+              mode="indeterminate"
+              color="accent"
+            ></mat-spinner>
+            }@else {
             {{ translationService.t("addComment") }}
+            }
           </button>
         </div>
       </form>
@@ -130,6 +151,7 @@ import { MatIconModule } from "@angular/material/icon";
     LoadingPageComponent,
     MatProgressSpinnerModule,
     MatIconModule,
+    FormsModule,
   ],
 })
 export class ProjectPageComponent {
@@ -142,6 +164,8 @@ export class ProjectPageComponent {
   credentials = ""; //todo: remove after add users
   listStateValue = LIST_STATE_VALUE;
   deleting = false;
+  addingComment = false;
+  newComment = "";
 
   private projectsService = inject(ProjectsService);
   state: PageState<ProjectData> = { state: LIST_STATE_VALUE.IDLE };
@@ -198,5 +222,50 @@ export class ProjectPageComponent {
 
   openGit(git: string) {
     window.location.href = git;
+  }
+
+  async addComment(comment: string) {
+    console.log(comment);
+
+    if (this.state.state === LIST_STATE_VALUE.SUCCESS) {
+      this.addingComment = true;
+      await wait(2000); //todo: remove
+      let currentDate = new Date();
+      this.projectsService
+        .update(this.state.result[0].id, {
+          title: this.state.result[0].title,
+          description: this.state.result[0].description,
+          github: this.state.result[0].github,
+          lastUpdate: this.state.result[0].lastUpdate,
+          photos: this.state.result[0].photos,
+          comments: [
+            ...this.state.result[0].comments,
+            {
+              id: generateUUID(),
+              user: this.credentials,
+              date: currentDate.getTime(),
+              content: this.newComment,
+            },
+          ],
+        })
+        .subscribe({
+          next: (res) => {
+            if (this.state.state === LIST_STATE_VALUE.SUCCESS) {
+              this.state.result = this.state.result.map((d) => {
+                if (d.id === res.id) {
+                  return res;
+                } else {
+                  return d;
+                }
+              });
+            }
+            this.newComment = "";
+            this.addingComment = false;
+          },
+          error: (res) => {
+            alert(res.message);
+          },
+        });
+    }
   }
 }

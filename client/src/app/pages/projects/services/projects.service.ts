@@ -30,13 +30,6 @@ export class ProjectsService {
         }
       })
     );
-    // return this.httpService.getSingle(id).pipe(
-    //   tap((res) => {
-    //     if (res.body) {
-    //       this.state.setProjects(res.body);
-    //     }
-    //   })
-    // );
   }
 
   update(id: string, payload: ProjectsUpdatePayload) {

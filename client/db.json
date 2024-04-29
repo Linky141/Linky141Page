@@ -111,7 +111,56 @@
       "photos": [
         "https://ocdn.eu/pulscms-transforms/1/eJnk9kqTURBXy8zYzUyYmI0ZDdmMjc4YWNhNzZmNzVjNWE3NzYxNDNjNS5qcGVnk5UDzQFvAM0I2s0E-5MJpmJmNWMxNQaTBc0EsM0Cdt4AAaEwAQ/shrek-film-ktory-stal-sie-kulturowym-fenomenem.jpg"
       ],
-      "comments": []
+      "comments": [
+        {
+          "id": "eb41b58c-16ff-4df0-8961-053ae3c18f34",
+          "user": "admin",
+          "date": 1714417429449,
+          "content": ""
+        },
+        {
+          "id": "c91b55f0-9cd7-4c72-a3ef-5aee803e66c5",
+          "user": "admin",
+          "date": 1714417450449,
+          "content": "tests"
+        },
+        {
+          "id": "6bbae4b7-16e6-4492-acad-27c5ff4dfe40",
+          "user": "admin",
+          "date": 1714417547850,
+          "content": "asdasd"
+        },
+        {
+          "id": "48e11289-5370-4fae-8299-9c3f950e7445",
+          "user": "admin",
+          "date": 1714417570463,
+          "content": ""
+        },
+        {
+          "id": "f53b5202-c350-4243-b4b5-e4dcaad2040a",
+          "user": "admin",
+          "date": 1714417582086,
+          "content": ""
+        },
+        {
+          "id": "f8f39e6e-db38-48ac-a190-fe85be3f0922",
+          "user": "admin",
+          "date": 1714417653655,
+          "content": "asdadsads"
+        },
+        {
+          "id": "c7fdae1f-6a52-4cd8-a4d8-25f5229d03e5",
+          "user": "user",
+          "date": 1714417661743,
+          "content": "ddd"
+        },
+        {
+          "id": "55511bc8-8079-4a65-b81a-e762f1e92428",
+          "user": "user",
+          "date": 1714417669475,
+          "content": "asdsad\nasd"
+        }
+      ]
     },
     {
       "id": "2de4",
