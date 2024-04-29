@@ -42,9 +42,9 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
             <a href="{{ element.downloadLink }}">
               <button
                 mat-icon-button
-                disabled="{{ deletingDownloadsId !== -1 }}"
+                disabled="{{ deletingDownloadsId !== '-1' }}"
               >
-                @if(deletingDownloadsId === -1){
+                @if(deletingDownloadsId === '-1'){
                 <mat-icon class="text-blue-500">download</mat-icon>
                 }@else {
                 <mat-icon class="text-gray-600">download</mat-icon>
@@ -67,9 +67,9 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
             <button
               mat-icon-button
               (click)="deleteDownloads(element.id)"
-              disabled="{{ deletingDownloadsId !== -1 }}"
+              disabled="{{ deletingDownloadsId !== '-1' }}"
             >
-              @if(deletingDownloadsId === -1){
+              @if(deletingDownloadsId === '-1'){
               <mat-icon class="text-red-600">delete</mat-icon>
               } @else { @if(deletingDownloadsId === element.id){
               <mat-spinner
@@ -83,7 +83,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
             </button>
             <button
               mat-icon-button
-              disabled="{{ deletingDownloadsId !== -1 }}"
+              disabled="{{ deletingDownloadsId !== '-1' }}"
               [routerLink]="[
                 '/downloadsUpdate',
                 element.id,
@@ -92,7 +92,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
                 element.downloadLink
               ]"
             >
-              @if(deletingDownloadsId === -1){
+              @if(deletingDownloadsId === '-1'){
               <mat-icon color="primary">edit</mat-icon>
               } @else {
               <mat-icon class="text-gray-600">edit</mat-icon>
@@ -113,7 +113,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
         mat-fab
         color="primary"
         routerLink="/downloadsAdd"
-        disabled="{{ deletingDownloadsId !== -1 }}"
+        disabled="{{ deletingDownloadsId !== '-1' }}"
       >
         <mat-icon>add</mat-icon>
       </button>
@@ -138,7 +138,7 @@ export class DownloadsPageComponent {
   credentials = ""; //todo: remove after add users
   lastCollumnWidth = "";
   listStateValue = LIST_STATE_VALUE;
-  deletingDownloadsId = -1;
+  deletingDownloadsId = "-1";
 
   private downloadsService = inject(DownloadsService);
   state: PageState<DownloadsData> = { state: LIST_STATE_VALUE.IDLE };
@@ -172,7 +172,7 @@ export class DownloadsPageComponent {
     });
   }
 
-  async deleteDownloads(id: number) {
+  async deleteDownloads(id: string) {
     this.deletingDownloadsId = id;
     await wait(500); //todo: remove
     this.downloadsService.delete(id).subscribe({
@@ -185,6 +185,6 @@ export class DownloadsPageComponent {
         alert(res.message);
       },
     });
-    this.deletingDownloadsId = -1;
+    this.deletingDownloadsId = "-1";
   }
 }

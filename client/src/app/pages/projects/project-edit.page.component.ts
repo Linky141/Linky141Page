@@ -9,7 +9,6 @@ import { CustomDatePipe } from "../../utils/pipes/custom-date.pipe";
 import { TranslationService } from "../../services/translation.service";
 import { MatIconModule } from "@angular/material/icon";
 import { ActivatedRoute } from "@angular/router";
-import { ProjectModel } from "../../models/project.model";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogImage } from "./dialog-image.component";
 
@@ -28,7 +27,7 @@ import { DialogImage } from "./dialog-image.component";
   ],
   styles: ``,
   template: `
-    <button class="ml-5 mt-5" mat-flat-button color="primary">
+    <!-- <button class="ml-5 mt-5" mat-flat-button color="primary">
       {{ translationService.t("submit") }}
     </button>
     <button class="mt-5" mat-button color="primary">
@@ -76,7 +75,7 @@ import { DialogImage } from "./dialog-image.component";
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   `,
 })
 export class ProjectEditPageComponent {
@@ -99,41 +98,4 @@ export class ProjectEditPageComponent {
       },
     });
   }
-
-  project: ProjectModel = {
-    id: 1,
-    title: "Project 1",
-    lastUpdate: 1700291084476,
-    description:
-      "Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. Project 1 description. ",
-    github: "www.google.pl",
-    photos: [
-      "https://picsum.photos/100",
-      "https://picsum.photos/800",
-      "https://picsum.photos/200",
-      "https://picsum.photos/500",
-      "https://picsum.photos/300",
-      "https://picsum.photos/200",
-      "https://picsum.photos/200",
-      "https://picsum.photos/500",
-      "https://picsum.photos/2000",
-      "https://picsum.photos/200",
-    ],
-    comments: [
-      {
-        id: 1,
-        user: "USER1",
-        content:
-          "commnet commnet commnet commnet commnet commnet commnet commnet commnet commnet ",
-        date: 1700291084476,
-      },
-      {
-        id: 2,
-        user: "USER2",
-        content:
-          "commnet commnet commnet commnet commnet commnet commnet commnet commnet commnet ",
-        date: 1700291084476,
-      },
-    ],
-  };
 }

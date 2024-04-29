@@ -1,20 +1,27 @@
-import { Injectable, computed, inject, signal } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Injectable, inject, signal, computed } from "@angular/core";
+import { Observable, catchError, EMPTY, tap } from "rxjs";
 import { FetchingError } from "../../../utils/page-state.type";
-import { EMPTY, Observable, catchError, tap } from "rxjs";
-import { DownloadsData } from "../models/downloads.model";
+import { CommentModel } from "../models/comment.model";
+import { ProjectData } from "../models/project.model";
 
-export type DownloadsUpdatePayload = {
-  name?: string;
+export type ProjectsUpdatePayload = {
+  id?: number;
+  title?: string;
+  lastUpdate?: number;
+  github?: string;
   description?: string;
-  downloadLink?: string;
-  uploadDate?: number;
+  photos?: string[];
+  comments?: CommentModel[];
 };
-export type DownloadsAddPayload = {
-  name?: string;
+export type ProjectsAddPayload = {
+  id?: number;
+  title?: string;
+  lastUpdate?: number;
+  github?: string;
   description?: string;
-  downloadLink?: string;
-  uploadDate?: number;
+  photos?: string[];
+  comments?: CommentModel[];
 };
 
 export type LoadingState = {
@@ -26,7 +33,7 @@ export type LoadingState = {
 @Injectable({
   providedIn: "root",
 })
-export class DownloadsApiService {
+export class ProjectsApiService {
   private http = inject(HttpClient);
 
   private $idle = signal(true);
@@ -62,24 +69,33 @@ export class DownloadsApiService {
 
   getAll() {
     return this.withLoadingState(
-      this.http.get<DownloadsData[]>(`${this.baseURL}/downloads`, {
+      this.http.get<ProjectData[]>(`${this.baseURL}/projects`, {
         observe: "response",
       })
     );
   }
 
-  update(id: string, payload: DownloadsUpdatePayload) {
-    return this.http.patch<DownloadsData>(
-      `${this.baseURL}/downloads/${id}`,
+  getSingle(id: string) {
+    return this.withLoadingState(
+      this.http.get<ProjectData[]>(`${this.baseURL}/projects`, {
+        observe: "response",
+        params: { id },
+      })
+    );
+  }
+
+  update(id: string, payload: ProjectsUpdatePayload) {
+    return this.http.patch<ProjectData>(
+      `${this.baseURL}/projects/${id}`,
       payload
     );
   }
 
-  add(payload: DownloadsAddPayload) {
-    return this.http.post<DownloadsData>(`${this.baseURL}/downloads`, payload);
+  add(payload: ProjectsAddPayload) {
+    return this.http.post<ProjectData>(`${this.baseURL}/projects`, payload);
   }
 
   delete(id: string) {
-    return this.http.delete(`${this.baseURL}/downloads/${id}`);
+    return this.http.delete(`${this.baseURL}/projects/${id}`);
   }
 }

@@ -1,7 +1,7 @@
 import { CommentModel } from "./comment.model";
 
-export type ProjectModel = {
-  id: number;
+export type ProjectData = {
+  id: string;
   title: string;
   lastUpdate: number;
   github: string;

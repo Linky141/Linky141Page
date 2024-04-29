@@ -1,5 +1,5 @@
 export type DownloadsData = {
-  id: number;
+  id: string;
   name: string;
   description: string;
   downloadLink: string;

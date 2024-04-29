@@ -36,5 +36,6 @@
   "contactValue": "Wartość kontaktu",
   "add": "Dodaj",
   "examplemail@mail.com": "twójmail@mail.pl",
-  "loading": "Wczytywanie..."
+  "loading": "Wczytywanie...",
+  "github": "GitHub"
 }

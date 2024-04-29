@@ -36,5 +36,6 @@
   "contactValue": "Contact value",
   "add": "Add",
   "examplemail@mail.com": "yourmail@mail.com",
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "github": "GitHub"
 }

@@ -30,7 +30,7 @@ export class DownloadsService {
     );
   }
 
-  delete(id: number) {
+  delete(id: string) {
     return this.httpService.delete(id).pipe(
       tap(() => {
         this.state.removeDownloads(id);

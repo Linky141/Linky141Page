@@ -10,6 +10,7 @@ import { ProjectPageComponent } from "./pages/projects/project.page.component";
 import { ProjectEditPageComponent } from "./pages/projects/project-edit.page.component";
 import { DownloadsAddPageComponent } from "./pages/downloads/download-add.page.component";
 import { DownloadsUpdatePageComponent } from "./pages/downloads/download-update.page.component";
+import { ProjectAddPageComponent } from "./pages/projects/project-add.page.component";
 
 export const routes: Routes = [
   {
@@ -48,6 +49,10 @@ export const routes: Routes = [
   {
     path: "project/:id",
     component: ProjectPageComponent,
+  },
+  {
+    path: "projectAdd",
+    component: ProjectAddPageComponent,
   },
   {
     path: "projectEdit/:id",

@@ -19,16 +19,6 @@ export class DownloadsStateService {
     });
   }
 
-  updateDownloadsData(data: DownloadsData) {
-    const updatedData = this.state$.value.downloads.map((val) => {
-      return val.id === data.id ? data : val;
-    });
-
-    this.state$.next({
-      downloads: updatedData,
-    });
-  }
-
   updateDownloads(data: DownloadsData) {
     const updatedData = this.state$.value.downloads.map((val) => {
       return val.id === data.id ? data : val;
