@@ -37,5 +37,6 @@
   "add": "Dodaj",
   "examplemail@mail.com": "twójmail@mail.pl",
   "loading": "Wczytywanie...",
-  "github": "GitHub"
+  "github": "GitHub",
+  "imageurl": "Adres obrazu"
 }

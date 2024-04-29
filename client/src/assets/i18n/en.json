@@ -37,5 +37,6 @@
   "add": "Add",
   "examplemail@mail.com": "yourmail@mail.com",
   "loading": "Loading...",
-  "github": "GitHub"
+  "github": "GitHub",
+  "imageurl": "Image address"
 }

@@ -17,6 +17,7 @@ import { PageState, LIST_STATE_VALUE } from "../../utils/page-state.type";
 import { ProjectData } from "./models/project.model";
 import { ProjectsService } from "./services/projects.service";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { NewImageDialog } from "./new-image-dialog.component";
 
 @Component({
   selector: "app-project-add",
@@ -99,7 +100,7 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
           class="flex justify-center flex-wrap mx-auto"
           style="max-width: 75%;"
         >
-          <!-- @for (photo of project.photos; track $index) {
+          @for (photo of photos; track $index) {
           <mat-card class="m-1">
             <div class="flex justify-center items-center m-2 w-52 h-52">
               <img
@@ -110,13 +111,25 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
                 style="object-fit: contain;"
               />
             </div>
-            <button mat-fab color="warn" class="m-2">
+            <button
+              mat-fab
+              color="warn"
+              class="m-2"
+              disabled="{{ saving }}"
+              (click)="removePhoto(photo)"
+            >
               <mat-icon>delete</mat-icon>
             </button>
           </mat-card>
-          } -->
+          }
           <div class="flex justify-center items-center m-2 w-52 h-72">
-            <button mat-fab color="primary" class="m-2" disabled="{{ saving }}">
+            <button
+              mat-fab
+              color="primary"
+              class="m-2"
+              disabled="{{ saving }}"
+              (click)="addPhoto()"
+            >
               <mat-icon>add</mat-icon>
             </button>
           </div>
@@ -132,11 +145,12 @@ export class ProjectAddPageComponent {
 
   credentials = ""; //todo: remove after add users
   saving = false;
+  addingImage = false;
 
   title = "";
   description = "";
   github = "";
-  photos = [];
+  photos: string[] = [];
 
   private projectsService = inject(ProjectsService);
   state: PageState<ProjectData> = { state: LIST_STATE_VALUE.IDLE };
@@ -161,6 +175,7 @@ export class ProjectAddPageComponent {
         github: github,
         lastUpdate: currentDate.getTime(),
         photos: photos,
+        comments: [],
       })
       .subscribe({
         next: (res) => {
@@ -197,5 +212,19 @@ export class ProjectAddPageComponent {
 
   backToProjects() {
     this.router.navigate(["/projects"]);
+  }
+
+  addPhoto() {
+    const dialogRef = this.dialog.open(NewImageDialog, { data: { url: "" } });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.photos = [...this.photos, res];
+      }
+    });
+  }
+
+  removePhoto(photo: string) {
+    this.photos = this.photos.filter((p) => p !== photo);
   }
 }
