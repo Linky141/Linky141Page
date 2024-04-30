@@ -60,7 +60,7 @@ export class DownloadsAdminButtonsComponent {
   @Input() state!: PageState<DownloadsData>;
   @Output() removedIdEmitter = new EventEmitter<string>();
 
-  downloadsDeletingIdService = inject(DownloadsDeletingIdService);
+  private downloadsDeletingIdService = inject(DownloadsDeletingIdService);
   private downloadsService = inject(DownloadsService);
 
   deletingDownloadsId = "-1";

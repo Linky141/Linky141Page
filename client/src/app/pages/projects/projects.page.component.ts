@@ -114,13 +114,11 @@ import { CustomDateTimePipe } from "../../utils/pipes/custom-date-time.pipe";
 })
 export class ProjectsPageComponent {
   translationService = inject(TranslationService);
+  private projectsService = inject(ProjectsService);
 
   credentials = ""; //todo: remove after add users
   listStateValue = LIST_STATE_VALUE;
-
   deletingProject = "-1";
-
-  private projectsService = inject(ProjectsService);
   state: PageState<ProjectData> = { state: LIST_STATE_VALUE.IDLE };
 
   ngOnInit() {

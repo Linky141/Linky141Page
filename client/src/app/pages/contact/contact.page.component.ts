@@ -78,23 +78,19 @@ import { ContactData } from "./models/contact.model";
   ],
 })
 export class ContactPageComponent {
-  credentials = ""; //todo: remove after add users
+  contactService = inject(ContactService);
+  translationsService = inject(TranslationService);
 
+  credentials = ""; //todo: remove after add users
   addingNewContact = false;
   savingNewContact = false;
-
   editingContact = "-1";
   editingContactName = "";
   editingContactValue = "";
   savingEditedContact = false;
-
   deletingContactId = "-1";
-
-  contactService = inject(ContactService);
-  translationsService = inject(TranslationService);
   state: PageState<ContactData> = { state: LIST_STATE_VALUE.IDLE };
   listStateValue = LIST_STATE_VALUE;
-
   displayedColumns: string[] = ["contactName", "contactValue"];
 
   ngOnInit() {

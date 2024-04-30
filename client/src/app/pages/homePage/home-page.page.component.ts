@@ -84,16 +84,16 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
   ],
 })
 export class HomePagePageComponent {
-  credentials = ""; //todo: remove after add users
   private homePageService = inject(HomePageService);
+  translationService = inject(TranslationService);
+
+  credentials = ""; //todo: remove after add users
   state: PageState<HomePageData> = { state: LIST_STATE_VALUE.IDLE };
   editMode = false;
   title = "";
   content = "";
   listStateValue = LIST_STATE_VALUE;
   savingData = false;
-
-  translationService = inject(TranslationService);
 
   ngOnInit() {
     this.credentials = localStorage.getItem("credentials") || ""; //todo: remove after add users
@@ -122,22 +122,6 @@ export class HomePagePageComponent {
     });
   }
 
-  buttonChangeEditMode(edit: boolean) {
-    if (this.state.state == LIST_STATE_VALUE.SUCCESS) {
-      this.editMode = edit;
-      if (edit === false) {
-        this.resetControlsValues();
-      }
-    }
-  }
-
-  resetControlsValues() {
-    if (this.state.state === LIST_STATE_VALUE.SUCCESS) {
-      this.title = this.state.result[0].title;
-      this.content = this.state.result[0].content;
-    }
-  }
-
   async updateHomePage() {
     this.savingData = true;
     await waitDebug(); //todo: remove
@@ -155,5 +139,21 @@ export class HomePagePageComponent {
           }
         },
       });
+  }
+
+  buttonChangeEditMode(edit: boolean) {
+    if (this.state.state == LIST_STATE_VALUE.SUCCESS) {
+      this.editMode = edit;
+      if (edit === false) {
+        this.resetControlsValues();
+      }
+    }
+  }
+
+  resetControlsValues() {
+    if (this.state.state === LIST_STATE_VALUE.SUCCESS) {
+      this.title = this.state.result[0].title;
+      this.content = this.state.result[0].content;
+    }
   }
 }

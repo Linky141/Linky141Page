@@ -1,15 +1,14 @@
-import { Component, Input, inject } from "@angular/core";
+import { Component, EventEmitter, Output, inject } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogImage } from "./dialog-image.component";
-import { ProjectData } from "./models/project.model";
 import { NewImageDialog } from "./new-image-dialog.component";
 import { ProjectDisableButtonsService } from "./services/disable-buttons.service";
 
 @Component({
-  selector: "app-project-edit-image",
+  selector: "app-project-add-image",
   standalone: true,
   styles: ``,
   template: `
@@ -18,7 +17,7 @@ import { ProjectDisableButtonsService } from "./services/disable-buttons.service
         class="flex justify-center flex-wrap mx-auto"
         style="max-width: 75%;"
       >
-        @for (photo of state.photos; track $index) {
+        @for (photo of photos; track $index) {
         <mat-card class="m-1">
           <div class="flex justify-center items-center m-2 w-52 h-52">
             <img
@@ -56,18 +55,23 @@ import { ProjectDisableButtonsService } from "./services/disable-buttons.service
   `,
   imports: [MatCardModule, MatButtonModule, MatIconModule],
 })
-export class ProjectEditImageComponent {
-  @Input() state!: ProjectData;
+export class ProjectAddImageComponent {
+  @Output() photosEmitter = new EventEmitter<string[]>();
 
   private disableButtonsService = inject(ProjectDisableButtonsService);
   private dialog = inject(MatDialog);
 
   disabledButtons = false;
+  photos: string[] = [];
 
   ngOnInit() {
     this.disableButtonsService.state$.subscribe((state) => {
       this.disabledButtons = state;
     });
+  }
+
+  emitPhotosEmitter(p: string[]) {
+    this.photosEmitter.emit(p);
   }
 
   openImage(image: string) {
@@ -82,12 +86,14 @@ export class ProjectEditImageComponent {
     const dialogRef = this.dialog.open(NewImageDialog, { data: { url: "" } });
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
-        this.state.photos = [...this.state.photos, res];
+        this.photos = [...this.photos, res];
+        this.emitPhotosEmitter(this.photos);
       }
     });
   }
 
   removePhoto(photo: string) {
-    this.state.photos = this.state.photos.filter((p) => p !== photo);
+    this.photos = this.photos.filter((p) => p !== photo);
+    this.emitPhotosEmitter(this.photos);
   }
 }

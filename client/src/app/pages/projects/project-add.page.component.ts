@@ -1,46 +1,29 @@
 import { Component, inject } from "@angular/core";
-import { MatProgressBarModule } from "@angular/material/progress-bar";
 import { MatButtonModule } from "@angular/material/button";
-import { MatDividerModule } from "@angular/material/divider";
-import { MatCardModule } from "@angular/material/card";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { CustomDatePipe } from "../../utils/pipes/custom-date.pipe";
 import { TranslationService } from "../../services/translation.service";
-import { MatIconModule } from "@angular/material/icon";
 import { Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
-import { DialogImage } from "./dialog-image.component";
 import { FormsModule } from "@angular/forms";
 import { waitDebug } from "../../utils/wait";
 import { PageState, LIST_STATE_VALUE } from "../../utils/page-state.type";
 import { ProjectData } from "./models/project.model";
 import { ProjectsService } from "./services/projects.service";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { NewImageDialog } from "./new-image-dialog.component";
+import { ProjectDisableButtonsService } from "./services/disable-buttons.service";
+import { ProjectAddImageComponent } from "./project-add-image.component";
 
 @Component({
   selector: "app-project-add",
   standalone: true,
-  imports: [
-    MatCardModule,
-    MatDividerModule,
-    MatButtonModule,
-    MatProgressBarModule,
-    CustomDatePipe,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    FormsModule,
-    MatProgressSpinnerModule,
-  ],
   styles: ``,
   template: `
     <button
       class="ml-5 mt-5 w-28"
       mat-flat-button
       color="primary"
-      disabled="{{ saving }}"
+      disabled="{{ disabledButtons }}"
       (click)="addProject(title, description, github, photos)"
     >
       @if(saving){
@@ -51,7 +34,7 @@ import { NewImageDialog } from "./new-image-dialog.component";
       class="mt-5"
       mat-button
       color="primary"
-      disabled="{{ saving }}"
+      disabled="{{ disabledButtons }}"
       (click)="resetForm()"
     >
       {{ translationService.t("reset") }}
@@ -60,7 +43,7 @@ import { NewImageDialog } from "./new-image-dialog.component";
       class="mt-5"
       mat-button
       color="warn"
-      disabled="{{ saving }}"
+      disabled="{{ disabledButtons }}"
       (click)="backToProjects()"
     >
       {{ translationService.t("cancel") }}
@@ -73,7 +56,7 @@ import { NewImageDialog } from "./new-image-dialog.component";
             matInput
             [(ngModel)]="title"
             name="title"
-            disabled="{{ saving }}"
+            disabled="{{ disabledButtons }}"
           />
         </mat-form-field>
         <mat-form-field class="w-full">
@@ -82,7 +65,7 @@ import { NewImageDialog } from "./new-image-dialog.component";
             matInput
             [(ngModel)]="description"
             name="description"
-            disabled="{{ saving }}"
+            disabled="{{ disabledButtons }}"
           ></textarea>
         </mat-form-field>
         <mat-form-field class="w-full">
@@ -91,72 +74,44 @@ import { NewImageDialog } from "./new-image-dialog.component";
             matInput
             [(ngModel)]="github"
             name="github"
-            disabled="{{ saving }}"
+            disabled="{{ disabledButtons }}"
           />
         </mat-form-field>
       </form>
-      <div class="flex justify-center items-center mb-5">
-        <div
-          class="flex justify-center flex-wrap mx-auto"
-          style="max-width: 75%;"
-        >
-          @for (photo of photos; track $index) {
-          <mat-card class="m-1">
-            <div class="flex justify-center items-center m-2 w-52 h-52">
-              <img
-                (click)="openImage(photo)"
-                src="{{ photo }}"
-                alt="Image"
-                class="max-w-52 max-h-52 rounded-2xl"
-                style="object-fit: contain;"
-              />
-            </div>
-            <button
-              mat-fab
-              color="warn"
-              class="m-2"
-              disabled="{{ saving }}"
-              (click)="removePhoto(photo)"
-            >
-              <mat-icon>delete</mat-icon>
-            </button>
-          </mat-card>
-          }
-          <div class="flex justify-center items-center m-2 w-52 h-72">
-            <button
-              mat-fab
-              color="primary"
-              class="m-2"
-              disabled="{{ saving }}"
-              (click)="addPhoto()"
-            >
-              <mat-icon>add</mat-icon>
-            </button>
-          </div>
-        </div>
-      </div>
+      <app-project-add-image (photosEmitter)="handlePhotosEmitter($event)" />
     </div>
   `,
+  imports: [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatProgressSpinnerModule,
+    ProjectAddImageComponent,
+  ],
 })
 export class ProjectAddPageComponent {
   translationService = inject(TranslationService);
-  dialog = inject(MatDialog);
+  private disableButtonsService = inject(ProjectDisableButtonsService);
+  private dialog = inject(MatDialog);
   private router = inject(Router);
+  private projectsService = inject(ProjectsService);
 
   credentials = ""; //todo: remove after add users
   saving = false;
-  addingImage = false;
-
+  disabledButtons = false;
+  listStateValue = LIST_STATE_VALUE;
   title = "";
   description = "";
   github = "";
   photos: string[] = [];
-
-  private projectsService = inject(ProjectsService);
   state: PageState<ProjectData> = { state: LIST_STATE_VALUE.IDLE };
 
   ngOnInit() {
     this.credentials = localStorage.getItem("credentials") || ""; //todo: remove after add users
+    this.disableButtonsService.state$.subscribe((state) => {
+      this.disabledButtons = state;
+    });
   }
 
   async addProject(
@@ -165,7 +120,9 @@ export class ProjectAddPageComponent {
     github: string,
     photos: string[]
   ): Promise<void> {
+    console.log(photos.length);
     this.saving = true;
+    this.disableButtonsService.updateState(true);
     await waitDebug(); //todo: remove
     let currentDate = new Date();
     this.projectsService
@@ -192,15 +149,16 @@ export class ProjectAddPageComponent {
       });
 
     this.saving = false;
+    this.disableButtonsService.updateState(false);
     this.backToProjects();
   }
 
-  openImage(image: string) {
-    this.dialog.open(DialogImage, {
-      data: {
-        url: image,
-      },
-    });
+  handlePhotosEmitter(p: string[]) {
+    this.photos = p;
+  }
+
+  backToProjects() {
+    this.router.navigate(["/projects"]);
   }
 
   resetForm() {
@@ -208,23 +166,5 @@ export class ProjectAddPageComponent {
     this.description = "";
     this.github = "";
     this.photos = [];
-  }
-
-  backToProjects() {
-    this.router.navigate(["/projects"]);
-  }
-
-  addPhoto() {
-    const dialogRef = this.dialog.open(NewImageDialog, { data: { url: "" } });
-
-    dialogRef.afterClosed().subscribe((res) => {
-      if (res) {
-        this.photos = [...this.photos, res];
-      }
-    });
-  }
-
-  removePhoto(photo: string) {
-    this.photos = this.photos.filter((p) => p !== photo);
   }
 }

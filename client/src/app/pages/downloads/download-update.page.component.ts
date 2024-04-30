@@ -82,12 +82,10 @@ export class DownloadsUpdatePageComponent {
   translationService = inject(TranslationService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private downloadsService = inject(DownloadsService);
 
   credentials = ""; //todo: remove after add users
-
-  private downloadsService = inject(DownloadsService);
   state: PageState<DownloadsData> = { state: LIST_STATE_VALUE.IDLE };
-
   id = "";
   name = "";
   description = "";

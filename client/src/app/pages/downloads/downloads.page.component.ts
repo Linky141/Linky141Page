@@ -107,16 +107,14 @@ import { DownloadsDeletingIdService } from "./services/downloads-deleting-id.ser
 })
 export class DownloadsPageComponent {
   translationService = inject(TranslationService);
-  downloadsDeletingIdService = inject(DownloadsDeletingIdService);
+  private downloadsDeletingIdService = inject(DownloadsDeletingIdService);
+  private downloadsService = inject(DownloadsService);
 
   credentials = ""; //todo: remove after add users
   lastCollumnWidth = "";
   listStateValue = LIST_STATE_VALUE;
   deletingDownloadsId = "-1";
-
-  private downloadsService = inject(DownloadsService);
   state: PageState<DownloadsData> = { state: LIST_STATE_VALUE.IDLE };
-
   displayedColumns: string[] = ["name", "description", "link", "uploaded"];
 
   ngOnInit() {
