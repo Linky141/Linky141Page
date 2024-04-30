@@ -10,7 +10,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { ProjectData } from "./models/project.model";
 import { ProjectsService } from "./services/projects.service";
 import { LIST_STATE_VALUE, PageState } from "../../utils/page-state.type";
-import { wait } from "../../utils/wait";
+import { waitDebug } from "../../utils/wait";
 import { LoadingPageComponent } from "../../components/loading/loading.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { CustomDateTimePipe } from "../../utils/pipes/custom-date-time.pipe";
@@ -130,7 +130,7 @@ export class ProjectsPageComponent {
 
   async getAllProjectsData(): Promise<void> {
     this.state = { state: LIST_STATE_VALUE.LOADING };
-    await wait(200); //todo: remove
+    await waitDebug(); //todo: remove
 
     this.projectsService.getAll().subscribe({
       next: (res) => {
@@ -150,7 +150,7 @@ export class ProjectsPageComponent {
 
   async deleteProject(id: string) {
     this.deletingProject = id;
-    await wait(200); //todo: remove
+    await waitDebug(); //todo: remove
     this.projectsService.delete(id).subscribe({
       next: () => {
         if (this.state.state === LIST_STATE_VALUE.SUCCESS) {

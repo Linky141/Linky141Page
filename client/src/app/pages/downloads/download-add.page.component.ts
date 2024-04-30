@@ -6,7 +6,7 @@ import { CustomDatePipe } from "../../utils/pipes/custom-date.pipe";
 import { TranslationService } from "../../services/translation.service";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { wait } from "../../utils/wait";
+import { waitDebug } from "../../utils/wait";
 import { PageState, LIST_STATE_VALUE } from "../../utils/page-state.type";
 import { DownloadsData } from "./models/downloads.model";
 import { DownloadsService } from "./services/downloads.service";
@@ -105,7 +105,7 @@ export class DownloadsAddPageComponent {
     downloadLink: string
   ): Promise<void> {
     this.saving = true;
-    await wait(500); //todo: remove
+    await waitDebug(); //todo: remove
     let currentDate = new Date();
     this.downloadsService
       .add({

@@ -6,7 +6,7 @@ import { MatInputModule } from "@angular/material/input";
 import { TranslationService } from "../../services/translation.service";
 import { ProjectData } from "./models/project.model";
 import { ProjectsService } from "./services/projects.service";
-import { wait } from "../../utils/wait";
+import { waitDebug } from "../../utils/wait";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { FormsModule } from "@angular/forms";
 import { generateUUID } from "../../utils/guid-generator";
@@ -99,7 +99,7 @@ export class ProjectCommentsComponent {
   async addComment(comment: string) {
     this.disableButtonsService.updateState(true);
     this.addingComment = true;
-    await wait(2000); //todo: remove
+    await waitDebug(); //todo: remove
     let currentDate = new Date();
     let newComment: CommentModel = {
       id: generateUUID(),

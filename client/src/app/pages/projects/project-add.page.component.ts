@@ -8,11 +8,11 @@ import { MatInputModule } from "@angular/material/input";
 import { CustomDatePipe } from "../../utils/pipes/custom-date.pipe";
 import { TranslationService } from "../../services/translation.service";
 import { MatIconModule } from "@angular/material/icon";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { DialogImage } from "./dialog-image.component";
 import { FormsModule } from "@angular/forms";
-import { wait } from "../../utils/wait";
+import { waitDebug } from "../../utils/wait";
 import { PageState, LIST_STATE_VALUE } from "../../utils/page-state.type";
 import { ProjectData } from "./models/project.model";
 import { ProjectsService } from "./services/projects.service";
@@ -166,7 +166,7 @@ export class ProjectAddPageComponent {
     photos: string[]
   ): Promise<void> {
     this.saving = true;
-    await wait(2000); //todo: remove
+    await waitDebug(); //todo: remove
     let currentDate = new Date();
     this.projectsService
       .add({

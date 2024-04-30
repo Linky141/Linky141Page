@@ -7,7 +7,7 @@ import { RouterModule } from "@angular/router";
 import { DownloadsService } from "./services/downloads.service";
 import { DownloadsData } from "./models/downloads.model";
 import { PageState, LIST_STATE_VALUE } from "../../utils/page-state.type";
-import { wait } from "../../utils/wait";
+import { waitDebug } from "../../utils/wait";
 import { LoadingPageComponent } from "../../components/loading/loading.component";
 import { CustomDateTimePipe } from "../../utils/pipes/custom-date-time.pipe";
 import { DownloadsAdminButtonsComponent } from "./downloads-admin-buttons.component";
@@ -131,7 +131,7 @@ export class DownloadsPageComponent {
 
   async getAllDownloadsData(): Promise<void> {
     this.state = { state: LIST_STATE_VALUE.LOADING };
-    await wait(200); //todo: remove
+    await waitDebug(); //todo: remove
 
     this.downloadsService.getAll().subscribe({
       next: (res) => {

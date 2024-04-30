@@ -5,7 +5,7 @@ import { RouterModule } from "@angular/router";
 import { DownloadsService } from "./services/downloads.service";
 import { DownloadsData } from "./models/downloads.model";
 import { PageState, LIST_STATE_VALUE } from "../../utils/page-state.type";
-import { wait } from "../../utils/wait";
+import { waitDebug } from "../../utils/wait";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { DownloadsDeletingIdService } from "./services/downloads-deleting-id.service";
 
@@ -73,7 +73,7 @@ export class DownloadsAdminButtonsComponent {
 
   async deleteDownloads(id: string) {
     this.setDeletingDownloadsId(id);
-    await wait(500); //todo: remove
+    await waitDebug(); //todo: remove
     this.downloadsService.delete(id).subscribe({
       next: () => {
         if (this.state.state === LIST_STATE_VALUE.SUCCESS) {

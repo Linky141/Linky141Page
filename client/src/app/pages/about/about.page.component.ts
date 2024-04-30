@@ -6,7 +6,7 @@ import { MatInputModule } from "@angular/material/input";
 import { AboutService } from "./services/about.service";
 import { LIST_STATE_VALUE, PageState } from "../../utils/page-state.type";
 import { AboutData } from "./models/about.model";
-import { wait } from "../../utils/wait";
+import { waitDebug } from "../../utils/wait";
 import { FormsModule } from "@angular/forms";
 import { LoadingPageComponent } from "../../components/loading/loading.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
@@ -87,7 +87,7 @@ export class AboutPageComponent {
 
   async getAllAboutData(): Promise<void> {
     this.state = { state: LIST_STATE_VALUE.LOADING };
-    await wait(2000); //todo: remove
+    await waitDebug(); //todo: remove
 
     this.aboutService.getAll().subscribe({
       next: (res) => {
@@ -123,7 +123,7 @@ export class AboutPageComponent {
 
   async updateAbout() {
     this.savingData = true;
-    await wait(2000); //todo: remove
+    await waitDebug(); //todo: remove
     this.aboutService.update({ content: this.content }).subscribe({
       next: (res) => {
         if (this.state.state === LIST_STATE_VALUE.SUCCESS) {

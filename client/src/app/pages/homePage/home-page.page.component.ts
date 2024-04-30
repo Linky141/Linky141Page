@@ -7,7 +7,7 @@ import { HomePageData } from "./models/home-page.model";
 import { LIST_STATE_VALUE, PageState } from "../../utils/page-state.type";
 import { FormsModule } from "@angular/forms";
 import { HomePageService } from "./services/home-page.service";
-import { wait } from "../../utils/wait";
+import { waitDebug } from "../../utils/wait";
 import { LoadingPageComponent } from "../../components/loading/loading.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
@@ -102,7 +102,7 @@ export class HomePagePageComponent {
 
   async getAllHomePageData(): Promise<void> {
     this.state = { state: LIST_STATE_VALUE.LOADING };
-    await wait(2000); //todo: remove
+    await waitDebug(); //todo: remove
 
     this.homePageService.getAll().subscribe({
       next: (res) => {
@@ -140,7 +140,7 @@ export class HomePagePageComponent {
 
   async updateHomePage() {
     this.savingData = true;
-    await wait(2000); //todo: remove
+    await waitDebug(); //todo: remove
     this.homePageService
       .update({ title: this.title, content: this.content })
       .subscribe({

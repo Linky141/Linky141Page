@@ -3,7 +3,7 @@ import { MatTableModule } from "@angular/material/table";
 import { TranslationService } from "../../services/translation.service";
 import { ContactService } from "./services/contact.setvice";
 import { PageState, LIST_STATE_VALUE } from "../../utils/page-state.type";
-import { wait } from "../../utils/wait";
+import { waitDebug } from "../../utils/wait";
 import { LoadingPageComponent } from "../../components/loading/loading.component";
 import { FormsModule } from "@angular/forms";
 import { ContactNewContectComponent } from "./contact.new-contect.component";
@@ -79,7 +79,6 @@ import { ContactData } from "./models/contact.model";
 })
 export class ContactPageComponent {
   credentials = ""; //todo: remove after add users
-  debugDelay = 1000; //todo: remove
 
   addingNewContact = false;
   savingNewContact = false;
@@ -105,7 +104,7 @@ export class ContactPageComponent {
 
   async getAllContactData(): Promise<void> {
     this.state = { state: LIST_STATE_VALUE.LOADING };
-    await wait(this.debugDelay); //todo: remove
+    await waitDebug(); //todo: remove
 
     this.contactService.getAll().subscribe({
       next: (res) => {
@@ -125,7 +124,7 @@ export class ContactPageComponent {
 
   async addContact(event: { name: string; value: string }): Promise<void> {
     this.savingNewContact = true;
-    await wait(this.debugDelay); //todo: remove
+    await waitDebug(); //todo: remove
     this.contactService
       .add({ contactName: event.name, contactValue: event.value })
       .subscribe({
@@ -148,7 +147,7 @@ export class ContactPageComponent {
 
   async deleteContact(id: string) {
     this.deletingContactId = id;
-    await wait(this.debugDelay); //todo: remove
+    await waitDebug(); //todo: remove
     this.contactService.delete(id).subscribe({
       next: () => {
         if (this.state.state === LIST_STATE_VALUE.SUCCESS) {
@@ -164,7 +163,7 @@ export class ContactPageComponent {
 
   async updateContact(id: string, name: string, value: string) {
     this.savingEditedContact = true;
-    await wait(this.debugDelay); //todo: remove
+    await waitDebug(); //todo: remove
     this.contactService
       .update(id, { contactName: name, contactValue: value })
       .subscribe({

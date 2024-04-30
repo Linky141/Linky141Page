@@ -5,7 +5,7 @@ import { ActivatedRoute, Router, RouterModule } from "@angular/router";
 import { PageState, LIST_STATE_VALUE } from "../../utils/page-state.type";
 import { ProjectData } from "./models/project.model";
 import { ProjectsService } from "./services/projects.service";
-import { wait } from "../../utils/wait";
+import { waitDebug } from "../../utils/wait";
 import { LoadingPageComponent } from "../../components/loading/loading.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatIconModule } from "@angular/material/icon";
@@ -113,7 +113,7 @@ export class ProjectPageComponent {
 
   async getProjectData(id: string): Promise<void> {
     this.state = { state: LIST_STATE_VALUE.LOADING };
-    await wait(400); //todo: remove
+    await waitDebug(); //todo: remove
 
     this.projectsService.getSingle(id).subscribe({
       next: (res) => {
@@ -134,7 +134,7 @@ export class ProjectPageComponent {
   async deleteProject(id: string) {
     this.disableButtonsService.updateState(true);
     this.deleting = true;
-    await wait(2000); //todo: remove
+    await waitDebug(); //todo: remove
     this.projectsService.delete(id).subscribe({
       next: () => {
         if (this.state.state === LIST_STATE_VALUE.SUCCESS) {
