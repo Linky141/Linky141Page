@@ -1,4 +1,4 @@
-using API.entities;
+using API.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.data;
@@ -10,4 +10,5 @@ public class PageContext : DbContext
     }
 
     public DbSet<HomePage> HomePages { get; set; }
+    public DbSet<About> Abouts { get; set; }
 }

@@ -1,4 +1,4 @@
-using API.entities;
+using API.Entities;
 
 namespace API.data;
 
