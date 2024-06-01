@@ -81,19 +81,14 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 export class DownloadsAddPageComponent {
   translationService = inject(TranslationService);
   private router = inject(Router);
+  private downloadsService = inject(DownloadsService);
 
   credentials = ""; //todo: remove after add users
-
-  private downloadsService = inject(DownloadsService);
   state: PageState<DownloadsData> = { state: LIST_STATE_VALUE.IDLE };
-
   name = "";
   description = "";
   addresUrl = "";
   saving = false;
-
-  // displayedColumns: string[] = ["name", "description", "link", "uploaded"];
-  // dataSource = ELEMENT_DATA;
 
   ngOnInit() {
     this.credentials = localStorage.getItem("credentials") || ""; //todo: remove after add users

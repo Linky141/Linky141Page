@@ -152,8 +152,6 @@ export class HeaderComponent {
   }
 
   testAdminChange(credential: string) {
-    //todo: remove after add users
-    // const credentials = localStorage.getItem("credentials");
     if (credential === "admin") {
       localStorage.setItem("credentials", "admin");
       this.credentials = "admin";

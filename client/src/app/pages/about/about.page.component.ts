@@ -70,11 +70,11 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
   ],
 })
 export class AboutPageComponent {
+  translationService = inject(TranslationService);
+  private aboutService = inject(AboutService);
+
   credentials = ""; //todo: remove after add users
   editMode = false;
-
-  private aboutService = inject(AboutService);
-  translationService = inject(TranslationService);
   state: PageState<AboutData> = { state: LIST_STATE_VALUE.IDLE };
   content = "";
   listStateValue = LIST_STATE_VALUE;
@@ -106,21 +106,6 @@ export class AboutPageComponent {
     });
   }
 
-  buttonChangeEditMode(edit: boolean) {
-    if (this.state.state == LIST_STATE_VALUE.SUCCESS) {
-      this.editMode = edit;
-      if (edit === false) {
-        this.resetControlsValues();
-      }
-    }
-  }
-
-  resetControlsValues() {
-    if (this.state.state === LIST_STATE_VALUE.SUCCESS) {
-      this.content = this.state.result[0].content;
-    }
-  }
-
   async updateAbout() {
     this.savingData = true;
     await waitDebug(); //todo: remove
@@ -134,5 +119,20 @@ export class AboutPageComponent {
         }
       },
     });
+  }
+
+  buttonChangeEditMode(edit: boolean) {
+    if (this.state.state == LIST_STATE_VALUE.SUCCESS) {
+      this.editMode = edit;
+      if (edit === false) {
+        this.resetControlsValues();
+      }
+    }
+  }
+
+  resetControlsValues() {
+    if (this.state.state === LIST_STATE_VALUE.SUCCESS) {
+      this.content = this.state.result[0].content;
+    }
   }
 }

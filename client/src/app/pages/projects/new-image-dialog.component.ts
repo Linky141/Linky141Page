@@ -11,7 +11,6 @@ import {
 } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
-import { DialogImageData } from "./dialog-image.component";
 import { TranslationService } from "../../services/translation.service";
 
 export interface DialogNewImageData {
