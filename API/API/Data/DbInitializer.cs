@@ -6,6 +6,7 @@ public class DbInitializer
 {
     public static async Task Initialize(PageContext pageContext)
     {
+        #region HomePages
         if (!pageContext.HomePages.Any())
         {
             var homePages = new List<HomePage>(){
@@ -20,6 +21,9 @@ public class DbInitializer
                 pageContext.HomePages.Add(homePage);
             }
         }
+        #endregion
+
+        #region about
 
         pageContext.SaveChanges();
     }
