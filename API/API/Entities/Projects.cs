@@ -8,5 +8,5 @@ public class Projects
     public required string Github { get; set; }
     public required string Description { get; set; }
     public required string[] Photos { get; set; }
-    public required Comment[] Comments { get; set; }
+    public required List<Comment> Comments { get; set; } = new();
 }

@@ -2988,21 +2988,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Projects\\Web\\linky141page\\API\\API\\API.csproj",
+      "projectUniqueName": "C:\\Users\\tomas\\Documents\\Projects\\Web\\Linky141Page\\API\\API\\API.csproj",
       "projectName": "API",
-      "projectPath": "D:\\Projects\\Web\\linky141page\\API\\API\\API.csproj",
+      "projectPath": "C:\\Users\\tomas\\Documents\\Projects\\Web\\Linky141Page\\API\\API\\API.csproj",
       "packagesPath": "C:\\Users\\tomas\\.nuget\\packages\\",
-      "outputPath": "D:\\Projects\\Web\\linky141page\\API\\API\\obj\\",
+      "outputPath": "C:\\Users\\tomas\\Documents\\Projects\\Web\\Linky141Page\\API\\API\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\tomas\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\tomas\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3064,7 +3062,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
