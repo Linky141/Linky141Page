@@ -256,3 +256,4 @@ C:\Users\tomas\Documents\Projects\Web\Linky141Page\API\API\obj\Debug\net8.0\refi
 C:\Users\tomas\Documents\Projects\Web\Linky141Page\API\API\obj\Debug\net8.0\API.pdb
 C:\Users\tomas\Documents\Projects\Web\Linky141Page\API\API\obj\Debug\net8.0\API.genruntimeconfig.cache
 C:\Users\tomas\Documents\Projects\Web\Linky141Page\API\API\obj\Debug\net8.0\ref\API.dll
+D:\Projects\Web\linky141page\API\API\bin\Debug\net8.0\AutoMapper.dll
