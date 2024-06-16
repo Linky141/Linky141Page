@@ -48,7 +48,7 @@ export class ProjectsApiService {
     };
   });
 
-  private baseURL = "http://localhost:3000";
+  private baseURL = "http://localhost:5000/api/Projects";
 
   withLoadingState<T>(source$: Observable<T>): Observable<T> {
     this.$idle.set(false);
@@ -67,35 +67,35 @@ export class ProjectsApiService {
     );
   }
 
-  getAll() {
+  GetProjects() {
     return this.withLoadingState(
-      this.http.get<ProjectData[]>(`${this.baseURL}/projects`, {
+      this.http.get<ProjectData[]>(`${this.baseURL}/GetProjects`, {
         observe: "response",
       })
     );
   }
 
-  getSingle(id: string) {
+  GetProject(id: string) {
     return this.withLoadingState(
-      this.http.get<ProjectData[]>(`${this.baseURL}/projects`, {
+      this.http.get<ProjectData[]>(`${this.baseURL}/GetProject`, {
         observe: "response",
         params: { id },
       })
     );
   }
 
-  update(id: string, payload: ProjectsUpdatePayload) {
+  UpdateProject(id: string, payload: ProjectsUpdatePayload) {
     return this.http.patch<ProjectData>(
-      `${this.baseURL}/projects/${id}`,
+      `${this.baseURL}/UpdateProject/${id}`,
       payload
     );
   }
 
-  add(payload: ProjectsAddPayload) {
-    return this.http.post<ProjectData>(`${this.baseURL}/projects`, payload);
+  AddProject(payload: ProjectsAddPayload) {
+    return this.http.post<ProjectData>(`${this.baseURL}/AddProject`, payload);
   }
 
-  delete(id: string) {
-    return this.http.delete(`${this.baseURL}/projects/${id}`);
+  DeleteProject(id: string) {
+    return this.http.delete(`${this.baseURL}/DeleteProject/${id}`);
   }
 }

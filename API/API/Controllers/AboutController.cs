@@ -15,7 +15,7 @@ public class AboutController : BaseApiController
         this.pageContext = pageContext;
     }
 
-    [HttpGet]
+    [HttpGet("GetAbout")]
     public async Task<ActionResult<List<About>>> GetAbout()
     {
         var aboutData = await pageContext.Abouts.ToListAsync();

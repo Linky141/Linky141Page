@@ -41,7 +41,7 @@ export class DownloadsApiService {
     };
   });
 
-  private baseURL = "http://localhost:3000";
+  private baseURL = "http://localhost:5000/api/Downloads";
 
   withLoadingState<T>(source$: Observable<T>): Observable<T> {
     this.$idle.set(false);
@@ -60,26 +60,26 @@ export class DownloadsApiService {
     );
   }
 
-  getAll() {
+  GetDownloads() {
     return this.withLoadingState(
-      this.http.get<DownloadsData[]>(`${this.baseURL}/downloads`, {
+      this.http.get<DownloadsData[]>(`${this.baseURL}/GetDownloads`, {
         observe: "response",
       })
     );
   }
 
-  update(id: string, payload: DownloadsUpdatePayload) {
+  UpdateDownloads(id: string, payload: DownloadsUpdatePayload) {
     return this.http.patch<DownloadsData>(
-      `${this.baseURL}/downloads/${id}`,
+      `${this.baseURL}/UpdateDownloads/${id}`,
       payload
     );
   }
 
-  add(payload: DownloadsAddPayload) {
-    return this.http.post<DownloadsData>(`${this.baseURL}/downloads`, payload);
+  AddDownloads(payload: DownloadsAddPayload) {
+    return this.http.post<DownloadsData>(`${this.baseURL}/AddDownloads`, payload);
   }
 
-  delete(id: string) {
-    return this.http.delete(`${this.baseURL}/downloads/${id}`);
+  DeleteDownloads(id: string) {
+    return this.http.delete(`${this.baseURL}/DeleteDownloads/${id}`);
   }
 }

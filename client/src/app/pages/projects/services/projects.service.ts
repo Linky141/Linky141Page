@@ -13,7 +13,7 @@ export class ProjectsService {
   private state = inject(ProjectsStateService);
 
   getAll() {
-    return this.httpService.getAll().pipe(
+    return this.httpService.GetProjects().pipe(
       tap((res) => {
         if (res.body) {
           this.state.setProjects(res.body);
@@ -23,7 +23,7 @@ export class ProjectsService {
   }
 
   getSingle(id: string) {
-    return this.httpService.getSingle(id).pipe(
+    return this.httpService.GetProject(id).pipe(
       tap((res) => {
         if (res.body) {
           this.state.setProjects(res.body);
@@ -33,7 +33,7 @@ export class ProjectsService {
   }
 
   update(id: string, payload: ProjectsUpdatePayload) {
-    return this.httpService.update(id, payload).pipe(
+    return this.httpService.UpdateProject(id, payload).pipe(
       tap((res) => {
         this.state.updateProject(res);
       })
@@ -41,7 +41,7 @@ export class ProjectsService {
   }
 
   delete(id: string) {
-    return this.httpService.delete(id).pipe(
+    return this.httpService.DeleteProject(id).pipe(
       tap(() => {
         this.state.removeProject(id);
       })
@@ -49,7 +49,7 @@ export class ProjectsService {
   }
 
   add(payload: ProjectsAddPayload) {
-    return this.httpService.add(payload).pipe(
+    return this.httpService.AddProject(payload).pipe(
       tap((download) => {
         this.state.addProject(download);
       })

@@ -15,7 +15,7 @@ public class ProjectsController : BaseApiController
         this.pageContext = pageContext;
     }
 
-    [HttpGet]
+    [HttpGet("GetProjects")]
     public async Task<ActionResult<List<Projects>>> GetProjects()
     {
         var projectsData = await pageContext.Projects.ToListAsync();

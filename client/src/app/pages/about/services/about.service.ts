@@ -9,7 +9,7 @@ export class AboutService {
   private state = inject(AboutStateService);
 
   getAll() {
-    return this.httpService.getAll().pipe(
+    return this.httpService.GetAbout().pipe(
       tap((res) => {
         if (res.body) {
           this.state.setAboutData(res.body);
@@ -19,7 +19,7 @@ export class AboutService {
   }
 
   update(payload: AboutUpdatePayload) {
-    return this.httpService.update(payload).pipe(
+    return this.httpService.UpdateAbout(payload).pipe(
       tap((res) => {
         this.state.updateAboutData(res);
       })

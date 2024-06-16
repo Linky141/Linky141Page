@@ -36,7 +36,7 @@ export class ContactApiService {
     };
   });
 
-  private baseURL = "http://localhost:3000";
+  private baseURL = "http://localhost:5000/api/Contact";
 
   withLoadingState<T>(source$: Observable<T>): Observable<T> {
     this.$idle.set(false);
@@ -55,26 +55,26 @@ export class ContactApiService {
     );
   }
 
-  getAll() {
+  GetContacts() {
     return this.withLoadingState(
-      this.http.get<ContactData[]>(`${this.baseURL}/contact`, {
+      this.http.get<ContactData[]>(`${this.baseURL}/GetContacts`, {
         observe: "response",
       })
     );
   }
 
-  update(id: string, payload: ContactUpdatePayload) {
+  UpdateContact(id: string, payload: ContactUpdatePayload) {
     return this.http.patch<ContactData>(
-      `${this.baseURL}/contact/${id}`,
+      `${this.baseURL}/UpdateContact/${id}`,
       payload
     );
   }
 
-  add(payload: ContactAddPayload) {
-    return this.http.post<ContactData>(`${this.baseURL}/contact`, payload);
+  AddNewContact(payload: ContactAddPayload) {
+    return this.http.post<ContactData>(`${this.baseURL}/AddNewContact`, payload);
   }
 
-  delete(id: string) {
-    return this.http.delete(`${this.baseURL}/contact/${id}`);
+  DeleteContact(id: string) {
+    return this.http.delete(`${this.baseURL}/DeleteContact/${id}`);
   }
 }

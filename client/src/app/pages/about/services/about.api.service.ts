@@ -30,7 +30,7 @@ export class AboutApiService {
     };
   });
 
-  private baseURL = "http://localhost:3000";
+  private baseURL = "http://localhost:5000/api/About";
 
   withLoadingState<T>(source$: Observable<T>): Observable<T> {
     this.$idle.set(false);
@@ -49,15 +49,15 @@ export class AboutApiService {
     );
   }
 
-  getAll() {
+  GetAbout() {
     return this.withLoadingState(
-      this.http.get<AboutData[]>(`${this.baseURL}/about`, {
+      this.http.get<AboutData[]>(`${this.baseURL}/GetAbout`, {
         observe: "response",
       })
     );
   }
 
-  update(payload: AboutUpdatePayload) {
-    return this.http.patch<AboutData>(`${this.baseURL}/about/1`, payload);
+  UpdateAbout(payload: AboutUpdatePayload) {
+    return this.http.patch<AboutData>(`${this.baseURL}/UpdateAbout`, payload);
   }
 }

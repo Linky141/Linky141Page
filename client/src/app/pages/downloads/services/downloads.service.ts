@@ -13,7 +13,7 @@ export class DownloadsService {
   private state = inject(DownloadsStateService);
 
   getAll() {
-    return this.httpService.getAll().pipe(
+    return this.httpService.GetDownloads().pipe(
       tap((res) => {
         if (res.body) {
           this.state.setDownloadsData(res.body);
@@ -23,7 +23,7 @@ export class DownloadsService {
   }
 
   update(id: string, payload: DownloadsUpdatePayload) {
-    return this.httpService.update(id, payload).pipe(
+    return this.httpService.UpdateDownloads(id, payload).pipe(
       tap((res) => {
         this.state.updateDownloads(res);
       })
@@ -31,7 +31,7 @@ export class DownloadsService {
   }
 
   delete(id: string) {
-    return this.httpService.delete(id).pipe(
+    return this.httpService.DeleteDownloads(id).pipe(
       tap(() => {
         this.state.removeDownloads(id);
       })
@@ -39,7 +39,7 @@ export class DownloadsService {
   }
 
   add(payload: DownloadsAddPayload) {
-    return this.httpService.add(payload).pipe(
+    return this.httpService.AddDownloads(payload).pipe(
       tap((download) => {
         this.state.addDownloads(download);
       })

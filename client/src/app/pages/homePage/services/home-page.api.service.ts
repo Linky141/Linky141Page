@@ -30,7 +30,7 @@ export class HomePageApiService {
     };
   });
 
-  private baseURL = "http://localhost:3000";
+  private baseURL = "http://localhost:5000/api/HomePage";
 
   withLoadingState<T>(source$: Observable<T>): Observable<T> {
     this.$idle.set(false);
@@ -51,15 +51,15 @@ export class HomePageApiService {
 
   getAll() {
     return this.withLoadingState(
-      this.http.get<HomePageData[]>(`${this.baseURL}/homePageData`, {
+      this.http.get<HomePageData[]>(`${this.baseURL}/GetHomePage`, {
         observe: "response",
       })
     );
   }
 
   update(payload: HomePageUpdatePayload) {
-    return this.http.patch<HomePageData>(
-      `${this.baseURL}/homePageData/1`,
+    return this.http.put<HomePageData>(
+      `${this.baseURL}/UpdateHomePage`,
       payload
     );
   }

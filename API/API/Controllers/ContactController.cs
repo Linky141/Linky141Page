@@ -15,7 +15,7 @@ public class ContactController : BaseApiController
         this.pageContext = pageContext;
     }
 
-    [HttpGet]
+    [HttpGet("GetContacts")]
     public async Task<ActionResult<List<Contact>>> GetContacts()
     {
         var contactsData = await pageContext.Contacts.ToListAsync();

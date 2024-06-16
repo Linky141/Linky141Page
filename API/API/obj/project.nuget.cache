@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Rlk0AwLJiTZqO8Jf51JfCurGF7dhTwFR/5ggxpT9JHqCH0zz0odvh1/sptbHOhPreNvSOwQCh7x9g1PGtRuP8w==",
+  "dgSpecHash": "TXnTW7GIwsk=",
   "success": true,
-  "projectFilePath": "D:\\Projects\\Web\\linky141page\\API\\API\\API.csproj",
+  "projectFilePath": "C:\\Users\\tomas\\Documents\\Code\\Web\\Linky141Page\\API\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tomas\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\tomas\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

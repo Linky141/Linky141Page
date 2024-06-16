@@ -16,14 +16,14 @@ public class HomePageController : BaseApiController
         this.mapper = mapper;
     }
 
-    [HttpGet(Name = "GetHomePage")]
+    [HttpGet("GetHomePage")]
     public async Task<ActionResult<List<HomePage>>> GetHomePage()
     {
         var homePageData = await pageContext.HomePages.ToListAsync();
         return Ok(homePageData);
     }
 
-    [HttpPut(Name = "UpdateHomePage")]
+    [HttpPut("UpdateHomePage")]
     public async Task<ActionResult<HomePage>> UpdateHomePage(DTO.HomePageDto homePageDto)
     {
         var homePage = RetrieveHomePage(homePageDto.Id).Result;

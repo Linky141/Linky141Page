@@ -15,7 +15,7 @@ public class DownloadsController : BaseApiController
         this.pageContext = pageContext;
     }
 
-    [HttpGet]
+    [HttpGet("GetDownloads")]
     public async Task<ActionResult<List<Downloads>>> GetDownloads()
     {
         var downloadsData = await pageContext.Downloads.ToListAsync();

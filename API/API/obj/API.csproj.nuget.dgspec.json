@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\Web\\linky141page\\API\\API\\API.csproj": {}
+    "C:\\Users\\tomas\\Documents\\Code\\Web\\Linky141Page\\API\\API\\API.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\Web\\linky141page\\API\\API\\API.csproj": {
+    "C:\\Users\\tomas\\Documents\\Code\\Web\\Linky141Page\\API\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\Web\\linky141page\\API\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\tomas\\Documents\\Code\\Web\\Linky141Page\\API\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "D:\\Projects\\Web\\linky141page\\API\\API\\API.csproj",
+        "projectPath": "C:\\Users\\tomas\\Documents\\Code\\Web\\Linky141Page\\API\\API\\API.csproj",
         "packagesPath": "C:\\Users\\tomas\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\Web\\linky141page\\API\\API\\obj\\",
+        "outputPath": "C:\\Users\\tomas\\Documents\\Code\\Web\\Linky141Page\\API\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\tomas\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -22,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -87,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

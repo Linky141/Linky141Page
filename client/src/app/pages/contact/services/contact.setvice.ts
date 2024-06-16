@@ -13,7 +13,7 @@ export class ContactService {
   private state = inject(ContactStateService);
 
   getAll() {
-    return this.httpService.getAll().pipe(
+    return this.httpService.GetContacts().pipe(
       tap((res) => {
         if (res.body) {
           this.state.setContact(res.body);
@@ -23,7 +23,7 @@ export class ContactService {
   }
 
   update(id: string, payload: ContactUpdatePayload) {
-    return this.httpService.update(id, payload).pipe(
+    return this.httpService.UpdateContact(id, payload).pipe(
       tap((res) => {
         this.state.updateContact(res);
       })
@@ -31,7 +31,7 @@ export class ContactService {
   }
 
   delete(id: string) {
-    return this.httpService.delete(id).pipe(
+    return this.httpService.DeleteContact(id).pipe(
       tap(() => {
         this.state.removeContact(id);
       })
@@ -39,7 +39,7 @@ export class ContactService {
   }
 
   add(payload: ContactAddPayload) {
-    return this.httpService.add(payload).pipe(
+    return this.httpService.AddNewContact(payload).pipe(
       tap((task) => {
         this.state.addContact(task);
       })
