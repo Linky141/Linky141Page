@@ -1,0 +1,12 @@
+/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/bin/Debug/net9.0/API.Domain.deps.json
+/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/bin/Debug/net9.0/API.Domain.dll
+/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/bin/Debug/net9.0/API.Domain.pdb
+/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/obj/Debug/net9.0/API.Domain.GeneratedMSBuildEditorConfig.editorconfig
+/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/obj/Debug/net9.0/API.Domain.AssemblyInfoInputs.cache
+/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/obj/Debug/net9.0/API.Domain.AssemblyInfo.cs
+/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/obj/Debug/net9.0/API.Domain.csproj.CoreCompileInputs.cache
+/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/obj/Debug/net9.0/API.Domain.sourcelink.json
+/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/obj/Debug/net9.0/API.Domain.dll
+/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/obj/Debug/net9.0/refint/API.Domain.dll
+/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/obj/Debug/net9.0/API.Domain.pdb
+/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/obj/Debug/net9.0/ref/API.Domain.dll

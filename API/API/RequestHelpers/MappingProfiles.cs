@@ -1,10 +1,13 @@
+using Microsoft.AspNetCore.Mvc;
+using API.Domain.Entities;
+
 namespace API.RequestHelpers;
 
 public class MappingProfiles : AutoMapper.Profile
 {
     public MappingProfiles()
     {
-        CreateMap<DTO.HomePageDto, Entities.HomePage>();
-        CreateMap<Entities.HomePage, DTO.HomePageDto>();
+        CreateMap<DTO.HomePageDto, HomePage>();
+        CreateMap<HomePage, DTO.HomePageDto>();
     }
 }

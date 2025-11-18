@@ -1,10 +1,10 @@
-using API.data;
-using API.Entities;
+using API.Data;
+using API.Domain.Entities;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.controllers;
+namespace API.Controllers;
 public class HomePageController : BaseApiController
 {
     private readonly PageContext pageContext;

@@ -1,7 +1,7 @@
-using API.Entities;
+using API.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.data;
+namespace API.Data;
 
 public class PageContext : DbContext
 {

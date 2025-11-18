@@ -1,0 +1,202 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Infrastructure/API.Infrastructure.csproj": {}
+  },
+  "projects": {
+    "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Application/API.Application.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Application/API.Application.csproj",
+        "projectName": "API.Application",
+        "projectPath": "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Application/API.Application.csproj",
+        "packagesPath": "/Users/tomaszbielas/.nuget/packages/",
+        "outputPath": "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Application/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/tomaszbielas/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/API.Domain.csproj": {
+                "projectPath": "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/API.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "MediatR": {
+              "target": "Package",
+              "version": "[13.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/API.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/API.Domain.csproj",
+        "projectName": "API.Domain",
+        "projectPath": "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/API.Domain.csproj",
+        "packagesPath": "/Users/tomaszbielas/.nuget/packages/",
+        "outputPath": "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/tomaszbielas/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Infrastructure/API.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Infrastructure/API.Infrastructure.csproj",
+        "projectName": "API.Infrastructure",
+        "projectPath": "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Infrastructure/API.Infrastructure.csproj",
+        "packagesPath": "/Users/tomaszbielas/.nuget/packages/",
+        "outputPath": "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/tomaszbielas/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Application/API.Application.csproj": {
+                "projectPath": "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Application/API.Application.csproj"
+              },
+              "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/API.Domain.csproj": {
+                "projectPath": "/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Domain/API.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.305/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
