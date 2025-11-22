@@ -1,9 +1,9 @@
 using API.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Data;
+namespace API.Infrastructure.Data;
 
-public class PageContext : DbContext
+public class PageContext : DbContext, IPageContext
 {
     public PageContext(DbContextOptions options) : base(options)
     {

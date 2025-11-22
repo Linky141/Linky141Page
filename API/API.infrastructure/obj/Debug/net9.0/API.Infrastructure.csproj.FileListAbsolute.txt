@@ -16,3 +16,5 @@
 /Users/tomaszbielas/Documents/Code/Linky141Page/API/API.infrastructure/obj/Debug/net9.0/refint/API.Infrastructure.dll
 /Users/tomaszbielas/Documents/Code/Linky141Page/API/API.infrastructure/obj/Debug/net9.0/API.Infrastructure.pdb
 /Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Infrastructure/obj/Debug/net9.0/ref/API.Infrastructure.dll
+/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Infrastructure/bin/Debug/net9.0/API.Infrastructure.runtimeconfig.json
+/Users/tomaszbielas/Documents/Code/Linky141Page/API/API.Infrastructure/obj/Debug/net9.0/API.Infrastructure.genruntimeconfig.cache

@@ -1,6 +1,6 @@
 using API.Domain.Entities;
 
-namespace API.Data;
+namespace API.Infrastructure.Data;
 
 public class DbInitializer
 {
