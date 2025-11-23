@@ -1,23 +1,23 @@
-using API.Domain.Entities;
-using API.Infrastructure.Data;
+using API.Application.Dto.AboutPage;
+using Application.Features.AboutPage.Queries.GetAboutPageList;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-public class AboutController : BaseApiController
+public class AboutPageController : BaseApiController
 {
-    private readonly PageContext pageContext;
+    private readonly IMediator mediator;
 
-    public AboutController(PageContext pageContext)
+    public AboutPageController(IMediator mediator)
     {
-        this.pageContext = pageContext;
+        this.mediator = mediator;
     }
 
-    [HttpGet("GetAbout")]
-    public async Task<ActionResult<List<About>>> GetAbout()
+    [HttpGet("GetAboutPageList")]
+    public async Task<ActionResult<List<AboutPageDto>>> GetAboutPageList()
     {
-        var aboutData = await pageContext.Abouts.ToListAsync();
-        return Ok(aboutData);
+        var result = await mediator.Send(new GetAboutPageListQuery());
+        return Ok(result);
     }
 }

@@ -10,8 +10,8 @@ public class PageContext : DbContext, IPageContext
     }
 
     public DbSet<HomePage> HomePages { get; set; }
-    public DbSet<About> Abouts { get; set; }
-    public DbSet<Contact> Contacts { get; set; }
-    public DbSet<Downloads> Downloads { get; set; }
-    public DbSet<Projects> Projects { get; set; }
+    public DbSet<AboutPage> Abouts { get; set; }
+    public DbSet<ContactPage> Contacts { get; set; }
+    public DbSet<DownloadsPage> Downloads { get; set; }
+    public DbSet<ProjectsPage> Projects { get; set; }
 }

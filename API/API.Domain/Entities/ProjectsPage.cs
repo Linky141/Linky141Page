@@ -1,6 +1,6 @@
 namespace API.Domain.Entities;
 
-public class Projects
+public class ProjectsPage
 {
     public int Id { get; set; }
     public required string Title { get; set; }

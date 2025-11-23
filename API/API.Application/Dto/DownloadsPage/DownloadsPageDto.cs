@@ -1,6 +1,6 @@
-namespace API.Domain.Entities;
+namespace API.Application.Dto.DownloadsPage;
 
-public class Downloads
+public class DownloadsPageDto
 {
     public int Id { get; set; }
     public required string Name { get; set; }

@@ -28,9 +28,9 @@ public class DbInitializer
 
         if (!pageContext.Abouts.Any())
         {
-            var abouts = new List<About>()
+            var abouts = new List<AboutPage>()
             {
-                new About(){Content="sample content"}
+                new AboutPage(){Content="sample content"}
             };
 
             foreach (var about in abouts)
@@ -44,11 +44,11 @@ public class DbInitializer
 
         if (!pageContext.Contacts.Any())
         {
-            var contacts = new List<Contact>()
+            var contacts = new List<ContactPage>()
             {
-                new Contact(){ContactName="contact 1", ContactValue="contact 1 content example"},
-                new Contact(){ContactName="contact 2", ContactValue="contact 2 content example"},
-                new Contact(){ContactName="contact 3", ContactValue="contact 3 content example"},
+                new ContactPage(){ContactName="contact 1", ContactValue="contact 1 content example"},
+                new ContactPage(){ContactName="contact 2", ContactValue="contact 2 content example"},
+                new ContactPage(){ContactName="contact 3", ContactValue="contact 3 content example"},
             };
 
             foreach (var contact in contacts)
@@ -63,11 +63,11 @@ public class DbInitializer
 
         if (!pageContext.Downloads.Any())
         {
-            var downloads = new List<Downloads>()
+            var downloads = new List<DownloadsPage>()
             {
-                new Downloads(){Name="Downloads 1", Description="Downloads 1 description", DownloadLink="https://www.google.pl/", UploadDate=1714514855902},
-                new Downloads(){Name="Downloads 2", Description="Downloads 2 description", DownloadLink="https://www.google.pl/", UploadDate=1714514855902},
-                new Downloads(){Name="Downloads 3", Description="Downloads 3 description", DownloadLink="https://www.google.pl/", UploadDate=1714514855902},
+                new DownloadsPage(){Name="Downloads 1", Description="Downloads 1 description", DownloadLink="https://www.google.pl/", UploadDate=1714514855902},
+                new DownloadsPage(){Name="Downloads 2", Description="Downloads 2 description", DownloadLink="https://www.google.pl/", UploadDate=1714514855902},
+                new DownloadsPage(){Name="Downloads 3", Description="Downloads 3 description", DownloadLink="https://www.google.pl/", UploadDate=1714514855902},
             };
 
             foreach (var download in downloads)
@@ -81,9 +81,9 @@ public class DbInitializer
         #region Projects
         if (!pageContext.Projects.Any())
         {
-            var projects = new List<Projects>()
+            var projects = new List<ProjectsPage>()
             {
-                new Projects()
+                new ProjectsPage()
                 {
                     Title="project 1",
                     Description="project 1 description",
@@ -97,7 +97,7 @@ public class DbInitializer
                             new Comment(){User="user 3", Content="content 3", Date=1714514855902}
                     ]
                 },
-                       new Projects()
+                       new ProjectsPage()
                 {
                     Title="project 2",
                     Description="project 2 description",

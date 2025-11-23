@@ -1,4 +1,4 @@
-namespace API.DTO;
+namespace API.Application.Dto.HomePage;
 
 public class HomePageDto
 {

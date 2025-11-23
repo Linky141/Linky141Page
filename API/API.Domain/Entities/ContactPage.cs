@@ -1,6 +1,6 @@
 namespace API.Domain.Entities;
 
-public class Contact
+public class ContactPage
 {
     public int Id { get; set; }
     public required string ContactName { get; set; }

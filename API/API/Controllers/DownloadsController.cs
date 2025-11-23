@@ -1,23 +1,23 @@
-using API.Domain.Entities;
-using API.Infrastructure.Data;
+using API.Application.Dto.DownloadsPage;
+using Application.Features.DownloadsPage.Queries.GetDownloadsPageList;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
 public class DownloadsController : BaseApiController
 {
-    private readonly PageContext pageContext;
+     private readonly IMediator mediator;
 
-    public DownloadsController(PageContext pageContext)
+    public DownloadsController(IMediator mediator)
     {
-        this.pageContext = pageContext;
+        this.mediator = mediator;
     }
 
-    [HttpGet("GetDownloads")]
-    public async Task<ActionResult<List<Downloads>>> GetDownloads()
+    [HttpGet("GetDownloadsPage")]
+    public async Task<ActionResult<List<DownloadsPageDto>>> GetDownloadsPage()
     {
-        var downloadsData = await pageContext.Downloads.ToListAsync();
-        return Ok(downloadsData);
+        var result = await mediator.Send(new GetDownloadsPageListQuery());
+        return Ok(result);
     }
 }

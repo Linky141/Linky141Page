@@ -1,23 +1,23 @@
-using API.Domain.Entities;
-using API.Infrastructure.Data;
+using API.Application.Dto.ContactPage;
+using Application.Features.ContactPage.Queries.GetContactPageList;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
 public class ContactController : BaseApiController
 {
-    private readonly PageContext pageContext;
+    private readonly IMediator mediator;
 
-    public ContactController(PageContext pageContext)
+    public ContactController(IMediator mediator)
     {
-        this.pageContext = pageContext;
+        this.mediator = mediator;
     }
 
-    [HttpGet("GetContacts")]
-    public async Task<ActionResult<List<Contact>>> GetContacts()
+    [HttpGet("GetContactsPage")]
+    public async Task<ActionResult<List<ContactPageDto>>> GetContactsPage()
     {
-        var contactsData = await pageContext.Contacts.ToListAsync();
-        return Ok(contactsData);
+        var result = await mediator.Send(new GetContactPageListQuery());
+        return Ok(result);
     }
 }

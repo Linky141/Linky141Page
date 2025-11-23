@@ -1,5 +1,8 @@
+using API.Application.Dto.ProjectsPageDto;
 using API.Domain.Entities;
 using API.Infrastructure.Data;
+using Application.Features.ProjectsPage.Queries.GetProjectsPageList;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,17 +10,17 @@ namespace API.Controllers;
 
 public class ProjectsController : BaseApiController
 {
-    private readonly PageContext pageContext;
+    private readonly IMediator mediator;
 
-    public ProjectsController(PageContext pageContext)
+    public ProjectsController(IMediator mediator)
     {
-        this.pageContext = pageContext;
+        this.mediator = mediator;
     }
 
-    [HttpGet("GetProjects")]
-    public async Task<ActionResult<List<Projects>>> GetProjects()
+    [HttpGet("GetProjectsPage")]
+    public async Task<ActionResult<List<ProjectsPageDto>>> GetProjectsPage()
     {
-        var projectsData = await pageContext.Projects.ToListAsync();
-        return Ok(projectsData);
+        var result = await mediator.Send(new GetProjectsPageListQuery());
+        return Ok(result);
     }
 }

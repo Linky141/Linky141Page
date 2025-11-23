@@ -1,6 +1,6 @@
-namespace API.Domain.Entities;
+namespace API.Application.Dto.AboutPage;
 
-public class About
+public class AboutPageDto
 {
     public int Id { get; set; }
     public required string Content { get; set; }
